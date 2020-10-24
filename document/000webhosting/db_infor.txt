@@ -1,0 +1,10 @@
+
+
+
+
+
+/*----------------------*/
+000webhosting
+dbname: db_01
+username: db_01
+password: jhSrTi?$qRWTM>29
