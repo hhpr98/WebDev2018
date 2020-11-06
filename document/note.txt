@@ -1,0 +1,3 @@
+Advanced:
+- ES6
+- Sequelize ORM Codefirst
