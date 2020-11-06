@@ -3,8 +3,10 @@ import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import hbs from "hbs";
 
 import indexRouter from "./routes/index";
+import adminRouter from "./routes/admin";
 
 var app = express();
 
@@ -12,6 +14,10 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.set('view options', { layout: 'layout/layout' });
+// view engine helper
+hbs.registerHelper("formatCurencyVND", function (price) {
+  return price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -20,6 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
