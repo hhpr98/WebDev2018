@@ -1,7 +1,18 @@
-export const getProductList = (req, res) => {
-    res.render("product/product-list", { title: "Danh sách sản phẩm" });
+import { getCategoryRightBar, getProductList } from "../models/productModels";
+
+export const getProductListPage = (req, res) => {
+    res.render("product/product-list", { title: "Danh sách sản phẩm", productList: getProductList(), category: getCategoryRightBar() });
 }
 
-export const getProductDetail = (req, res) => {
+export const getProductListPagination = (req, res) => {
+    const pageId = req.params.id || "";
+    if (pageId === "") {
+        res.render("product/product-list", { title: "Danh sách sản phẩm", productList: getProductList(), category: getCategoryRightBar() });
+    } else {
+        res.render("product/product-list", { title: "Danh sách sản phẩm", productList: getProductList(), category: getCategoryRightBar() });
+    }
+}
+
+export const getProductDetailPage = (req, res) => {
     res.render("product/product-detail", { title: "Chi tiết sản phẩm" });
 }
