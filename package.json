@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "start:dev": "nodemon --exec babel-node ./app.js",
-    "heroku-postbuild": "npm install",
     "start": "babel-node ./app.js"
   },
   "dependencies": {
