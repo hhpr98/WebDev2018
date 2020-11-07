@@ -20,31 +20,31 @@ export const getCategoryLeftBar = () => {
         },
         {
             id: 4,
-            name: "Fashion & Beauty",
+            name: "Thời gian & đẹp",
             iclass: "fa fa-female",
             ihref: "/"
         },
         {
             id: 5,
-            name: "Kids & Babies Clothes",
+            name: "Trẻ em",
             iclass: "fa fa-child",
             ihref: "/"
         },
         {
             id: 6,
-            name: "Men & Women Clothes",
+            name: "Đồ cho Nam & Nữ",
             iclass: "fa fa-tshirt",
             ihref: "/"
         },
         {
             id: 7,
-            name: "Gadgets & Accessories",
+            name: "Phụ kiện",
             iclass: "fa fa-mobile-alt",
             ihref: "/"
         },
         {
             id: 8,
-            name: "Electronics & Accessories",
+            name: "Hàng dịch vụ",
             iclass: "fa fa-microchip",
             ihref: "/"
         }
