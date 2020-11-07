@@ -1,3 +1,8 @@
+NOTE:
+** in cmd set mode Product = false to use devDependencies and can start babel-node **
+heroku config:set NPM_CONFIG_PRODUCTION=false
+
+
 Advanced:
 - ES6
 - Sequelize ORM Codefirst

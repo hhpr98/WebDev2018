@@ -33,12 +33,12 @@
 
    ```sh
    
-   # "start": "nodemon --exec babel-node ./app.js"
-   npm start
+    # "start:dev" : "nodemon --exec babel-node ./app.js"
+   npm run start:dev
 
    OR
 
-   # "start:dev" : "nodemon --exec babel-node ./app.js"
-   npm run start:dev
+   # "start": "babel-node ./app.js"
+   npm start
 
    ```
