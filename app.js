@@ -4,16 +4,19 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import hbs from "hbs";
+import favicon from "serve-favicon";
 
 import indexRouter from "./routes/index";
 import adminRouter from "./routes/admin";
 
 var app = express();
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.set('view options', { layout: 'layout/layout' });
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
 // view engine helper
 hbs.registerHelper("formatCurencyVND", function (price) {
   return price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
