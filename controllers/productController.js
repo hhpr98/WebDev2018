@@ -14,5 +14,8 @@ export const getProductListPagination = (req, res) => {
 }
 
 export const getProductDetailPage = (req, res) => {
-    res.render("product/product-detail", { title: "Chi tiết sản phẩm" });
+    const productId = req.params.id || "1";
+    const listProduct = getProductList();
+    const dataFind = listProduct.find(item => item.id.toString() === productId.toString());
+    res.render("product/product-detail", { title: "Chi tiết sản phẩm", item: dataFind, productList: getProductList(), category: getCategoryRightBar() });
 }
