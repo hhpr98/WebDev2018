@@ -3,7 +3,7 @@ import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import hbs from "hbs";
+import { registerHelper } from "./libs/hbsHelper";
 import favicon from "serve-favicon";
 
 import indexRouter from "./routes/index";
@@ -18,12 +18,7 @@ app.set('view engine', 'hbs');
 app.set('view options', { layout: 'layout/layout' });
 app.use(favicon(__dirname + '/public/img/favicon.ico'));
 // view engine helper
-hbs.registerHelper("formatCurencyVND", function (price) {
-  return price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-});
-hbs.registerHelper("titleHelper", function (title) {
-  return typeof (title) === "undefined" ? "HDD Shop" : title.toString() + " - HDD Shop";
-});
+registerHelper();
 
 app.use(logger('dev'));
 app.use(express.json());
