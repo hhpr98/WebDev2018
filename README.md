@@ -3,30 +3,28 @@
 
 ## 🚀 Deploying at heroku
 
-1. **website**
+1. **Website**
 
-   ```sh
-   
-   ```
-
+   https://btn03-hddteam.herokuapp.com/
 
 ## 🚀 Documentation
 
-1. **API**
+1. **Documentation**
 
    ```sh
-   # API
-   https://github.com/hhpr98/WebDev2018/tree/master/document
+   # Document
    ```
-
+   https://github.com/hhpr98/WebDev2018/tree/master/document
 
 ## 🚀 Using
 
 1. **Install dependencies.**
 
    ```sh
+   
    # install the dependencies
    npm install
+
    ```
 
 2. **Start developing.**
@@ -36,7 +34,11 @@
     # "start:dev" : "nodemon --exec babel-node ./app.js"
    npm run start:dev
 
-   OR
+   ```
+
+2. **OR Start developing.**
+
+   ```sh
 
    # "start": "babel-node ./app.js"
    npm start

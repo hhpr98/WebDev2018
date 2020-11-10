@@ -2,9 +2,9 @@ export const getProductList = () => {
     return [
         {
             id: 1,
-            name: "Váy ngắn VT01",
+            name: "Đầm dạ hội đen VT01",
             star: 5,
-            price: 250000,
+            price: 132000,
             originPrice: 300000,
             image: "/img/product-1.jpg",
             image2: "/img/product-9.jpg",
@@ -38,10 +38,6 @@ export const getProductList = () => {
                 {
                     colorId: 2,
                     colorName: "Đen"
-                },
-                {
-                    colorId: 3,
-                    colorName: "Xanh"
                 }
             ],
             description: "Xu hướng thời trang bị ảnh hưởng bởi một số yếu tố, bao gồm điện ảnh, người nổi tiếng, khí hậu, khám phá sáng tạo, đổi mới, thiết kế, chính trị, kinh tế, xã hội và công nghệ. Việc kiểm tra các yếu tố này được gọi là phân tích PEST. Các nhà dự báo thời trang có thể sử dụng thông tin này để giúp xác định sự tăng trưởng hoặc suy giảm của một xu hướng cụ thể. Đồng thời giúp biết thêm về đấu trường thời trang và lối sống trong thế giới hiện đại",
@@ -86,9 +82,9 @@ export const getProductList = () => {
         },
         {
             id: 2,
-            name: "Váy ngắn VT02",
+            name: "Áo cổ trái tymmmm VT02",
             star: 5,
-            price: 250000,
+            price: 121000,
             originPrice: 320000,
             image: "/img/product-2.jpg",
             image2: "/img/product-9.jpg",
@@ -170,9 +166,9 @@ export const getProductList = () => {
         },
         {
             id: 3,
-            name: "Váy ngắn VT03",
+            name: "Đầm xẻ trái VT03",
             star: 5,
-            price: 250000,
+            price: 200000,
             originPrice: 265000,
             image: "/img/product-3.jpg",
             image2: "/img/product-9.jpg",
@@ -254,9 +250,9 @@ export const getProductList = () => {
         },
         {
             id: 4,
-            name: "Váy ngắn VT04",
+            name: "Áo dài tay tím VT04",
             star: 5,
-            price: 230000,
+            price: 100000,
             originPrice: 410000,
             image: "/img/product-4.jpg",
             image2: "/img/product-9.jpg",
@@ -338,10 +334,10 @@ export const getProductList = () => {
         },
         {
             id: 5,
-            name: "Váy ngắn VT05",
+            name: "Quần jean nam VT05",
             star: 5,
-            price: 140000,
-            originPrice: 200000,
+            price: 200000,
+            originPrice: 300000,
             image: "/img/product-5.jpg",
             image2: "/img/product-9.jpg",
             image3: "/img/product-10.jpg",
@@ -422,10 +418,10 @@ export const getProductList = () => {
         },
         {
             id: 6,
-            name: "Váy ngắn VT06",
+            name: "Quần bò VT06",
             star: 5,
-            price: 110000,
-            originPrice: 120000,
+            price: 150000,
+            originPrice: 200000,
             image: "/img/product-6.jpg",
             image2: "/img/product-9.jpg",
             image3: "/img/product-10.jpg",
@@ -506,10 +502,10 @@ export const getProductList = () => {
         },
         {
             id: 7,
-            name: "Váy ngắn VT07",
+            name: "Đầm ngang lưng VT07",
             star: 5,
-            price: 210000,
-            originPrice: 231000,
+            price: 400000,
+            originPrice: 420000,
             image: "/img/product-7.jpg",
             image2: "/img/product-9.jpg",
             image3: "/img/product-10.jpg",
@@ -590,7 +586,7 @@ export const getProductList = () => {
         },
         {
             id: 8,
-            name: "Váy ngắn VT08",
+            name: "Áo VT08",
             star: 5,
             price: 250000,
             originPrice: 300000,
@@ -674,10 +670,10 @@ export const getProductList = () => {
         },
         {
             id: 9,
-            name: "Váy ngắn VT09",
+            name: "Áo dài tay VT09",
             star: 5,
-            price: 250000,
-            originPrice: 301000,
+            price: 180000,
+            originPrice: 300000,
             image: "/img/product-9.jpg",
             image2: "/img/product-9.jpg",
             image3: "/img/product-10.jpg",
