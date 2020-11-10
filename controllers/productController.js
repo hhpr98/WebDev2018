@@ -17,5 +17,9 @@ export const getProductDetailPage = (req, res) => {
     const productId = req.params.id || "1";
     const listProduct = getProductList();
     const dataFind = listProduct.find(item => item.id.toString() === productId.toString());
-    res.render("product/product-detail", { title: "Chi tiết sản phẩm", item: dataFind, productList: getProductList(), category: getCategoryRightBar() });
+    if (typeof (dataFind) === "undefined") {
+        res.render("product/product-not-found", { title: "Chi tiết sản phẩm" });
+    } else {
+        res.render("product/product-detail", { title: "Chi tiết sản phẩm", item: dataFind, productList: getProductList(), category: getCategoryRightBar() });
+    }
 }
