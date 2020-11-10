@@ -3,7 +3,6 @@ export const getAccount = () => {
         {
             username: "nguyenvandat",
             password: "dat123456"
-            
         },
         {
             username: "nguyenvandanh",
@@ -23,4 +22,3 @@ export const getAccount = () => {
         }
     ]
 }
-
