@@ -1,18 +1,19 @@
 import { getAccount } from "../models/accountModels";
 import { getBuyingMost, getRecentProduct, getCategoryLeftBar, getReviewOfCustomer } from "../models/homeModels";
 
+/* Tài khoản */
 export const getAccountPage = (req, res) => {
   res.render("account/account", { title: "Tài khoản" });
 };
 
-/* Đăng kí */
+/* Đăng nhập */
 export const getLoginPage = (req, res) => {
   res.render("account/login", { title: "Đăng nhập", layout: "layout/loginlayout" });
 };
 
 export const postLoginPage = (req, res) => {
-  var username = req.body.username;
-  var pass = req.body.pass;
+  var username = req.body.username || "";
+  var pass = req.body.pass || "";
   var getAcc = getAccount();
   var account = getAcc.find(ele => ele.username === username);
   // console.log(account);
@@ -27,7 +28,8 @@ export const postLoginPage = (req, res) => {
   res.render("home/index", { title: "Trang chủ", buyingMost: getBuyingMost(), recentProduct: getRecentProduct(), categoryLeftBar: getCategoryLeftBar(), review: getReviewOfCustomer() });
 };
 
-/* Đăng nhập */
+
+/* Đăng kí */
 export const getRegisterPage = (req, res) => {
   res.render("account/register", { title: "Đăng kí", layout: "layout/loginlayout" });
 };
