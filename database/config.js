@@ -2,11 +2,10 @@ import dotenv from "dotenv";
 dotenv.config();
 module.exports = {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    use_env_variable: true,
+    "url": "mysql://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_HOST + ":" + process.env.DB_PORT + "/" + process.env.DB_DATABASENAME,
+    "dialect": "mysql",
+    "timezone": "+07:00" //for writing to database
   },
   "local": {
     use_env_variable: true,
