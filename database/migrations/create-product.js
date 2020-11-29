@@ -28,11 +28,13 @@ module.exports = {
             },
             quantity: { // số lượng
                 type: Sequelize.INTEGER,
-                allowNull: true
+                allowNull: true,
+                defaultValue: 100
             },
             description: { // mô tả
                 type: Sequelize.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: "Không có mô tả"
             },
             type: { // Loại sản phẩm
                 type: Sequelize.STRING,
@@ -54,31 +56,11 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true
             },
-            size1: { // các loại size
+            size: { // size
                 type: Sequelize.STRING,
                 allowNull: true
             },
-            size2: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
-            size3: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
-            size4: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
-            color1: { // các loại màu sắc
-                type: Sequelize.STRING,
-                allowNull: true
-            },
-            color2: {
-                type: Sequelize.STRING,
-                allowNull: true
-            },
-            color3: {
+            color: { // màu sắc
                 type: Sequelize.STRING,
                 allowNull: true
             },
@@ -93,6 +75,11 @@ module.exports = {
             specification3: {
                 type: Sequelize.STRING,
                 allowNull: true
+            },
+            viewCount: { // số lần xem sản phẩm (mỗi khi get product/:id thì +1 vào số lần xem)
+                type: Sequelize.INTEGER,
+                allowNull: true,
+                defaultValue: 0
             },
             createdAt: {
                 type: Sequelize.DATE,

@@ -29,11 +29,13 @@ module.exports = (sequelize, DataTypes) => {
             },
             quantity: { // số lượng
                 type: DataTypes.INTEGER,
-                allowNull: true
+                allowNull: true,
+                defaultValue: 100
             },
             description: { // mô tả
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: "Không có mô tả"
             },
             type: { // Loại sản phẩm
                 type: DataTypes.STRING,
@@ -55,31 +57,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            size1: { // các loại size
+            size: { // size
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            size2: {
-                type: DataTypes.STRING,
-                allowNull: true
-            },
-            size3: {
-                type: DataTypes.STRING,
-                allowNull: true
-            },
-            size4: {
-                type: DataTypes.STRING,
-                allowNull: true
-            },
-            color1: { // các loại màu sắc
-                type: DataTypes.STRING,
-                allowNull: true
-            },
-            color2: {
-                type: DataTypes.STRING,
-                allowNull: true
-            },
-            color3: {
+            color: { // màu sắc
                 type: DataTypes.STRING,
                 allowNull: true
             },
@@ -94,6 +76,11 @@ module.exports = (sequelize, DataTypes) => {
             specification3: {
                 type: DataTypes.STRING,
                 allowNull: true
+            },
+            viewCount: { // số lần xem sản phẩm (mỗi khi get product/:id thì +1 vào số lần xem)
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                defaultValue: 0
             },
             createdAt: {
                 type: DataTypes.DATE,

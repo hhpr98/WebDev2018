@@ -7,4 +7,7 @@
 -category
 -comment
 -branch
+-user 
+-cart(cardId,.....)
+-cartDetail(cardId,productId,...)
 -...
