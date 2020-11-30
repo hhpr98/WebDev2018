@@ -1,0 +1,13 @@
+// Sử dụng lệnh dưới này để tạo db, migrate k tự tạo db
+
+// sequelize db:migrate
+
+// db list:
+-product
+-category
+-comment
+-branch
+-user 
+-cart(cardId,.....)
+-cartDetail(cardId,productId,...)
+-...
