@@ -7,7 +7,7 @@ export const getHomePage = catchAsync(
 
         // Test data on db
         // const allproducts = await Products.findAll();
-        // console.log(allproducts);
+        // console.log("all",allproducts);
 
         res.render("home/index", { title: "Trang chủ", buyingMost: getBuyingMost(), recentProduct: getRecentProduct(), categoryLeftBar: getCategoryLeftBar(), review: getReviewOfCustomer() });
     }
