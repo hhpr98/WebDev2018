@@ -1,4 +1,4 @@
-import { getCategoryRightBar, getProductList } from "../models/productModels";
+import { getCategoryRightBar, getProductDetail, getProductList, getReview } from "../models/productModels";
 
 export const getProductListPage = async (req, res) => {
     const productList = await getProductList();
@@ -16,13 +16,14 @@ export const getProductListPagination = async (req, res) => {
     }
 }
 
-export const getProductDetailPage = (req, res) => {
+export const getProductDetailPage = async (req, res) => {
     const productId = req.params.id || "1";
-    const listProduct = getProductList();
-    const dataFind = listProduct.find(item => item.id.toString() === productId.toString());
-    if (typeof (dataFind) === "undefined") {
+    const productList = await getProductList();
+    const reviewList = getReview();
+    const productDisplay = await getProductDetail(productId);
+    if (productDisplay === null) {
         res.render("product/product-not-found", { title: "Chi tiết sản phẩm" });
     } else {
-        res.render("product/product-detail", { title: "Chi tiết sản phẩm", item: dataFind, productList: getProductList(), category: getCategoryRightBar() });
+        res.render("product/product-detail", { title: "Chi tiết sản phẩm", item: productDisplay, productList, reviewList, category: getCategoryRightBar() });
     }
 }

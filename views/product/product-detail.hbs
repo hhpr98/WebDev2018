@@ -19,20 +19,20 @@
                     <div class="row align-items-center">
                         <div class="col-md-5">
                             <div class="product-slider-single normal-slider">
-                                <img src={{item.image}} alt="Không thể tải ảnh">
+                                <img src={{item.image1}} alt="Không thể tải ảnh">
                                 <img src={{item.image2}} alt="Không thể tải ảnh">
                                 <img src={{item.image3}} alt="Không thể tải ảnh">
-                                <img src={{item.image4}} alt="Không thể tải ảnh">
-                                <img src={{item.image5}} alt="Không thể tải ảnh">
-                                <img src={{item.image6}} alt="Không thể tải ảnh">
+                                <img src={{item.image1}} alt="Không thể tải ảnh">
+                                <img src={{item.image2}} alt="Không thể tải ảnh">
+                                <img src={{item.image3}} alt="Không thể tải ảnh">
                             </div>
                             <div class="product-slider-single-nav normal-slider">
-                                <div class="slider-nav-img"><img src={{item.image}} alt="Không thể tải ảnh"></div>
+                                <div class="slider-nav-img"><img src={{item.image1}} alt="Không thể tải ảnh"></div>
                                 <div class="slider-nav-img"><img src={{item.image2}} alt="Không thể tải ảnh"></div>
                                 <div class="slider-nav-img"><img src={{item.image3}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image4}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image5}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image6}} alt="Không thể tải ảnh"></div>
+                                <div class="slider-nav-img"><img src={{item.image1}} alt="Không thể tải ảnh"></div>
+                                <div class="slider-nav-img"><img src={{item.image2}} alt="Không thể tải ảnh"></div>
+                                <div class="slider-nav-img"><img src={{item.image3}} alt="Không thể tải ảnh"></div>
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -50,7 +50,7 @@
                                 <div class="price">
                                     <h4>Giá:</h4>
                                     <p>
-                                        {{formatCurencyVND item.price}}đ
+                                        {{formatCurencyVND item.salePrice}}đ
                                         <span>{{formatCurencyVND item.originPrice}}đ</span>
                                     </p>
                                 </div>
@@ -65,22 +65,25 @@
                                 <div class="p-size">
                                     <h4>Kích cỡ:</h4>
                                     <div class="btn-group btn-group-sm">
-                                        {{#each item.size}}
-                                            <button type="button" class="btn">{{sizeName}}</button>
-                                        {{/each}}
+                                        <button type="button" class="btn">S</button>
+                                        <button type="button" class="btn">M</button>
+                                        <button type="button" class="btn">L</button>
+                                        <button type="button" class="btn">XL</button>
                                     </div>
                                 </div>
                                 <div class="p-color">
                                     <h4>Màu sắc:</h4>
                                     <div class="btn-group btn-group-sm">
-                                        {{#each item.color}}
-                                            <button type="button" class="btn">{{colorName}}</button>
-                                        {{/each}}
+                                        <button type="button" class="btn">Đỏ</button>
+                                        <button type="button" class="btn">Đen</button>
+                                        <button type="button" class="btn">Trắng</button>
                                     </div>
                                 </div>
                                 <div class="action">
-                                    <a class="btn" href="/cart/{{item.id}}"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>
-                                    <a class="btn" href="/product/detail/{{item.id}}"><i class="fa fa-shopping-bag"></i>Mua ngay</a>
+                                    <a class="btn" href="/cart/{{item.id}}"><i class="fa fa-shopping-cart"></i>Giỏ
+                                        hàng</a>
+                                    <a class="btn" href="/product/detail/{{item.id}}"><i
+                                            class="fa fa-shopping-bag"></i>Mua ngay</a>
                                 </div>
                             </div>
                         </div>
@@ -109,9 +112,9 @@
                             <div id="specification" class="container tab-pane fade">
                                 <h4>Thông số kĩ thuật</h4>
                                 <ul>
-                                    {{#each item.special}}
-                                        <li>{{specName}}</li>
-                                    {{/each}}
+                                    <li>{{item.specification1}}</li>
+                                    <li>{{item.specification2}}</li>
+                                    <li>{{item.specification3}}</li>
                                 </ul>
                             </div>
                             <div id="reviews" class="container tab-pane fade">
@@ -178,7 +181,7 @@
                                     </div>
                                     <div class="product-image">
                                         <a href="/product/detail/{{id}}">
-                                            <img src={{image}} alt="Không thể tải ảnh">
+                                            <img src={{image1}} alt="Không thể tải ảnh">
                                         </a>
                                         <div class="product-action">
                                             <a href="/cart/{{id}}"><i class="fa fa-cart-plus"></i></a>
@@ -187,8 +190,9 @@
                                         </div>
                                     </div>
                                     <div class="product-price">
-                                        <h3>{{formatCurencyVND price}}<span>đ</span></h3>
-                                        <a class="btn" href="/product/detail/{{id}}"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                        <h3>{{formatCurencyVND salePrice}}<span>đ</span></h3>
+                                        <a class="btn" href="/product/detail/{{id}}"><i
+                                                class="fa fa-shopping-cart"></i>Mua ngay</a>
                                     </div>
                                 </div>
                             </div>
@@ -228,7 +232,7 @@
                                 </div>
                                 <div class="product-image">
                                     <a href="/product/detail/{{id}}">
-                                        <img src={{image}} alt="Không thể tải hình ảnh">
+                                        <img src={{image1}} alt="Không thể tải hình ảnh">
                                     </a>
                                     <div class="product-action">
                                         <a href="/cart/{{id}}"><i class="fa fa-cart-plus"></i></a>
@@ -237,8 +241,9 @@
                                     </div>
                                 </div>
                                 <div class="product-price">
-                                    <h3>{{formatCurencyVND price}}<span>đ</span></h3>
-                                    <a class="btn" href="/product/detail/{{id}}"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                    <h3>{{formatCurencyVND salePrice}}<span>đ</span></h3>
+                                    <a class="btn" href="/product/detail/{{id}}"><i class="fa fa-shopping-cart"></i>Mua
+                                        ngay</a>
                                 </div>
                             </div>
                         {{/each}}

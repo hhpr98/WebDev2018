@@ -6,7 +6,29 @@ export const getProductList = async () => {
     return product;
 }
 
-// export const getProductDetail
+export const getProductDetail = async (id) => {
+    const product = await Products.findByPk(id);
+    return product;
+}
+
+export const getReview = () => {
+    return [
+        {
+            reviewId: 1,
+            reviewName: "Phở Thị Nở",
+            reviewDate: "2021-01-01",
+            reviewStar: 5,
+            reviewContent: "Sản phẩm đẹp, bền"
+        },
+        {
+            reviewId: 2,
+            reviewName: "Hòa Nguyễn",
+            reviewDate: "2021-01-01",
+            reviewStar: 5,
+            reviewContent: "Khá thoải mái, tôi thích!"
+        }
+    ]
+}
 
 /*
 export const getProductList = () => {
