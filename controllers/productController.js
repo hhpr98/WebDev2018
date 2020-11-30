@@ -1,15 +1,18 @@
 import { getCategoryRightBar, getProductList } from "../models/productModels";
 
-export const getProductListPage = (req, res) => {
-    res.render("product/product-list", { title: "Danh sách sản phẩm", productList: getProductList(), category: getCategoryRightBar() });
+export const getProductListPage = async (req, res) => {
+    const productList = await getProductList();
+    res.render("product/product-list", { title: "Danh sách sản phẩm", productList, category: getCategoryRightBar() });
 }
 
-export const getProductListPagination = (req, res) => {
+export const getProductListPagination = async (req, res) => {
     const pageId = req.params.id || "";
+    const productList = await getProductList();
+
     if (pageId === "") {
-        res.render("product/product-list", { title: "Danh sách sản phẩm", productList: getProductList(), category: getCategoryRightBar() });
+        res.render("product/product-list", { title: "Danh sách sản phẩm", productList, category: getCategoryRightBar() });
     } else {
-        res.render("product/product-list", { title: "Danh sách sản phẩm", productList: getProductList(), category: getCategoryRightBar() });
+        res.render("product/product-list", { title: "Danh sách sản phẩm", productList, category: getCategoryRightBar() });
     }
 }
 

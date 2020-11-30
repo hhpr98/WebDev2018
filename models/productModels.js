@@ -1,3 +1,14 @@
+import { Products } from "../database/models";
+
+export const getProductList = async () => {
+    const product = await Products.findAll();
+    // console.log(product);
+    return product;
+}
+
+// export const getProductDetail
+
+/*
 export const getProductList = () => {
     return [
         {
@@ -754,6 +765,7 @@ export const getProductList = () => {
         }
     ]
 }
+*/
 
 export const getCategoryRightBar = () => {
     return [
