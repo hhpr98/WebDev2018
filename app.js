@@ -6,12 +6,14 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import { registerHelper } from "./libs/hbsHelper";
 import favicon from "serve-favicon";
-
+import dotenv from "dotenv";
 
 import indexRouter from "./routes/index";
 import adminRouter from "./routes/admin";
 
-var app = express();
+
+var app = express(); // express 
+dotenv.config(); // using dotenv file
 
 
 // view engine setup
