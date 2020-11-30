@@ -1,25 +1,29 @@
-import { getCategoryRightBar, getProductList } from "../models/productModels";
+import { getCategoryRightBar, getProductDetail, getProductList, getReview } from "../models/productModels";
 
-export const getProductListPage = (req, res) => {
-    res.render("product/product-list", { title: "Danh sách sản phẩm", productList: getProductList(), category: getCategoryRightBar() });
+export const getProductListPage = async (req, res) => {
+    const productList = await getProductList();
+    res.render("product/product-list", { title: "Danh sách sản phẩm", productList, category: getCategoryRightBar() });
 }
 
-export const getProductListPagination = (req, res) => {
+export const getProductListPagination = async (req, res) => {
     const pageId = req.params.id || "";
+    const productList = await getProductList();
+
     if (pageId === "") {
-        res.render("product/product-list", { title: "Danh sách sản phẩm", productList: getProductList(), category: getCategoryRightBar() });
+        res.render("product/product-list", { title: "Danh sách sản phẩm", productList, category: getCategoryRightBar() });
     } else {
-        res.render("product/product-list", { title: "Danh sách sản phẩm", productList: getProductList(), category: getCategoryRightBar() });
+        res.render("product/product-list", { title: "Danh sách sản phẩm", productList, category: getCategoryRightBar() });
     }
 }
 
-export const getProductDetailPage = (req, res) => {
+export const getProductDetailPage = async (req, res) => {
     const productId = req.params.id || "1";
-    const listProduct = getProductList();
-    const dataFind = listProduct.find(item => item.id.toString() === productId.toString());
-    if (typeof (dataFind) === "undefined") {
+    const productList = await getProductList();
+    const reviewList = getReview();
+    const productDisplay = await getProductDetail(productId);
+    if (productDisplay === null) {
         res.render("product/product-not-found", { title: "Chi tiết sản phẩm" });
     } else {
-        res.render("product/product-detail", { title: "Chi tiết sản phẩm", item: dataFind, productList: getProductList(), category: getCategoryRightBar() });
+        res.render("product/product-detail", { title: "Chi tiết sản phẩm", item: productDisplay, productList, reviewList, category: getCategoryRightBar() });
     }
 }
