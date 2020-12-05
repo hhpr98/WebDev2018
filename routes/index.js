@@ -10,9 +10,9 @@ indexRouter.use("/", homeRouter);
 indexRouter.use("/product", productRouter);
 indexRouter.use("/cart", cartRouter);
 indexRouter.use("/account", accountRouter);
-indexRouter.get("/gen", (req, res) => {
+indexRouter.get("/generate-data", (req, res) => {
     genProduct();
-    res.render("error/errorCustom", {errorContent: "Đang generate dữ liệu"});
+    res.render("error/errorCustom", { errorContent: "Đang generate dữ liệu" });
 });
 
 export default indexRouter;

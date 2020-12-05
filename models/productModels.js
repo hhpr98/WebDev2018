@@ -6,6 +6,7 @@ export const getProductList = async () => {
     return product;
 }
 
+
 export const getProductDetail = async (id) => {
     const product = await Products.findByPk(id);
     return product;
