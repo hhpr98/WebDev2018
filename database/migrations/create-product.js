@@ -6,10 +6,6 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.STRING
             },
-            productId: { // Mã sản phẩm, vd: PR001
-                type: Sequelize.STRING,
-                allowNull: true
-            },
             name: { // Tên sản phẩm
                 type: Sequelize.STRING,
                 allowNull: true
@@ -24,17 +20,17 @@ module.exports = {
             },
             salePercent: { // phần trăm giảm giá, từ 1-100
                 type: Sequelize.INTEGER,
-                allowNull: true
+                allowNull: true,
+                defaultValue: 0
             },
             quantity: { // số lượng
                 type: Sequelize.INTEGER,
                 allowNull: true,
-                defaultValue: 100
+                defaultValue: 0
             },
             description: { // mô tả
                 type: Sequelize.STRING,
-                allowNull: true,
-                defaultValue: "Không có mô tả"
+                allowNull: true
             },
             type: { // Loại sản phẩm
                 type: Sequelize.STRING,
@@ -42,7 +38,8 @@ module.exports = {
             },
             branch: { // nhãn hiệu
                 type: Sequelize.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: "Chưa cập nhật"
             },
             image1: { // hình ảnh
                 type: Sequelize.STRING,
@@ -66,20 +63,28 @@ module.exports = {
             },
             specification1: { // các thông số kĩ thuật
                 type: Sequelize.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: "Chưa cập nhật"
             },
             specification2: {
                 type: Sequelize.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: "Chưa cập nhật"
             },
             specification3: {
                 type: Sequelize.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: "Chưa cập nhật"
             },
             viewCount: { // số lần xem sản phẩm (mỗi khi get product/:id thì +1 vào số lần xem)
                 type: Sequelize.INTEGER,
                 allowNull: true,
                 defaultValue: 0
+            },
+            isDeleted: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+                defaultValue: 0 // chưa xóa
             },
             createdAt: {
                 type: Sequelize.DATE,

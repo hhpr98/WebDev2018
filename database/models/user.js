@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-    const Products = sequelize.define(
-        "Products",
+    const Users = sequelize.define(
+        "Users",
         {
             id: { // UUID
                 allowNull: false,
@@ -98,9 +98,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         {}
     );
-    Products.associate = () => {
+    Users.associate = () => {
         // associations can be defined here
 
     };
-    return Products;
+    return Users;
 };
