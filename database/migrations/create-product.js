@@ -43,15 +43,18 @@ module.exports = {
             },
             image1: { // hình ảnh
                 type: Sequelize.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: "/img/product-default.jpg"
             },
             image2: {
                 type: Sequelize.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: "/img/product-default.jpg"
             },
             image3: {
                 type: Sequelize.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: "/img/product-default.jpg"
             },
             size: { // size
                 type: Sequelize.STRING,

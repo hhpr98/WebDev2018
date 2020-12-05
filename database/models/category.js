@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-    const Products = sequelize.define(
-        "Products",
+    const Categories = sequelize.define(
+        "Categories",
         {
             id: { // id loại sản phẩm
                 allowNull: false,
@@ -38,9 +38,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         {}
     );
-    Products.associate = () => {
+    Categories.associate = () => {
         // associations can be defined here
 
     };
-    return Products;
+    return Categories;
 };

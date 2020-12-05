@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: true
             },
+            image: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: "/img/avatar-default.jpg"
+            },
             isDeleted: {
                 type: DataTypes.INTEGER,
                 allowNull: true,

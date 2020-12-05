@@ -7,80 +7,31 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.STRING
             },
-            name: { // Tên sản phẩm
+            email: { // email
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            originPrice: { // giá gốc
-                type: DataTypes.BIGINT,
-                allowNull: true
-            },
-            salePrice: { // giá đã giảm giá
-                type: DataTypes.BIGINT,
-                allowNull: true
-            },
-            salePercent: { // phần trăm giảm giá, từ 1-100
-                type: DataTypes.INTEGER,
-                allowNull: true,
-                defaultValue: 0
-            },
-            quantity: { // số lượng
-                type: DataTypes.INTEGER,
-                allowNull: true,
-                defaultValue: 0
-            },
-            description: { // mô tả
+            username: { // tên đăng nhập
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            type: { // Loại sản phẩm
+            password: { // hash
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            accountId: {// id tài khoản người dùng (để lấy họ tên, sđt, địa chỉ,...)
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            branch: { // nhãn hiệu
-                type: DataTypes.STRING,
-                allowNull: true,
-                defaultValue: "Chưa cập nhật"
-            },
-            image1: { // hình ảnh
-                type: DataTypes.STRING,
-                allowNull: true
-            },
-            image2: {
-                type: DataTypes.STRING,
-                allowNull: true
-            },
-            image3: {
-                type: DataTypes.STRING,
-                allowNull: true
-            },
-            size: { // size
-                type: DataTypes.STRING,
-                allowNull: true
-            },
-            color: { // màu sắc
-                type: DataTypes.STRING,
-                allowNull: true
-            },
-            specification1: { // các thông số kĩ thuật
-                type: DataTypes.STRING,
-                allowNull: true,
-                defaultValue: "Chưa cập nhật"
-            },
-            specification2: {
-                type: DataTypes.STRING,
-                allowNull: true,
-                defaultValue: "Chưa cập nhật"
-            },
-            specification3: {
-                type: DataTypes.STRING,
-                allowNull: true,
-                defaultValue: "Chưa cập nhật"
-            },
-            viewCount: { // số lần xem sản phẩm (mỗi khi get product/:id thì +1 vào số lần xem)
+            type: {// loại user : 0 => admin, 1: bình thường, 2: guest
                 type: DataTypes.INTEGER,
                 allowNull: true,
-                defaultValue: 0
+                defaultValue: 1
+            },
+            isBanned: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                defaultValue: 0 // chưa bị ban
             },
             isDeleted: {
                 type: DataTypes.INTEGER,

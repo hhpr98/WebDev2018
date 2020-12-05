@@ -22,6 +22,11 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false
             },
+            type: {// loại user : 0 => admin, 1: bình thường, 2: guest
+                type: Sequelize.INTEGER,
+                allowNull: true,
+                defaultValue: 1
+            },
             isBanned: {
                 type: Sequelize.INTEGER,
                 allowNull: true,
