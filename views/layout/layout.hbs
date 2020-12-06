@@ -93,10 +93,12 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="search">
-            <input type="text" placeholder="Tìm kiếm....">
-            <button><i class="fa fa-search"></i></button>
-          </div>
+          <form method="GET" action="/product/search?text={{text}}">
+            <div class="search">
+              <input type="text" placeholder="Tìm kiếm...." name="text">
+              <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
+          </form>
         </div>
         <div class="col-md-3">
           <div class="user">

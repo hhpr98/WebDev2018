@@ -1,9 +1,10 @@
 import express from "express";
-import { getProductDetailPage, getProductListPage, getProductListPagination } from "../../controllers/productController";
+import { getProductDetailPage, getProductListPageByCategoryPage, getProductListPage, getProductListPageBySearchText } from "../../controllers/productController";
 const productRouter = express.Router();
 
 productRouter.get("/", getProductListPage);
-productRouter.get("/page/:id", getProductListPagination);
+productRouter.get("/category/:id", getProductListPageByCategoryPage);
+productRouter.get("/search", getProductListPageBySearchText);
 productRouter.get("/detail/:id", getProductDetailPage);
 
 export default productRouter;
