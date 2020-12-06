@@ -2,6 +2,7 @@ NOTE:
 ** in cmd set mode Product = false to use devDependencies and can start babel-node **
 heroku config:set NPM_CONFIG_PRODUCTION=false
 
+after that add all line config in .env to settings/varible enviroment in heroku
 
 Advanced:
 - ES6
