@@ -5,7 +5,10 @@
 
 1. **Website**
 
-   https://btn03-hddteam.herokuapp.com/
+   # Site khách hàng
+   https://ishop-hddteam.herokuapp.com/
+   # Site quản trị
+   https://ishop-hddteam-admin.herokuapp.com/
 
 ## 🚀 Documentation
 
