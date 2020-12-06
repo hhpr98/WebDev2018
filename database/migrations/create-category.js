@@ -21,6 +21,11 @@ module.exports = {
                 alowNull: true,
                 defaultValue: "/img/product-default.jpg"
             },
+            iclass: { // class icon
+                type: Sequelize.STRING,
+                allowNull: true,
+                defaultValue: "fa fa-microchip"
+            },
             isDeleted: {
                 type: Sequelize.INTEGER,
                 allowNull: true,

@@ -12,7 +12,7 @@ export const genProduct = async () => {
             salePrice: origin - 10000,
             quantity: 100,
             description: "Cam kết chính hãng, bền, rẻ, đẹp",
-            type: Math.floor(Math.random() * 3) + 1,
+            type: Math.floor(Math.random() * 4) + 1,
             image1: "/img/product-" + i.toString() + ".jpg",
             image2: "/img/product-" + (Math.floor(Math.random() * 6) + 1).toString() + ".jpg",
             image3: "/img/product-" + (Math.floor(Math.random() * 6) + 1).toString() + ".jpg",

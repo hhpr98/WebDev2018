@@ -1,15 +1,34 @@
-import { Products } from "../database/models";
+import { Products, Categories } from "../database/models";
 
-export const getProductList = async () => {
-    const product = await Products.findAll();
-    // console.log(product);
-    return product;
+export const getProductListDatabase = async (limit, page) => {
+
+    const _product = await Products.findAndCountAll({
+        where: {
+            isDeleted: 0
+        },
+        limit: limit,
+        offset: limit * (page - 1)
+    });
+
+    return _product;
 }
 
+export const getProductDetailDatabase = async (id) => {
 
-export const getProductDetail = async (id) => {
-    const product = await Products.findByPk(id);
-    return product;
+    const _product = await Products.findByPk(id);
+
+    return _product;
+
+}
+export const getCategoryDatabase = async () => {
+
+    const _category = await Categories.findAll({
+        where: {
+            isDeleted: 0
+        }
+    });
+
+    return _category;
 }
 
 export const getReview = () => {
@@ -27,41 +46,6 @@ export const getReview = () => {
             reviewDate: "2021-01-01",
             reviewStar: 5,
             reviewContent: "Khá thoải mái, tôi thích!"
-        }
-    ]
-}
-
-export const getCategoryRightBar = () => {
-    return [
-        {
-            id: 1,
-            name: "Thời gian & đẹp",
-            iclass: "fa fa-female",
-            ihref: "/"
-        },
-        {
-            id: 2,
-            name: "Trẻ em",
-            iclass: "fa fa-child",
-            ihref: "/"
-        },
-        {
-            id: 3,
-            name: "Đồ cho Nam & Nữ",
-            iclass: "fa fa-tshirt",
-            ihref: "/"
-        },
-        {
-            id: 4,
-            name: "Phụ kiện",
-            iclass: "fa fa-mobile-alt",
-            ihref: "/"
-        },
-        {
-            id: 5,
-            name: "Hàng dịch vụ",
-            iclass: "fa fa-microchip",
-            ihref: "/"
         }
     ]
 }

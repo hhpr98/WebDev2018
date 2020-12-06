@@ -22,6 +22,11 @@ module.exports = (sequelize, DataTypes) => {
                 alowNull: true,
                 defaultValue: "/img/product-default.jpg"
             },
+            iclass: { // class icon
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: "fa fa-microchip"
+            },
             isDeleted: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
