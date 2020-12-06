@@ -4,7 +4,7 @@
         <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
             <li class="breadcrumb-item"><a href="/product">Sản phẩm</a></li>
-            <li class="breadcrumb-item active">Sản phẩm theo phân loại</li>
+            <li class="breadcrumb-item active">Tìm kiếm</li>
         </ul>
     </div>
 </div>
@@ -95,7 +95,7 @@
                             {{#if pageCount}}
                                 {{#if isPreviousPage}}
                                     <li class="page-item">
-                                        <a class="page-link" href="/product/category/{{type}}?page={{previousPage}}"
+                                        <a class="page-link" href="/product/search?text={{text}}&&page={{previousPage}}"
                                             tabindex="-1">Trước
                                         </a>
                                     </li>
@@ -108,13 +108,14 @@
                                 {{#each listPaginate}}
                                     <li {{#if isCurrentPage}}class="page-item active" {{else}}class="page-item" {{/if}}>
                                         <a class="page-link"
-                                            href="/product/category/{{../type}}?page={{pageId}}">{{pageId}}</a>
+                                            href="/product/search?text={{../text}}&&page={{pageId}}">{{pageId}}</a>
                                     </li>
                                 {{/each}}
 
                                 {{#if isNextPage}}
                                     <li class="page-item">
-                                        <a class="page-link" href="/product/category/{{type}}?page={{nextPage}}">Sau</a>
+                                        <a class="page-link"
+                                            href="/product/search?text={{text}}&&page={{nextPage}}">Sau</a>
                                     </li>
                                 {{else}}
                                     <li class="page-item disabled">

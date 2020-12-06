@@ -1,4 +1,4 @@
-import { getCategoryDatabase, getProductDetailDatabase, getProductListDatabase, getProductListDatabaseByCategory, getReview } from "../models/productModels";
+import { getCategoryDatabase, getProductDetailDatabase, getProductListDatabase, getProductListDatabaseByCategory, getProductListDatabaseBySearchText, getReview } from "../models/productModels";
 import catchAsync from "../libs/catchAsync";
 
 const getListPaginate = (currentPage, pageCount) => {
@@ -36,7 +36,7 @@ export const getProductListPage = catchAsync(
     }
 );
 
-export const getProductListByCategoryPage = catchAsync(
+export const getProductListPageByCategoryPage = catchAsync(
     async (req, res) => {
 
         const type = req.params.id || "1"; // loại sản phẩm
@@ -53,11 +53,42 @@ export const getProductListByCategoryPage = catchAsync(
         const isNextPage = (currentPage >= pageCount ? false : true);
 
         res.render("product/product-list-by-category", {
-            title: "Danh sách sản phẩm",
+            title: "Danh sách sản phẩm theo phân loại",
             productList: list.rows, category,
             currentPage, pageCount, previousPage, nextPage, isPreviousPage, isNextPage,
             listPaginate: getListPaginate(currentPage, pageCount),
             type
+        });
+    }
+);
+
+export const getProductListPageBySearchText = catchAsync(
+    async (req, res) => {
+
+        const text = req.query.text || ""; // text to search
+        if (text === "") {
+            res.redirect("/product");
+            return;
+        }
+
+        const currentPage = +req.query.page || 1;
+        const limitPerPage = 9;
+        const list = await getProductListDatabaseBySearchText(limitPerPage, currentPage, text);
+        const category = await getCategoryDatabase();
+
+        const totalCount = list.count || 0;
+        const pageCount = Math.ceil(totalCount / limitPerPage);
+        const previousPage = currentPage - 1;
+        const nextPage = currentPage + 1;
+        const isPreviousPage = (currentPage <= 1 ? false : true);
+        const isNextPage = (currentPage >= pageCount ? false : true);
+
+        res.render("product/search", {
+            title: "Tìm kiếm sản phẩm",
+            productList: list.rows, category,
+            currentPage, pageCount, previousPage, nextPage, isPreviousPage, isNextPage,
+            listPaginate: getListPaginate(currentPage, pageCount),
+            text
         });
     }
 );
