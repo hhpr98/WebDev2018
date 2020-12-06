@@ -1,4 +1,4 @@
-import { getCategoryDatabase, getProductDetailDatabase, getProductListDatabase, getReview } from "../models/productModels";
+import { getCategoryDatabase, getProductDetailDatabase, getProductListDatabase, getProductListDatabaseByCategory, getReview } from "../models/productModels";
 import catchAsync from "../libs/catchAsync";
 
 const getListPaginate = (currentPage, pageCount) => {
@@ -32,6 +32,32 @@ export const getProductListPage = catchAsync(
             productList: list.rows, category,
             currentPage, pageCount, previousPage, nextPage, isPreviousPage, isNextPage,
             listPaginate: getListPaginate(currentPage, pageCount)
+        });
+    }
+);
+
+export const getProductListByCategoryPage = catchAsync(
+    async (req, res) => {
+
+        const type = req.params.id || "1"; // loại sản phẩm
+        const currentPage = +req.query.page || 1;
+        const limitPerPage = 9;
+        const list = await getProductListDatabaseByCategory(limitPerPage, currentPage, type);
+        const category = await getCategoryDatabase();
+
+        const totalCount = list.count || 0;
+        const pageCount = Math.ceil(totalCount / limitPerPage);
+        const previousPage = currentPage - 1;
+        const nextPage = currentPage + 1;
+        const isPreviousPage = (currentPage <= 1 ? false : true);
+        const isNextPage = (currentPage >= pageCount ? false : true);
+
+        res.render("product/product-list-by-category", {
+            title: "Danh sách sản phẩm",
+            productList: list.rows, category,
+            currentPage, pageCount, previousPage, nextPage, isPreviousPage, isNextPage,
+            listPaginate: getListPaginate(currentPage, pageCount),
+            type
         });
     }
 );

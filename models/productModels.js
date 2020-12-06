@@ -13,6 +13,20 @@ export const getProductListDatabase = async (limit, page) => {
     return _product;
 }
 
+export const getProductListDatabaseByCategory = async (limit, page, type) => {
+
+    const _product = await Products.findAndCountAll({
+        where: {
+            isDeleted: 0,
+            type: type
+        },
+        limit: limit,
+        offset: limit * (page - 1)
+    });
+
+    return _product;
+}
+
 export const getProductDetailDatabase = async (id) => {
 
     const _product = await Products.findByPk(id);
