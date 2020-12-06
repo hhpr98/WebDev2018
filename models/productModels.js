@@ -1,4 +1,4 @@
-import { Products, Categories } from "../database/models";
+import { Products, Categories, Op } from "../database/models";
 
 export const getProductListDatabase = async (limit, page) => {
 
@@ -10,6 +10,35 @@ export const getProductListDatabase = async (limit, page) => {
         offset: limit * (page - 1)
     });
 
+    return _product;
+}
+
+export const getProductListDatabaseByCategory = async (limit, page, type) => {
+
+    const _product = await Products.findAndCountAll({
+        where: {
+            isDeleted: 0,
+            type: type
+        },
+        limit: limit,
+        offset: limit * (page - 1)
+    });
+
+    return _product;
+}
+
+export const getProductListDatabaseBySearchText = async (limit, page, text) => {
+
+    const _product = await Products.findAndCountAll({
+        where: {
+            isDeleted: 0,
+            name: {
+                [Op.like]: `%${text}%`
+            }
+        },
+        limit: limit,
+        offset: limit * (page - 1)
+    });
     return _product;
 }
 
