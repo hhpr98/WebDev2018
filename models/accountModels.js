@@ -2,11 +2,13 @@ import { Accounts} from "../database/models";
 
 export const getUser1 = async () => {
 
-    const _users = await Accounts.findAll({
+    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
+    const _users = await Accounts.findOne({
         where: {
+            isDeleted: 0,
             name: "Nguyễn Hữu Hòa"
         }
     });
-   console.log(_users.id)
+   
     return _users;
 }
