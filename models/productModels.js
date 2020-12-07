@@ -9,7 +9,6 @@ export const getProductListDatabase = async (limit, page) => {
         limit: limit,
         offset: limit * (page - 1)
     });
-
     return _product;
 }
 

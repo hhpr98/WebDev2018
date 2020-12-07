@@ -1,24 +1,14 @@
-export const getAccount = () => {
-    return [
-        {
-            username: "nguyenvandat",
-            password: "dat123456"
-        },
-        {
-            username: "nguyenvandanh",
-            password: "danh123456"
-        },
-        {
-            username: "nguyenvanhoa",
-            password: "hoa123456"
-        },
-        {
-            username: "nguyenvantam",
-            password: "tam123456",
-        },
-        {
-            username: "letiendat",
-            password: "dat123456"
+import { Accounts} from "../database/models";
+
+export const getUser1 = async () => {
+
+    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
+    const _users = await Accounts.findOne({
+        where: {
+            isDeleted: 0,
+            name: "Nguyễn Hữu Hòa"
         }
-    ]
+    });
+   
+    return _users;
 }
