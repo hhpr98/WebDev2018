@@ -1,16 +1,25 @@
-import { getAccount,getUser1  } from "../models/accountModels";
+import { getUser1,saveUser1  } from "../models/accountModels";
 import catchAsync from "../libs/catchAsync";
 
 /* Tài khoản */
 export const getAccountPage = catchAsync(
   async (req, res) => {
-    var user1 = getUser1();
-    console.log(user1);
+    const user1 = await getUser1();
     res.render("account/account", { title: "Tài khoản" ,  user:user1});
   }
 );
-
-
+// upload avata
+export const updateAvata = catchAsync(
+  // lay ra nguoi dung ( cap nhat sau)
+  // chinh sua lai image, sau do luu lai vao db
+  // render
+    async (req, res, filename) => {
+      const user1 = await getUser1();
+      user1.image = "/img/uploads/"+filename;
+      await saveUser1(user1.id, user1.image)
+      res.render("account/account", { title: "Tài khoản" ,  user:user1});
+    }
+  );
 /* Đăng nhập */
 export const getLoginPage = catchAsync(
   async (req, res) => {
