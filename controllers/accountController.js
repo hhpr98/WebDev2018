@@ -1,10 +1,12 @@
-import { getAccount } from "../models/accountModels";
+import { getAccount,getUser1  } from "../models/accountModels";
 import catchAsync from "../libs/catchAsync";
 
 /* Tài khoản */
 export const getAccountPage = catchAsync(
   async (req, res) => {
-    res.render("account/account", { title: "Tài khoản" });
+    var user1 = getUser1();
+    console.log(user1);
+    res.render("account/account", { title: "Tài khoản" ,  user:user1});
   }
 );
 
