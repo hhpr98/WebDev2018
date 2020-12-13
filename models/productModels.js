@@ -77,3 +77,99 @@ export const getReview = () => {
         }
     ]
 }
+
+export const getBranchs = () => {
+    return [
+        {
+            id: 1,
+            name: "Adidas",
+            number: 3
+        },
+        {
+            id: 2,
+            name: "A&D",
+            number: 2
+        },
+        {
+            id: 3,
+            name: "MN Corp",
+            number: 5
+        },
+        {
+            id: 4,
+            name: "Nike",
+            number: 13
+        },
+        {
+            id: 5,
+            name: "Fusce",
+            number: 7
+        },
+        {
+            id: 6,
+            name: "Khác",
+            number: 2
+        }
+    ]
+}
+
+export const getTags = () => {
+    return [
+        {
+            id: 1,
+            name: "Đồ nam"
+        },
+        {
+            id: 2,
+            name: "Hàng hiệu"
+        },
+        {
+            id: 3,
+            name: "Hô ly gút"
+        },
+        {
+            id: 4,
+            name: "Đỏ"
+        },
+        {
+            id: 5,
+            name: "Đầm ngắn"
+        },
+        {
+            id: 6,
+            name: "Váy diện ngang"
+        },
+        {
+            id: 7,
+            name: "Noel"
+        },
+        {
+            id: 8,
+            name: "Người yêu"
+        },
+        {
+            id: 9,
+            name: "Quần áo"
+        },
+        {
+            id: 10,
+            name: "Mũ len"
+        },
+        {
+            id: 11,
+            name: "Tây ba lô"
+        },
+        {
+            id: 12,
+            name: "Hello world"
+        },
+        {
+            id: 13,
+            name: "Cặp đôi"
+        },
+        {
+            id: 14,
+            name: "Mùa đông"
+        }
+    ]
+}

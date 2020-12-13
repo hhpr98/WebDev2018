@@ -209,7 +209,8 @@
                         <ul class="navbar-nav">
                             {{#each category}}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/product/category/{{id}}"><i class="{{iclass}}"></i>{{name}}</a>
+                                    <a class="nav-link" href="/product/category/{{id}}"><i
+                                            class="{{iclass}}"></i>{{name}}</a>
                                 </li>
                             {{/each}}
                         </ul>
@@ -253,29 +254,17 @@
                 <div class="sidebar-widget brands">
                     <h2 class="title">Nhãn hiệu</h2>
                     <ul>
-                        <li><a href="#">Nulla </a><span>(45)</span></li>
-                        <li><a href="#">Curabitur </a><span>(34)</span></li>
-                        <li><a href="#">Nunc </a><span>(67)</span></li>
-                        <li><a href="#">Ullamcorper</a><span>(74)</span></li>
-                        <li><a href="#">Fusce </a><span>(89)</span></li>
-                        <li><a href="#">Sagittis</a><span>(28)</span></li>
+                        {{#each branchs}}
+                            <li><a href="/product/search?text={{name}}">{{name}} </a><span>({{number}})</span></li>
+                        {{/each}}
                     </ul>
                 </div>
 
                 <div class="sidebar-widget tag">
                     <h2 class="title">Thẻ tags</h2>
-                    <a href="#">Đồ nam</a>
-                    <a href="#">Hàng hiệu</a>
-                    <a href="#">Hô ly gút</a>
-                    <a href="#">Đỏ</a>
-                    <a href="#">Đầm diện ngắn</a>
-                    <a href="#">Noel</a>
-                    <a href="#">Người yêu</a>
-                    <a href="#">Quần áo</a>
-                    <a href="#">Mũ len</a>
-                    <a href="#">Tây ba lô</a>
-                    <a href="#">Hello world</a>
-                    <a href="#">Mùa đông</a>
+                    {{#each tags}}
+                        <a href="/product/search?text={{name}}">{{name}}</a>
+                    {{/each}}
                 </div>
             </div>
             <!-- Side Bar End -->
