@@ -3,13 +3,16 @@ import catchAsync from "../libs/catchAsync";
 
 export const getHomePage = catchAsync(
     async (req, res) => {
-        res.render("home/index", { title: "Trang chủ", buyingMost: getBuyingMost(), recentProduct: getRecentProduct(), categoryLeftBar: getCategoryLeftBar(), review: getReviewOfCustomer() });
+        const categoryLeftBar = getCategoryLeftBar();
+        const recentProduct = await getRecentProduct();
+        const buyingMost = await getBuyingMost();
+        res.render("home/index", { title: "Trang chủ", buyingMost, recentProduct, categoryLeftBar, review: getReviewOfCustomer() });
     }
 );
 
 export const getWishlistPage = catchAsync(
     async (req, res) => {
-        res.render("other/wishlist", { title: "Wishlist Page" });
+        res.render("other/wishlist", { title: "Yêu thích" });
     }
 );
 
