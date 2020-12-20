@@ -123,7 +123,7 @@
                                 {{/if}}
                             {{else}}
                                 <h2 class="text-danger mt-5 mb-5 text-center">
-                                    Ồ không!!!! không có sản phẩm nào ở đây cả. Vui lòng thử lại
+                                    Ồ không!!!! không có sản phẩm nào ở đây cả. Vui lòng thử lại!
                                 </h2>
                             {{/if}}
                         </ul>
@@ -186,29 +186,17 @@
                 <div class="sidebar-widget brands">
                     <h2 class="title">Nhãn hiệu</h2>
                     <ul>
-                        <li><a href="#">Adidas </a><span>(3)</span></li>
-                        <li><a href="#">A&D </a><span>(2)</span></li>
-                        <li><a href="#">MN Corp </a><span>(5)</span></li>
-                        <li><a href="#">Nike</a><span>(7)</span></li>
-                        <li><a href="#">Fusce </a><span>(13)</span></li>
-                        <li><a href="#">Khác</a><span>(1)</span></li>
+                        {{#each branchs}}
+                            <li><a href="/product/search?text={{name}}">{{name}} </a><span>({{number}})</span></li>
+                        {{/each}}
                     </ul>
                 </div>
 
                 <div class="sidebar-widget tag">
                     <h2 class="title">Thẻ tags</h2>
-                    <a href="#">Đồ nam</a>
-                    <a href="#">Hàng hiệu</a>
-                    <a href="#">Hô ly gút</a>
-                    <a href="#">Đỏ</a>
-                    <a href="#">Đầm diện ngắn</a>
-                    <a href="#">Noel</a>
-                    <a href="#">Người yêu</a>
-                    <a href="#">Quần áo</a>
-                    <a href="#">Mũ len</a>
-                    <a href="#">Tây ba lô</a>
-                    <a href="#">Hello world</a>
-                    <a href="#">Mùa đông</a>
+                    {{#each tags}}
+                        <a href="/product/search?text={{name}}">{{name}}</a>
+                    {{/each}}
                 </div>
             </div>
             <!-- Side Bar End -->
