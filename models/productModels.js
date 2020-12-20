@@ -43,6 +43,17 @@ export const getProductListDatabaseBySearchText = async (limit, page, text) => {
 
 export const getProductDetailDatabase = async (id) => {
 
+    // increase view count
+    await Products.increment({
+        viewCount: +1
+    }, {
+        where:
+        {
+            id: id
+        }
+    });
+
+    // get detail 
     const _product = await Products.findByPk(id);
 
     return _product;

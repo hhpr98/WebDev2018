@@ -19,20 +19,20 @@
                     <div class="row align-items-center">
                         <div class="col-md-5">
                             <div class="product-slider-single normal-slider">
-                                <img src={{item.image1}} alt="Không thể tải ảnh">
-                                <img src={{item.image2}} alt="Không thể tải ảnh">
-                                <img src={{item.image3}} alt="Không thể tải ảnh">
-                                <img src={{item.image1}} alt="Không thể tải ảnh">
-                                <img src={{item.image2}} alt="Không thể tải ảnh">
-                                <img src={{item.image3}} alt="Không thể tải ảnh">
+                                <img src={{item.image1}} alt="">
+                                <img src={{item.image2}} alt="">
+                                <img src={{item.image3}} alt="">
+                                <img src={{item.image1}} alt="">
+                                <img src={{item.image2}} alt="">
+                                <img src={{item.image3}} alt="">
                             </div>
                             <div class="product-slider-single-nav normal-slider">
-                                <div class="slider-nav-img"><img src={{item.image1}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image2}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image3}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image1}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image2}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image3}} alt="Không thể tải ảnh"></div>
+                                <div class="slider-nav-img"><img src={{item.image1}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image2}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image3}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image1}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image2}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image3}} alt=""></div>
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -60,6 +60,12 @@
                                         <button class="btn-minus"><i class="fa fa-minus"></i></button>
                                         <input type="text" value="1">
                                         <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="quantity">
+                                    <h4>👁️ :</h4>
+                                    <div class="qty">
+                                        <input type="text" value={{{item.viewCount}}}>
                                     </div>
                                 </div>
                                 <div class="p-size">
@@ -181,7 +187,7 @@
                                     </div>
                                     <div class="product-image">
                                         <a href="/product/detail/{{id}}">
-                                            <img src={{image1}} alt="Không thể tải ảnh">
+                                            <img src={{image1}} alt="">
                                         </a>
                                         <div class="product-action">
                                             <a href="/cart/{{id}}"><i class="fa fa-cart-plus"></i></a>
