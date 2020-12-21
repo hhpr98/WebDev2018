@@ -36,7 +36,7 @@ export const getCategoryLeftBar = () => {
             id: 6,
             name: "Đồ cho Nam & Nữ",
             iclass: "fa fa-tshirt",
-            ihref: "/product/search?text=Nam&20Nữ"
+            ihref: "/product/search?text=Nam%20Nữ"
         },
         {
             id: 7,
