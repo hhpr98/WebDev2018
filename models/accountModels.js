@@ -1,5 +1,6 @@
 import { Accounts} from "../database/models";
 
+
 export const getUser1 = async () => {
 
     // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
@@ -10,6 +11,31 @@ export const getUser1 = async () => {
         }
     });
     return _users;
+}
+export const getUserByID = async (userId) => {
+
+    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
+    const _users = await Accounts.findOne({
+        where: {
+            isDeleted: 0,
+            id: userId
+        }
+    });
+    return _users;
+}
+export const updateUserInfo = async (firstName, phone, email, adress, userID)=>{
+   
+   console.log(phone);
+    await Accounts.update({
+        name : firstName,
+        phonenumber: phone,
+        address: adress,
+        email:email
+   },{
+       where:{
+           id: userID
+       }
+   });
 }
 // luu hinh anh nguoi dung vao db 
 export const saveUser1 = async (id, update_img) => {

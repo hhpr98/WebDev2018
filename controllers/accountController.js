@@ -1,10 +1,10 @@
-import { getUser1,saveUser1  } from "../models/accountModels";
+import { getUser1,saveUser1, getUserByID, updateUserInfo  } from "../models/accountModels";
 import catchAsync from "../libs/catchAsync";
 
 /* Tài khoản */
 export const getAccountPage = catchAsync(
   async (req, res) => {
-    const user1 = await getUser1();
+    const user1 = await getUserByID('4bd31be7-9e2a-481e-b285-8fe70fd49b6f');
     res.render("account/account", { title: "Tài khoản" ,  user:user1});
   }
 );
@@ -16,10 +16,11 @@ export const updateAvata = catchAsync(
     async (req, res, filename) => {
       const user1 = await getUser1();
       user1.image = "/img/uploads/"+filename;
-      await saveUser1(user1.id, user1.image)
-      res.render("account/account", { title: "Tài khoản" ,  user:user1});
+      await saveUser1(user1.id, user1.image);
+      res.redirect("/account");
     }
   );
+
 /* Đăng nhập */
 export const getLoginPage = catchAsync(
   async (req, res) => {
@@ -72,3 +73,20 @@ export const postRegisterPage = catchAsync(
     res.redirect("/");
   }
 );
+
+// update details
+// update password
+
+
+// update info
+
+export const updateInfo = catchAsync(
+  async(req, res) => {
+    //
+
+    const id = '4bd31be7-9e2a-481e-b285-8fe70fd49b6f';
+    //
+    await updateUserInfo(req.body.userName, req.body.userPhone, req.body.userEmail, req.body.userAddress, id);
+    res.redirect("/account");
+    }
+)

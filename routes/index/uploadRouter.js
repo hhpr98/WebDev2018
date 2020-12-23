@@ -19,6 +19,7 @@ var storage = multer.diskStorage({
   var upload = multer({ storage: storage })
 
 
+  // upload/avata, can cap nhat id theo id nguoi dung
   uploadRouter.post('/avata', upload.single('file'),(req, res)=>{
     updateAvata(req, res, req.file.originalname);
 })
