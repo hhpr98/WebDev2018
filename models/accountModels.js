@@ -12,7 +12,7 @@ export const getUser1 = async () => {
     });
     return _users;
 }
-export const getUserByID = async (userId) => {
+export const getAccountByID = async (userId) => {
 
     // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
     const _users = await Accounts.findOne({
@@ -24,8 +24,6 @@ export const getUserByID = async (userId) => {
     return _users;
 }
 export const updateUserInfo = async (firstName, phone, email, adress, userID)=>{
-   
-   console.log(phone);
     await Accounts.update({
         name : firstName,
         phonenumber: phone,
@@ -37,6 +35,7 @@ export const updateUserInfo = async (firstName, phone, email, adress, userID)=>{
        }
    });
 }
+
 // luu hinh anh nguoi dung vao db 
 export const saveUser1 = async (id, update_img) => {
 

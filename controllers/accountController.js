@@ -1,11 +1,16 @@
-import { getUser1,saveUser1, getUserByID, updateUserInfo  } from "../models/accountModels";
+import { getUser1,saveUser1, getAccountByID, updateUserInfo} from "../models/accountModels";
+import { updateUserPW, getUserByID  } from "../models/userModels";
+
 import catchAsync from "../libs/catchAsync";
 
 /* Tài khoản */
 export const getAccountPage = catchAsync(
   async (req, res) => {
-    const user1 = await getUserByID('4bd31be7-9e2a-481e-b285-8fe70fd49b6f');
-    res.render("account/account", { title: "Tài khoản" ,  user:user1});
+    // lay tam thong tin acc 
+    const user1 = await getAccountByID('4bd31be7-9e2a-481e-b285-8fe70fd49b6f');
+    // lay tam thong tin user
+    const user2 = await getUserByID('e61f8345-be67-45e9-9a53-8c6ab412d14b');
+    res.render("account/account", { title: "Tài khoản" ,  user:user1, pw : user2.password});
   }
 );
 // upload avata
@@ -76,8 +81,15 @@ export const postRegisterPage = catchAsync(
 
 // update details
 // update password
-
-
+export const updatePassword = catchAsync(
+  async(req, res) =>{
+    // temp id, truyeenf id sau khi authentica
+    const id = "e61f8345-be67-45e9-9a53-8c6ab412d14b";
+    // chinh trong bang user nen id nay thuoc bang user
+    await updateUserPW(req.body.newpPssword, id);
+    res.redirect("/account");
+  }
+)
 // update info
 
 export const updateInfo = catchAsync(
@@ -90,3 +102,4 @@ export const updateInfo = catchAsync(
     res.redirect("/account");
     }
 )
+
