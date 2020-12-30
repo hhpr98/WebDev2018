@@ -124,9 +124,9 @@
                                 </ul>
                             </div>
                             <div id="tabreviews" class="container tab-pane fade">
-                                {{#each item.review}}
+                                {{#each reviewList}}
                                     <div class="reviews-submitted">
-                                        <div class="reviewer">{{reviewName}} - <span>{{reviewDate}}</span></div>
+                                        <div class="reviewer">{{name}} - <span>{{updatedAt}}</span></div>
                                         <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -134,7 +134,7 @@
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                         </div>
-                                        <p>{{reviewContent}}</p>
+                                        <p>{{content}}</p>
                                     </div>
                                 {{/each}}
                                 <div class="reviews-submit">

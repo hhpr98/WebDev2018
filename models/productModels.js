@@ -1,4 +1,4 @@
-import { Products, Categories, Op } from "../database/models";
+import { Products, Categories, Op, Comments } from "../database/models";
 
 // Lấy danh sách sản phẩm
 // Input : limit, page
@@ -83,25 +83,6 @@ export const getCategoryDatabase = async () => {
     });
 
     return _category;
-}
-
-export const getReview = () => {
-    return [
-        {
-            reviewId: 1,
-            reviewName: "Phở Thị Nở",
-            reviewDate: "2021-01-01",
-            reviewStar: 5,
-            reviewContent: "Sản phẩm đẹp, bền"
-        },
-        {
-            reviewId: 2,
-            reviewName: "Hòa Nguyễn",
-            reviewDate: "2021-01-01",
-            reviewStar: 5,
-            reviewContent: "Khá thoải mái, tôi thích!"
-        }
-    ]
 }
 
 // Get branchs (thẻ bên phải mỗi product page)
@@ -200,4 +181,24 @@ export const getTags = () => {
             name: "Mùa đông"
         }
     ]
+}
+
+// Lấy danh sách bình luận dựa vào productId
+// Input : limit, page, productId
+// Result: count + list bình luận
+export const getCommentListDatabaseByProductId = async (limit, page, productId) => {
+
+    const _comment = await Comments.findAndCountAll({
+        where: {
+            isDeleted: 0,
+            productId: productId
+        },
+        limit: limit,
+        offset: limit * (page - 1),
+        order: [
+            ['updatedAt', 'ASC']
+        ]
+    });
+
+    return _comment;
 }

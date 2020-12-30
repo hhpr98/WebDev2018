@@ -4,9 +4,9 @@ import {
     getProductListDatabase,
     getProductListDatabaseByCategory,
     getProductListDatabaseBySearchText,
-    getReview,
     getBranchs,
-    getTags
+    getTags,
+    getCommentListDatabaseByProductId
 } from "../models/productModels";
 import catchAsync from "../libs/catchAsync";
 
@@ -122,16 +122,16 @@ export const getProductDetailPage = catchAsync(
             return;
         }
 
-        const reviewList = getReview();
         const category = await getCategoryDatabase();
         const branchs = getBranchs();
         const tags = getTags();
-        const relativeProduct = await getProductListDatabaseByCategory(5, 1, item.type || 1);
-
+        const relativeProduct = await getProductListDatabaseByCategory(5, 1, item.type);
+        const getComments = await getCommentListDatabaseByProductId(2, 1, item.id);
 
         res.render("product/product-detail", {
             title: "Chi tiết sản phẩm",
-            item, relativeProducts: relativeProduct.rows, reviewList, category, branchs, tags
+            item, relativeProducts: relativeProduct.rows, category, branchs, tags,
+            reviewList: getComments.rows
         });
     }
 );
