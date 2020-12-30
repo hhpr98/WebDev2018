@@ -124,6 +124,7 @@
                                 </ul>
                             </div>
                             <div id="tabreviews" class="container tab-pane fade">
+
                                 {{#each reviewList}}
                                     <div class="reviews-submitted">
                                         <div class="reviewer">{{name}} - <span>{{updatedAt}}</span></div>
@@ -137,6 +138,49 @@
                                         <p>{{content}}</p>
                                     </div>
                                 {{/each}}
+
+                                <!-- Pagination Start -->
+                                <ul class="pagination">
+                                    {{#if pageCount}}
+                                        {{#if isPreviousPage}}
+                                            <li class="page-item">
+                                                <a class="page-link"
+                                                    href="/product/detail/{{item.id}}?page={{previousPage}}"
+                                                    tabindex="-1">Trước
+                                                </a>
+                                            </li>
+                                        {{else}}
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">Trước</a>
+                                            </li>
+                                        {{/if}}
+
+                                        {{#each listPaginate}}
+                                            <li {{#if isCurrentPage}}class="page-item active" {{else}}class="page-item"
+                                                {{/if}}>
+                                                <a class="page-link"
+                                                    href="/product/detail/{{item.id}}?page={{pageId}}">{{pageId}}</a>
+                                            </li>
+                                        {{/each}}
+
+                                        {{#if isNextPage}}
+                                            <li class="page-item">
+                                                <a class="page-link"
+                                                    href="/product/detail/{{item.id}}?page={{nextPage}}">Sau</a>
+                                            </li>
+                                        {{else}}
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#">Sau</a>
+                                            </li>
+                                        {{/if}}
+                                    {{else}}
+                                        <h2 class="text-danger mt-5 mb-5 text-center">
+                                            Chưa có bình luận!
+                                        </h2>
+                                    {{/if}}
+                                </ul>
+                                <!-- Pagination Start -->
+
                                 <div class="reviews-submit">
                                     <h4>Để lại bình luận:</h4>
                                     <div class="ratting">
