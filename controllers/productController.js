@@ -1,6 +1,16 @@
-import { getCategoryDatabase, getProductDetailDatabase, getProductListDatabase, getProductListDatabaseByCategory, getProductListDatabaseBySearchText, getReview, getBranchs, getTags } from "../models/productModels";
+import {
+    getCategoryDatabase,
+    getProductDetailDatabase,
+    getProductListDatabase,
+    getProductListDatabaseByCategory,
+    getProductListDatabaseBySearchText,
+    getReview,
+    getBranchs,
+    getTags
+} from "../models/productModels";
 import catchAsync from "../libs/catchAsync";
 
+// Hàm : lấy array paginate chi tiết (gồm page , isCurrentPage)
 const getListPaginate = (currentPage, pageCount) => {
     const arrPage = [];
     for (var i = 1; i <= pageCount; i++) {
@@ -12,6 +22,7 @@ const getListPaginate = (currentPage, pageCount) => {
     return arrPage;
 }
 
+// Lấy danh sách sản phẩm 
 export const getProductListPage = catchAsync(
     async (req, res) => {
 
@@ -38,6 +49,7 @@ export const getProductListPage = catchAsync(
     }
 );
 
+// Lấy danh sách sản phẩm (dựa vào loại sản phẩm)
 export const getProductListPageByCategoryPage = catchAsync(
     async (req, res) => {
 
@@ -66,6 +78,7 @@ export const getProductListPageByCategoryPage = catchAsync(
     }
 );
 
+// Lấy danh sách sản phẩm (dựa vào từ khóa tìm kiếm)
 export const getProductListPageBySearchText = catchAsync(
     async (req, res) => {
 
@@ -99,23 +112,26 @@ export const getProductListPageBySearchText = catchAsync(
     }
 );
 
+// Chi tiết sản phẩm
 export const getProductDetailPage = catchAsync(
     async (req, res) => {
         const productId = req.params.id || "1";
-        const list = await getProductListDatabase(5, 1); // mượn acc fix lỗi này luôn
-        const reviewList = getReview();
         const item = await getProductDetailDatabase(productId);
+        if (item === null) {
+            res.render("product/product-not-found", { title: "Chi tiết sản phẩm" });
+            return;
+        }
+
+        const reviewList = getReview();
         const category = await getCategoryDatabase();
         const branchs = getBranchs();
         const tags = getTags();
+        const relativeProduct = await getProductListDatabaseByCategory(5, 1, item.type || 1);
 
-        if (item === null) {
-            res.render("product/product-not-found", { title: "Chi tiết sản phẩm" });
-        } else {
-            res.render("product/product-detail", {
-                title: "Chi tiết sản phẩm",
-                item, productList: list.rows, reviewList, category, branchs, tags
-            });
-        }
+
+        res.render("product/product-detail", {
+            title: "Chi tiết sản phẩm",
+            item, relativeProducts: relativeProduct.rows, reviewList, category, branchs, tags
+        });
     }
 );

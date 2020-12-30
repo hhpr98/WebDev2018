@@ -100,22 +100,22 @@
                     <div class="col-lg-12">
                         <ul class="nav nav-pills nav-justified">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="pill" href="#description">Mô tả</a>
+                                <a class="nav-link active" data-toggle="pill" href="#tabdescription">Mô tả</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#specification">Thông số kĩ thuật</a>
+                                <a class="nav-link" data-toggle="pill" href="#tabspecification">Thông số kĩ thuật</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#reviews">Nhận xét (2)</a>
+                                <a class="nav-link" data-toggle="pill" href="#tabreviews">Nhận xét</a>
                             </li>
                         </ul>
 
                         <div class="tab-content">
-                            <div id="description" class="container tab-pane active">
+                            <div id="tabdescription" class="container tab-pane active">
                                 <h4>Mô tả sản phẩm</h4>
                                 <p>{{item.description}}</p>
                             </div>
-                            <div id="specification" class="container tab-pane fade">
+                            <div id="tabspecification" class="container tab-pane fade">
                                 <h4>Thông số kĩ thuật</h4>
                                 <ul>
                                     <li>{{item.specification1}}</li>
@@ -123,7 +123,7 @@
                                     <li>{{item.specification3}}</li>
                                 </ul>
                             </div>
-                            <div id="reviews" class="container tab-pane fade">
+                            <div id="tabreviews" class="container tab-pane fade">
                                 {{#each item.review}}
                                     <div class="reviews-submitted">
                                         <div class="reviewer">{{reviewName}} - <span>{{reviewDate}}</span></div>
@@ -172,7 +172,7 @@
                     </div>
 
                     <div class="row align-items-center product-slider product-slider-3">
-                        {{#each productList}}
+                        {{#each relativeProducts}}
                             <div class="col-lg-3">
                                 <div class="product-item">
                                     <div class="product-title">
@@ -225,7 +225,7 @@
 
                 <div class="sidebar-widget widget-slider">
                     <div class="sidebar-slider normal-slider">
-                        {{#each productList}}
+                        {{#each relativeProducts}}
                             <div class="product-item">
                                 <div class="product-title">
                                     <a href="#">{{name}}</a>

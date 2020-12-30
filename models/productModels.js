@@ -1,5 +1,8 @@
 import { Products, Categories, Op } from "../database/models";
 
+// Lấy danh sách sản phẩm
+// Input : limit, page
+// Result: count + list sản phẩm
 export const getProductListDatabase = async (limit, page) => {
 
     const _product = await Products.findAndCountAll({
@@ -12,6 +15,9 @@ export const getProductListDatabase = async (limit, page) => {
     return _product;
 }
 
+// Lấy danh sách sản phẩm dựa vào phân loại
+// Input : limit, page, loại sản phẩm
+// Result: count + list sản phẩm
 export const getProductListDatabaseByCategory = async (limit, page, type) => {
 
     const _product = await Products.findAndCountAll({
@@ -26,6 +32,9 @@ export const getProductListDatabaseByCategory = async (limit, page, type) => {
     return _product;
 }
 
+// Lấy danh sách sản phẩm dựa vào từ khóa tìm kiếm
+// Input : limit, page, search text
+// Result: count + list sản phẩm
 export const getProductListDatabaseBySearchText = async (limit, page, text) => {
 
     const _product = await Products.findAndCountAll({
@@ -41,6 +50,9 @@ export const getProductListDatabaseBySearchText = async (limit, page, text) => {
     return _product;
 }
 
+// Lấy thông tin chi tiết 1 sản phẩm
+// Input : id sản phẩm
+// Result: chi tiết sản phẩm
 export const getProductDetailDatabase = async (id) => {
 
     // increase view count
@@ -59,6 +71,9 @@ export const getProductDetailDatabase = async (id) => {
     return _product;
 
 }
+
+// Lấy danh sách loại sản phẩm
+// Result: danh sách loại sản phẩm
 export const getCategoryDatabase = async () => {
 
     const _category = await Categories.findAll({
@@ -89,6 +104,7 @@ export const getReview = () => {
     ]
 }
 
+// Get branchs (thẻ bên phải mỗi product page)
 export const getBranchs = () => {
     return [
         {
@@ -124,6 +140,7 @@ export const getBranchs = () => {
     ]
 }
 
+// Get tags (thẻ bên phải mỗi product page)
 export const getTags = () => {
     return [
         {
