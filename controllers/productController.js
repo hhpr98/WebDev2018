@@ -115,23 +115,36 @@ export const getProductListPageBySearchText = catchAsync(
 // Chi tiết sản phẩm
 export const getProductDetailPage = catchAsync(
     async (req, res) => {
+
+        // product infor
         const productId = req.params.id || "1";
         const item = await getProductDetailDatabase(productId);
         if (item === null) {
             res.render("product/product-not-found", { title: "Chi tiết sản phẩm" });
             return;
         }
-
         const category = await getCategoryDatabase();
         const branchs = getBranchs();
         const tags = getTags();
         const relativeProduct = await getProductListDatabaseByCategory(5, 1, item.type);
-        const getComments = await getCommentListDatabaseByProductId(2, 1, item.id);
+        // comment
+        const currentPage = +req.query.page || 1;
+        const limitPerPage = 2;
+        const getComments = await getCommentListDatabaseByProductId(limitPerPage, currentPage, item.id);
+        const totalCount = getComments.count || 0;
+        const pageCount = Math.ceil(totalCount / limitPerPage);
+        const previousPage = currentPage - 1;
+        const nextPage = currentPage + 1;
+        const isPreviousPage = (currentPage <= 1 ? false : true);
+        const isNextPage = (currentPage >= pageCount ? false : true);
 
         res.render("product/product-detail", {
             title: "Chi tiết sản phẩm",
             item, relativeProducts: relativeProduct.rows, category, branchs, tags,
-            reviewList: getComments.rows
+            reviewList: getComments.rows,
+            currentPage, pageCount, previousPage, nextPage, isPreviousPage, isNextPage,
+            listPaginate: getListPaginate(currentPage, pageCount)
         });
+
     }
 );
