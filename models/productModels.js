@@ -1,5 +1,8 @@
-import { Products, Categories, Op } from "../database/models";
+import { Products, Categories, Op, Comments } from "../database/models";
 
+// Lấy danh sách sản phẩm
+// Input : limit, page
+// Result: count + list sản phẩm
 export const getProductListDatabase = async (limit, page) => {
 
     const _product = await Products.findAndCountAll({
@@ -12,6 +15,9 @@ export const getProductListDatabase = async (limit, page) => {
     return _product;
 }
 
+// Lấy danh sách sản phẩm dựa vào phân loại
+// Input : limit, page, loại sản phẩm
+// Result: count + list sản phẩm
 export const getProductListDatabaseByCategory = async (limit, page, type) => {
 
     const _product = await Products.findAndCountAll({
@@ -26,6 +32,9 @@ export const getProductListDatabaseByCategory = async (limit, page, type) => {
     return _product;
 }
 
+// Lấy danh sách sản phẩm dựa vào từ khóa tìm kiếm
+// Input : limit, page, search text
+// Result: count + list sản phẩm
 export const getProductListDatabaseBySearchText = async (limit, page, text) => {
 
     const _product = await Products.findAndCountAll({
@@ -41,13 +50,30 @@ export const getProductListDatabaseBySearchText = async (limit, page, text) => {
     return _product;
 }
 
+// Lấy thông tin chi tiết 1 sản phẩm
+// Input : id sản phẩm
+// Result: chi tiết sản phẩm
 export const getProductDetailDatabase = async (id) => {
 
+    // increase view count
+    await Products.increment({
+        viewCount: +1
+    }, {
+        where:
+        {
+            id: id
+        }
+    });
+
+    // get detail 
     const _product = await Products.findByPk(id);
 
     return _product;
 
 }
+
+// Lấy danh sách loại sản phẩm
+// Result: danh sách loại sản phẩm
 export const getCategoryDatabase = async () => {
 
     const _category = await Categories.findAll({
@@ -59,25 +85,7 @@ export const getCategoryDatabase = async () => {
     return _category;
 }
 
-export const getReview = () => {
-    return [
-        {
-            reviewId: 1,
-            reviewName: "Phở Thị Nở",
-            reviewDate: "2021-01-01",
-            reviewStar: 5,
-            reviewContent: "Sản phẩm đẹp, bền"
-        },
-        {
-            reviewId: 2,
-            reviewName: "Hòa Nguyễn",
-            reviewDate: "2021-01-01",
-            reviewStar: 5,
-            reviewContent: "Khá thoải mái, tôi thích!"
-        }
-    ]
-}
-
+// Get branchs (thẻ bên phải mỗi product page)
 export const getBranchs = () => {
     return [
         {
@@ -113,6 +121,7 @@ export const getBranchs = () => {
     ]
 }
 
+// Get tags (thẻ bên phải mỗi product page)
 export const getTags = () => {
     return [
         {
@@ -172,4 +181,24 @@ export const getTags = () => {
             name: "Mùa đông"
         }
     ]
+}
+
+// Lấy danh sách bình luận dựa vào productId
+// Input : limit, page, productId
+// Result: count + list bình luận
+export const getCommentListDatabaseByProductId = async (limit, page, productId) => {
+
+    const _comment = await Comments.findAndCountAll({
+        where: {
+            isDeleted: 0,
+            productId: productId
+        },
+        limit: limit,
+        offset: limit * (page - 1),
+        order: [
+            ['updatedAt', 'ASC']
+        ]
+    });
+
+    return _comment;
 }
