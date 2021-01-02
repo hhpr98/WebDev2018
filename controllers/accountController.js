@@ -1,5 +1,5 @@
-import { getUser1,saveUser1, getAccountByID, updateUserInfo, getAccountByUserName} from "../models/accountModels";
-import { updateUserPW, getUserByID  } from "../models/userModels";
+import { getUser1, saveUser1, getAccountByID, updateUserInfo, getAccountByUserName, addNewAccoutToDatabase } from "../models/accountModels";
+import { updateUserPW, getUserByID } from "../models/userModels";
 
 import catchAsync from "../libs/catchAsync";
 
@@ -12,7 +12,7 @@ export const getAccountPage = catchAsync(
     const user1 = await getAccountByID('4bd31be7-9e2a-481e-b285-8fe70fd49b6f');
     // lay tam thong tin user
     const user2 = await getUserByID('e61f8345-be67-45e9-9a53-8c6ab412d14b');
-    res.render("account/account", { title: "Tài khoản" ,  user:user1, pw : user2.password});
+    res.render("account/account", { title: "Tài khoản", user: user1, pw: user2.password });
   }
 );
 // upload avata
@@ -20,13 +20,13 @@ export const updateAvata = catchAsync(
   // lay ra nguoi dung ( cap nhat sau)
   // chinh sua lai image, sau do luu lai vao db
   // render
-    async (req, res, filename) => {
-      const user1 = await getUser1();
-      user1.image = "/img/uploads/"+filename;
-      await saveUser1(user1.id, user1.image);
-      res.redirect("/account");
-    }
-  );
+  async (req, res, filename) => {
+    const user1 = await getUser1();
+    user1.image = "/img/uploads/" + filename;
+    await saveUser1(user1.id, user1.image);
+    res.redirect("/account");
+  }
+);
 
 /* Đăng nhập */
 export const getLoginPage = catchAsync(
@@ -76,10 +76,10 @@ exports.getAccountByPassword = catchAsync(
 //     return pw;
 //   }
 // )
- const getAccountPassword = catchAsync(
-  async(accountName) =>{
-    console.log(accountName+ "controller");
-    const  pw = await getAccountByUserName(accountName);
+const getAccountPassword = catchAsync(
+  async (accountName) => {
+    console.log(accountName + "controller");
+    const pw = await getAccountByUserName(accountName);
     // tamj thoi su dung phonenumber, vi bang nayk co pw
     return pw;
   }
@@ -94,15 +94,15 @@ export const postRegisterPage = catchAsync(
       return;
     }
     // luu vao db
-
-    res.redirect("/");
+    await addNewAccoutToDatabase(req.body.username, req.body.pass, req.body.email);
+    res.redirect("/login");
   }
 );
-
+// 
 // update details
 // update password
 export const updatePassword = catchAsync(
-  async(req, res) =>{
+  async (req, res) => {
     // temp id, truyeenf id sau khi authentica
     const id = "e61f8345-be67-45e9-9a53-8c6ab412d14b";
     // chinh trong bang user nen id nay thuoc bang user
@@ -113,13 +113,18 @@ export const updatePassword = catchAsync(
 // update info
 
 export const updateInfo = catchAsync(
-  async(req, res) => {
+  async (req, res) => {
     //
 
     const id = '4bd31be7-9e2a-481e-b285-8fe70fd49b6f';
     //
     await updateUserInfo(req.body.userName, req.body.userPhone, req.body.userEmail, req.body.userAddress, id);
     res.redirect("/account");
-    }
+  }
 )
-
+// export const createNewAccount = catchAsync(
+//   async (req, res, username, password, email)=>{
+//     await addNewAccoutToDatabase(username, password, email);
+//     res.redirect("/login",{ title: "Đăng nhập",  layout: "layout/loginlayout" });
+//   }
+// )
