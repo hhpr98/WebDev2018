@@ -15,6 +15,24 @@ import adminRouter from "./routes/admin";
 var app = express(); // express 
 dotenv.config(); // using dotenv file
 
+// autenticat
+import expressSession from "express-session";
+import passport from "passport";
+
+app.use(expressSession({secret: "userCookieSecret", cookie:{maxAge: 300000}})); // 5p ton tai
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+passport.serializeUser((user, done) => {
+  done(null, user)
+})
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

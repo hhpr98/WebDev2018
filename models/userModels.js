@@ -24,3 +24,14 @@ export const getUserByID = async (userId) => {
     });
     return _users;
 }
+export const getUserByUserName = async (userName) => {
+
+    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
+    const _users = await Users.findOne({
+        where: {
+            isDeleted: 0,
+            username: userName
+        }
+    });
+    return _users;
+}

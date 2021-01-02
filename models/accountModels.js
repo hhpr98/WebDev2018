@@ -23,6 +23,21 @@ export const getAccountByID = async (userId) => {
     });
     return _users;
 }
+
+export const getAccountByUserName = async (userName) => {
+    console.log("model ");
+    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
+    const _users = await Accounts.findOne({
+        where: {
+            isDeleted: 0,
+            name: userName
+        }
+    });
+    console.log("model " + _users);
+    if(_users == null)
+        return "";
+    return _users.phonenumber;
+}
 export const updateUserInfo = async (firstName, phone, email, adress, userID)=>{
     await Accounts.update({
         name : firstName,

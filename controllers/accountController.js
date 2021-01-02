@@ -1,7 +1,9 @@
-import { getUser1,saveUser1, getAccountByID, updateUserInfo} from "../models/accountModels";
+import { getUser1,saveUser1, getAccountByID, updateUserInfo, getAccountByUserName} from "../models/accountModels";
 import { updateUserPW, getUserByID  } from "../models/userModels";
 
 import catchAsync from "../libs/catchAsync";
+
+//
 
 /* Tài khoản */
 export const getAccountPage = catchAsync(
@@ -63,8 +65,25 @@ export const getRegisterPage = catchAsync(
     res.render("account/register", { title: "Đăng kí", layout: "layout/loginlayout" });
   }
 );
+exports.getAccountByPassword = catchAsync(
 
-
+);
+// module.exports = function getAccountPassword() = catchAsync(
+//   async(accountName) =>{
+//     console.log(accountName+ "controller");
+//     const  pw = await getAccountByUserName(accountName);
+//     // tamj thoi su dung phonenumber, vi bang nayk co pw
+//     return pw;
+//   }
+// )
+ const getAccountPassword = catchAsync(
+  async(accountName) =>{
+    console.log(accountName+ "controller");
+    const  pw = await getAccountByUserName(accountName);
+    // tamj thoi su dung phonenumber, vi bang nayk co pw
+    return pw;
+  }
+)
 export const postRegisterPage = catchAsync(
   async (req, res) => {
     const pass = req.body.pass || "";
@@ -74,6 +93,7 @@ export const postRegisterPage = catchAsync(
       res.render("account/register", { title: "Đăng kí", Noti: "Mật khẩu nhập lại không khớp", layout: "layout/loginlayout" });
       return;
     }
+    // luu vao db
 
     res.redirect("/");
   }
