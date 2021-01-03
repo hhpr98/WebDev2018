@@ -25,7 +25,7 @@ export const addNewAccoutToDatabase = async (username, password, email) => {
         password: password,
         accountId: account_id,
         type: 1,
-        isBanned:0,
+        isBanned:-1, // chua verificate
         isDeleted: 0,
         createdAt: created_date,
         updatedAt: null
@@ -66,6 +66,8 @@ export const getAccountByUserName = async (userName) => {
     console.log("model " + _users);
     if(_users == null)
         return "";
+        // trong banrgh này k có pw, nên e lấy phone ra để test
+        
     return _users.phonenumber;
 }
 export const updateUserInfo = async (firstName, phone, email, adress, userID)=>{

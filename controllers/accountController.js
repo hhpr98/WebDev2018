@@ -34,7 +34,13 @@ export const getLoginPage = catchAsync(
     res.render("account/login", { title: "Đăng nhập", layout: "layout/loginlayout" });
   }
 );
-
+// logout
+export const logout = catchAsync(
+  async (req, res) => {
+    req.logout();
+    res.redirect('/');
+  }
+)
 
 export const postLoginPage = catchAsync(
   async (req, res) => {
@@ -42,7 +48,7 @@ export const postLoginPage = catchAsync(
     var username = req.body.username || "";
     var pass = req.body.pass || "";
     var getAcc = getAccount();
-    var account = getAcc.find(ele => ele.username === username);
+    var account = getAcc.find(ele => ele.username === username); get
     // console.log(account);
 
     if (!account) {
@@ -65,25 +71,25 @@ export const getRegisterPage = catchAsync(
     res.render("account/register", { title: "Đăng kí", layout: "layout/loginlayout" });
   }
 );
-exports.getAccountByPassword = catchAsync(
-
-);
-// module.exports = function getAccountPassword() = catchAsync(
-//   async(accountName) =>{
-//     console.log(accountName+ "controller");
-//     const  pw = await getAccountByUserName(accountName);
+// exports.getAccountByPassword = catchAsync(
+//   async(accountName)=>{
+//     console.log(accountName + "controller");
+//     const pw = await getAccountByUserName(accountName);
 //     // tamj thoi su dung phonenumber, vi bang nayk co pw
 //     return pw;
 //   }
-// )
-const getAccountPassword = catchAsync(
-  async (accountName) => {
-    console.log(accountName + "controller");
-    const pw = await getAccountByUserName(accountName);
-    // tamj thoi su dung phonenumber, vi bang nayk co pw
-    return pw;
-  }
-)
+// );
+export const getAccountPassword = async (accountName) => {
+  console.log(accountName + "controller");
+  const pw = await getAccountByUserName(accountName);
+  // console.log(0);
+  // tamj thoi su dung phonenumber, vi bang nayk co pw
+  return pw;
+}
+
+
+
+
 export const postRegisterPage = catchAsync(
   async (req, res) => {
     const pass = req.body.pass || "";
