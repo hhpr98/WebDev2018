@@ -6,8 +6,10 @@ const SALT_ROUNDS = 10;
 
 // update password
 export const updatePasswordById = async (newpw, userID)=>{  
+    const _password = bcrypt.hashSync(newpw, SALT_ROUNDS);
+    
     await Users.update({
-       password : newpw
+       password : _password
    },{
        where:{
            id: userID
@@ -87,10 +89,10 @@ export const getNPIById = async (userid) => {
 }
 export const updateUserInfoById = async (username, phone, email, adress, userID)=>{
     await Users.update({
-        name: "Người dùng",
+        name: username,
         email: email,
-        phonenumber: null,
-        password: _password
+        phonenumber: phone,
+        address: adress
    },{
        where:{
            id: userID

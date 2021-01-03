@@ -30,6 +30,7 @@ const rerenderAcccounPage = catchAsync(
     // lay tam thong tin acc 
     const id = req.user;
     const user_info = await getAccountByID(id);
+    console.log( req.session.message );
     res.render("account/account", { title: "Tài khoản", user: user_info, noti: req.session.message });
   }
 );
@@ -75,11 +76,15 @@ export const updateInfo = catchAsync(
 )
 export const updatePassword = catchAsync(
   async (req, res) => {
-    // temp id, truyeenf id sau khi authentica
+    const id = req.user;
     const account = await getNPIById(id);
     //
-    if (bcrypt.compareSync(req.body.oldpw, account.pw))
+    if (bcrypt.compareSync(req.body.oldpw, account.pw)){
       await updatePasswordById(req.body.newpw, id);
+      req.session.message = 'Da cap nhat mat khau';
+      rerenderAcccounPage();
+    }
+      
     else{
       req.session.message = 'Mật khẩu cũ không khớp!!';
       rerenderAcccounPage();
