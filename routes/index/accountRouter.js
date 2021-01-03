@@ -14,7 +14,8 @@ import {
     postRegisterPage,
     updateInfo,
     updatePassword,
-    logoutAccount
+    logoutAccount,
+    updateAvata
 } from "../../controllers/accountController";
 
 const accountRouter = express.Router();

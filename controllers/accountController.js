@@ -15,8 +15,10 @@ import catchAsync from "../libs/catchAsync";
 // get layout
 export const getLoginPage = catchAsync(
   async (req, res) => {
-    var message = req.session.message;
-    res.render("account/login", { title: "Đăng nhập", layout: "layout/loginlayout" });
+    // var noti = req.flash('loginMessage')[0];
+    var message = req.session.valid;
+    req.session.valid = null;
+    res.render("account/login", { title: "Đăng nhập", layout: "layout/loginlayout" , Noti:message});
   }
 );
 export const getRegisterPage = catchAsync(
@@ -25,21 +27,14 @@ export const getRegisterPage = catchAsync(
   }
 );
 
-const rerenderAcccounPage = catchAsync(
-  async (req, res) => {
-    // lay tam thong tin acc 
-    const id = req.user;
-    const user_info = await getAccountByID(id);
-    console.log( req.session.message );
-    res.render("account/account", { title: "Tài khoản", user: user_info, noti: req.session.message });
-  }
-);
 export const getAccountPage = catchAsync(
   async (req, res) => {
-    // lay tam thong tin acc 
+    var message = req.session.valid;
+    req.session.valid = null;
+    // lay tam thong tin acc
     const id = req.user;
     const user_info = await getAccountByID(id);
-    res.render("account/account", { title: "Tài khoản", user: user_info });
+    res.render("account/account", { title: "Tài khoản", user: user_info, noti:message});
   }
 );
 
@@ -60,7 +55,8 @@ export const logoutAccount = catchAsync(
 
 // update
 export const updateAvata = catchAsync(
-  async (req, res, filename, id) => {
+  async (req, res, filename) => {
+    const id = req.user;
     const file_src = "/img/uploads/" + filename;
     await updateUserImage(id, file_src);
     res.redirect("/account");
@@ -69,6 +65,7 @@ export const updateAvata = catchAsync(
 export const updateInfo = catchAsync(
   async (req, res) => {
     const id = req.user;
+    req.session.valid = "Đã cập nhật thông tin tài khoản";
 
     await updateUserInfoById(req.body.username, req.body.phone, req.body.email, req.body.address, id);
     res.redirect("/account");
@@ -81,19 +78,12 @@ export const updatePassword = catchAsync(
     //
     if (bcrypt.compareSync(req.body.oldpw, account.pw)){
       await updatePasswordById(req.body.newpw, id);
-      req.session.message = 'Da cap nhat mat khau';
-      rerenderAcccounPage();
+      req.session.valid = "Đã cập nhật mật khẩu";
     }
       
     else{
-      req.session.message = 'Mật khẩu cũ không khớp!!';
-      rerenderAcccounPage();
+      req.session.valid = 'Mật khẩu cũ không khớp!!';
     }
-          
-
-
-      // chinh trong bang user nen id nay thuoc bang user
-
       res.redirect("/account");
   }
 )
