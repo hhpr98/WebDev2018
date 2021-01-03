@@ -1,21 +1,24 @@
 import express from "express";
+// for authenticate
+import bcrypt from "bcrypt";
 
-// authenticate
 import passport from "passport";
-// import localStrategy from "passport-local";
 const localStrategy = require("passport-local").Strategy;
-// import expressSession from "express-session";
 
+// local
 import { genService } from "../service/generateService";
 import accountRouter from "./index/accountRouter";
 import cartRouter from "./index/cartRouter";
 import homeRouter from "./index/homeRouter";
 import productRouter from "./index/productRouter";
-import uploadRouter from "./index/uploadRouter";
-import { getLoginPage, getRegisterPage, postRegisterPage, getAccountPassword } from "../controllers/accountController"
-// import "../controllers/accountController"
+
+
+import {getAccountAuthenticate, getLoginPage, getRegisterPage, postRegisterPage} from "../controllers/accountController"
+const SALT_ROUNDS = 10;
+
 const indexRouter = express.Router();
 
+//                              //////parent route
 indexRouter.use("/", homeRouter);
 indexRouter.use("/product", productRouter);
 indexRouter.use("/cart", cartRouter);
@@ -25,57 +28,71 @@ indexRouter.use("/account", (req, res, next) => {
         next();
     }
     else
-        res.send("ban chua dang nhapnpm ")
+        res.render("error/authenticate");
 }, accountRouter);
 indexRouter.get("/generate-data", genService);
-indexRouter.use("/upload", uploadRouter);
 
-// login route
+
+//                          /////////////login route//////////
+
 indexRouter.route("/login")
     .get(getLoginPage)
     .post(passport.authenticate("local", { failureRedirect: "/login", successRedirect: "/" }));
+    // .post(passport.authenticate("local", function(req, res, next) {
+    //     passport.authenticate('local', function(err, user, info) {
+    //       if (err) { return next(err); }
+    //       if (!user) { return res.redirect('/login'); }
+    //       req.logIn(user, function(err) {
+    //         if (err) { return next(err); }
+    //         // return res.redirect('/users/' + user.username);
+    //         return res.redirect('/');
 
+    //       });
+    //     })(req, res, next);
+    //   }));
+
+    
 // check tài khoản để login vào
 passport.use(new localStrategy( // này để passport dùng
-
     async (username, password, done) => {
-        console.log(username + " " + password);
         // lay tu db ra password tuong ung voi username, neu khong co thi la "";
-        // var pwfromDB= "01643681993";
-        var pwfromDB;
+        var account;
         try {
-            pwfromDB = await getAccountPassword(username);// chỗ này nè a
+            account = await getAccountAuthenticate(username);// chỗ này nè a
         }
         catch (err) {
-            console.log("Err while getting password from db!!1111111")
+            console.log("Err while getting password from db!!")
         }
-        if (password == pwfromDB) {
-            const memory = { username, password };
-            return done(null, memory);
-        }
-        else {
+
+        if(account==null){
             return done(null, false);
         }
+       else{
+            if (bcrypt.compareSync(password, account.pw)) {
+                return done(null, account.id);
+            }
+            else {
+                return done(null, false);
+            }
+       }
     }
 ))
-passport.serializeUser((username, done) => {
+passport.serializeUser((id, done) => {
     // ghi vao session
-    done(null, username);
+    done(null, id);
 })
-passport.deserializeUser((username, done) => {
+passport.deserializeUser((id, done) => {
 
     //deserializeUser để kiểm tra thông tin người dùng mỗi khi người dùng access vào các tài nguyên khác (/private). Vì lúc này thông tin xác thực đã được generate ra một session và được lưu trong cookies  của trình duyệt.
-    // neeus ton tai ==  da dang nhap
-    // hoac lay tai khoan trong db ra so sanh tiep    
-    if (username != null) {
-        return done(null, username);
+    if (id != null) {
+        return done(null, id);
     }
     else {
         return done(null, false);
     }
 })
 
-// register route 
+//                                        ///////register route ////////////////
 indexRouter.get("/register", getRegisterPage);
 indexRouter.post("/register", postRegisterPage);
 //

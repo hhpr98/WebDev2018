@@ -7,7 +7,6 @@ import logger from "morgan";
 import { registerHelper } from "./libs/hbsHelper";
 import favicon from "serve-favicon";
 import dotenv from "dotenv";
-
 import indexRouter from "./routes/index";
 import adminRouter from "./routes/admin";
 
@@ -17,21 +16,16 @@ dotenv.config(); // using dotenv file
 
 // autenticat
 import expressSession from "express-session";
+var FileStore = require('session-file-store')(expressSession);
+
 import passport from "passport";
 
-app.use(expressSession({secret: "userCookieSecret", cookie:{maxAge: 300000}})); // 5p ton tai
+app.use(expressSession({secret: "userCookieSecret",resave: false, saveUninitialized: false, cookie:{maxAge: 3000000}})); // 5p ton tai
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-passport.serializeUser((user, done) => {
-  done(null, user)
-})
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
 
 
 // view engine setup

@@ -1,51 +1,50 @@
-import { Accounts, Users} from "../database/models";
 import { v4 as uuid } from "uuid";
+import { Users } from "../database/models";
+import bcrypt from "bcrypt";
 
-// create new
-export const addNewAccoutToDatabase = async (username, password, email) => {
-    // tạo thông tin trong bảng account
-    var account_id = uuid();
-    var created_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    await Accounts.create({
-        id: account_id,
-        name: username,
-        phonenumber: null,
-        email: email,
-        address: null,
-        image: '/img/avatar-default.jpg',
-        isDeleted: 0,
-        createdAt: created_date,
-        updatedAt: null
-    });
-    // tạo tài khoản ttrong bảng user
-    await   Users.create({
-        id: uuid(),
-        email: email,
-        username: username,
-        password: password,
-        accountId: account_id,
-        type: 1,
-        isBanned:-1, // chua verificate
-        isDeleted: 0,
-        createdAt: created_date,
-        updatedAt: null
-    })
+const SALT_ROUNDS = 10;
+
+// update password
+export const updatePasswordById = async (newpw, userID)=>{  
+    await Users.update({
+       password : newpw
+   },{
+       where:{
+           id: userID
+       }
+   });
 }
-export const getUser1 = async () => {
+//
+
+export const getUserByUserName = async (userName) => {
 
     // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
-    const _users = await Accounts.findOne({
+    const _users = await Users.findOne({
         where: {
             isDeleted: 0,
-            name: "Nguyễn Hữu Hòa"
+            username: userName
         }
     });
     return _users;
 }
-export const getAccountByID = async (userId) => {
+// admin
+// create new
+export const addAccount = async (username, password, email) => {
+    // tạo thông tin trong bảng account
+    const _password = bcrypt.hashSync(password, SALT_ROUNDS);
+    await Users.create({
+        id: uuid(),
+        name: "Người dùng",
+        email: email,
+        phonenumber: null,
+        username: username,
+        password: _password,
+        type: 1
+    });
+}
 
-    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
-    const _users = await Accounts.findOne({
+export const getAccountByID = async (userId) => {
+    const _users = await Users.findOne({
         where: {
             isDeleted: 0,
             id: userId
@@ -55,27 +54,43 @@ export const getAccountByID = async (userId) => {
 }
 
 export const getAccountByUserName = async (userName) => {
-    console.log("model ");
-    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
-    const _users = await Accounts.findOne({
+    const _users = await Users.findOne({
         where: {
             isDeleted: 0,
-            name: userName
+            username: userName
         }
     });
-    console.log("model " + _users);
     if(_users == null)
-        return "";
-        // trong banrgh này k có pw, nên e lấy phone ra để test
-        
-    return _users.phonenumber;
+        return null;
+    const id = _users.id;
+    const un = _users.username;
+    const pw = _users.password;
+    return {
+        id, un, pw
+    };
 }
-export const updateUserInfo = async (firstName, phone, email, adress, userID)=>{
-    await Accounts.update({
-        name : firstName,
-        phonenumber: phone,
-        address: adress,
-        email:email
+export const getNPIById = async (userid) => {
+    const _users = await Users.findOne({
+        where: {
+            isDeleted: 0,
+            id: userid
+        }
+    });
+    if(_users == null)
+        return null;
+    const id = _users.id;
+    const un = _users.username;
+    const pw = _users.password;
+    return {
+        id, un, pw
+    };
+}
+export const updateUserInfoById = async (username, phone, email, adress, userID)=>{
+    await Users.update({
+        name: "Người dùng",
+        email: email,
+        phonenumber: null,
+        password: _password
    },{
        where:{
            id: userID
@@ -84,16 +99,13 @@ export const updateUserInfo = async (firstName, phone, email, adress, userID)=>{
 }
 
 // luu hinh anh nguoi dung vao db 
-export const saveUser1 = async (id, update_img) => {
-
-    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
-    const _users = await Accounts.findOne({
-        where: {
-            isDeleted: 0,
-            id: id
-        }
-    });
-    _users.image = update_img;
-    await _users.save();
-    return _users;
+export const updateUserImage = async (userID, update_img_src) => {
+    await Users.update({
+        image : update_img_src
+   },{
+       where:{
+           id: userID
+       }
+   });
+    
 }

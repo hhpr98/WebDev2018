@@ -115,95 +115,130 @@
                     <div class="tab-pane fade  show active" id="account-tab" role="tabpanel"
                         aria-labelledby="account-nav">
 
+                        <h1 style="color:red;">{{noti}}</h1>
                         <div class="row">
-                            <div class="col-md-8">
-                                <h2>{{user.name}}</h2>
-                            </div>
-                            <div class="col-md-4">
-                                <img style="height: 100px;
-                                border:  1px black solid;
-                                border-radius: 100%;" src={{user.image}} alt="Avatar">
-                            </div>
-                        </div>
-                        <hr>
-                        <h4>Update your avatar</h4>
-
-                        <div class="container">
-                            <div class="col-md-8 col-md-offset-2">
-                                <form method="post" action="/upload/avata" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <input type="file" name="file" class="input-group input-file"
-                                                    onchange="readURL(this);" />
-
-                                            </div>
-                                            <button type="submit" class="btn btn-primary pull-right">Upload</button>
-                                            <div class="col-md-4"></div>
+                            <div class="col-md-9">
+                                <h2>THÔNG TIN NGƯỜI DÙNG</h2>
+                                <HR>
+                                </HR>
+                                <div class="row">
+                                    <label for="tdd" class="col-sm-3 col-form-label">Tên Tài Khoản</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="tdd" placeholder="Tên Người Dùng"
+                                            value={{user.username}} name="userName">
+                                    </div>
+                                    <label for="tnd" class="col-sm-3 col-form-label">Tên Người Dùng</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="tnd" placeholder="Tên người dùng"
+                                            value="{{user.name}}">
+                                    </div>
+                                    <label for="e" class="col-sm-3 col-form-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="e" placeholder="Email"
+                                            value={{user.email}}>
+                                    </div>
+                                    <label for="p" class="col-sm-3 col-form-label">Số Điện Thoại</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="p" placeholder="Phonenumber"
+                                            value={{user.phonenumber}}>
+                                    </div>
+                                    <label for="dc" class="col-sm-3 col-form-label">Địa chỉ</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="dc" placeholder="Adress"
+                                            value="{{user.address}}">
+                                    </div>
+                                </div>
+                                <h2>CẬP NHẬT THÔNG TIN</h2>
+                                <HR>
+                                </HR>
+                                <form action="/account/updateinfo" method="POST" onsubmit="return toSubmit();">
+                                    <div class="form-group row">
+                                        
+                                        <label for="tnd2" class="col-sm-3 col-form-label">Tên Người Dùng</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="tnd2"
+                                                placeholder="Tên người dùng"  name="username">
+                                        </div>
+                                        <label for="e2" class="col-sm-3 col-form-label">Email</label>
+                                        <div class="col-sm-9">
+                                            <input type="email" class="form-control" id="e2" placeholder="Email"
+                                                 name="email">
+                                        </div>
+                                        <label for="p2" class="col-sm-3 col-form-label">Số Điện Thoại</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="p2" placeholder="Phonenumber"
+                                                 name="phone">
+                                        </div>
+                                        <label for="dc2" class="col-sm-3 col-form-label">Địa chỉ</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="dc2" placeholder="Adress"
+                                                value={{user.address}} name="address">
+                                        </div>
+                                        <div class="col-md-12 middle">
+                                            <button type="submit" class="btn">Cập nhật</button>
                                         </div>
                                     </div>
-
                                 </form>
+                                <h2>ĐỔI MẬT KHẨU</h2>
+                                <HR>
+                                </HR>
+                                <form action="/account/updatePw" method="POST" onsubmit="return toSubmit();">
+                                    <div class="form-group row">
+                                        <label for="mkc" class="col-sm-3 col-form-label">Nhập mật khẩu cũ</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="mkc"
+                                                placeholder="Mật khẩu cũ"  name="oldpw" minlength="6" maxlength="10">
+                                        </div>
+                                        <label for="mkm" class="col-sm-3 col-form-label">Nhập mật khẩu mới</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="mkm"
+                                                placeholder="Mật khẩu mới" minlength="6" maxlength="10" name="newpw">
+                                        </div>
+                                        <label for="nlmkm" class="col-sm-3 col-form-label">Nhập lại mật khẩu mới</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="nlmkm" placeholder="" minlength="6" maxlength="10">
+                                        </div>
+                                        <div class="col-md-12 middle">
+                                            <button type="submit" class="btn">Đổi mật khẩu</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="image-container">
+                                    <img class="fill-parent" src={{user.image}} alt="Avatar">
+                                </div>
+                                <hr>
+                                <p>Cập nhật ảnh đại diện</p>
+                                <div class="form-group row">
+                                    <form method="post" action="/upload/avata" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <input style="display: none;" type="file" name="file" id="files"
+                                                        class="hidden " onchange="readURL(this);" />
+                                                    <button type="button" class="btn btn-primary pull-right"><label
+                                                            for="files">Select
+                                                            file</label></button>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="submit"
+                                                        class="btn btn-primary pull-right">Upload</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                                 <img style="width: 100%; height: auto;" id="blah" src="#" />
+
                             </div>
                         </div>
-
-
                     </div>
-                    <hr>
-                    <h4>Account Details</h4>
-                    <hr>
-                    <form action="/account/updateinfo" method="POST">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" value={{user.name}} name="userName">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Last Name" value={{user.name}}>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input class="form-control" name="userPhone" type="text" placeholder="Mobile"
-                                    value={{user.phonenumber}}>
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" name="userEmail" type="text" placeholder="Email"
-                                    value={{user.email}}>
-                            </div>
-                        </div>
-                        <input class="form-control" name="userAddress" type="text" placeholder="Address"
-                            value={{user.address}}>
-
-                        <div class="col-md-12">
-                            <button type="submit" class="btn">Update Account</button>
-                            <br><br>
-                        </div>
-                    </form>
-
-                    <h4>Password change</h4>
-                    <input class="form-control" name="password" type="text" placeholder="Current Password" value={{pw}}>
-                    <form action="/account/updatePw" method="POST" onsubmit="return toSubmit();">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input id="npw" class="form-control" name="newpPssword" type="text" placeholder="New Password">
-                            </div>
-                            <div class="col-md-6">
-                                <input id ="cpw" class="form-control" name="confirmPassword" type="text"
-                                    placeholder="Confirm Password">
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <button type="submit" class="btn">Save Changes</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <!-- My Account End -->
 
@@ -228,13 +263,13 @@
     }
 
     // check update pw
-    function toSubmit(){
-       var newpPssword = document.getElementById("npw").value;
-        var confirmPassword = document.getElementById("cpw").value;
+    function toSubmit() {
+        var newpPssword = document.getElementById("mkm").value;
+        var confirmPassword = document.getElementById("nlmkm").value;
         if (newpPssword === confirmPassword) {
             return true;
         }
         alert("Confirm Password is incorrect, Check it again!");
         return false;
-   }
+    }
 </script>
