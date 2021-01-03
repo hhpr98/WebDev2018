@@ -26,15 +26,14 @@
                             class="fa fa-credit-card"></i>Payment Method</a>
                     <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i
                             class="fa fa-map-marker-alt"></i>address</a>
-                    
+
                     <a class="nav-link" href="index.html"><i class="fa fa-sign-out-alt"></i>Logout</a>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="tab-content">
-                    
-                    <div class="tab-pane fade" id="dashboard-tab" role="tabpanel"
-                        aria-labelledby="dashboard-nav">
+
+                    <div class="tab-pane fade" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
                         <h4>Dashboard</h4>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra
@@ -113,11 +112,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade  show active" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
-                      
+                    <div class="tab-pane fade  show active" id="account-tab" role="tabpanel"
+                        aria-labelledby="account-nav">
+
                         <div class="row">
                             <div class="col-md-8">
-                               <h2>{{user.name}}</h2>
+                                <h2>{{user.name}}</h2>
                             </div>
                             <div class="col-md-4">
                                 <img style="height: 100px;
@@ -134,67 +134,76 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-8">
-                                            <input type="file" name="file" class="input-group input-file" onchange="readURL(this);"/>
+                                                <input type="file" name="file" class="input-group input-file"
+                                                    onchange="readURL(this);" />
 
                                             </div>
                                             <button type="submit" class="btn btn-primary pull-right">Upload</button>
                                             <div class="col-md-4"></div>
                                         </div>
                                     </div>
-                                    
+
                                 </form>
-                                <img style="width: 100%; height: auto;" id="blah" src="#"/>
+                                <img style="width: 100%; height: auto;" id="blah" src="#" />
                             </div>
                         </div>
 
-                    
+
                     </div>
                     <hr>
                     <h4>Account Details</h4>
-                        <hr>
+                    <hr>
+                    <form action="/account/updateinfo" method="POST">
                         <div class="row">
                             <div class="col-md-6">
-                                <input class="form-control" type="text" 
-                                value={{user.name}}>
+                                <input class="form-control" type="text" value={{user.name}} name="userName">
                             </div>
                             <div class="col-md-6">
                                 <input class="form-control" type="text" placeholder="Last Name" value={{user.name}}>
                             </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Mobile" value={{user.phonenumber}}>
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Email" value={{user.email}}>
-                            </div>
-                            <div class="col-md-12">
-                                <input class="form-control" type="text" placeholder="Address" value={{user.address}}>
-                            </div>
-                            <div class="col-md-12">
-                                <button class="btn">Update Account</button>
-                                <br><br>
-                            </div>
                         </div>
-         
-                        <h4>Password change</h4>
                         <div class="row">
-                            <div class="col-md-12">
-                                <input class="form-control" type="password" placeholder="Current Password">
+                            <div class="col-md-6">
+                                <input class="form-control" name="userPhone" type="text" placeholder="Mobile"
+                                    value={{user.phonenumber}}>
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="New Password">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Confirm Password">
-                            </div>
-                            <div class="col-md-12">
-                                <button class="btn">Save Changes</button>
+                                <input class="form-control" name="userEmail" type="text" placeholder="Email"
+                                    value={{user.email}}>
                             </div>
                         </div>
-                    </div>
+                        <input class="form-control" name="userAddress" type="text" placeholder="Address"
+                            value={{user.address}}>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="btn">Update Account</button>
+                            <br><br>
+                        </div>
+                    </form>
+
+                    <h4>Password change</h4>
+                    <input class="form-control" name="password" type="text" placeholder="Current Password" value={{pw}}>
+                    <form action="/account/updatePw" method="POST" onsubmit="return toSubmit();">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input id="npw" class="form-control" name="newpPssword" type="text" placeholder="New Password">
+                            </div>
+                            <div class="col-md-6">
+                                <input id ="cpw" class="form-control" name="confirmPassword" type="text"
+                                    placeholder="Confirm Password">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="btn">Save Changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- My Account End -->
 
@@ -203,7 +212,7 @@
     show img
     -->
 <script>
-function readURL(input) {
+    function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
@@ -217,4 +226,15 @@ function readURL(input) {
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    // check update pw
+    function toSubmit(){
+       var newpPssword = document.getElementById("npw").value;
+        var confirmPassword = document.getElementById("cpw").value;
+        if (newpPssword === confirmPassword) {
+            return true;
+        }
+        alert("Confirm Password is incorrect, Check it again!");
+        return false;
+   }
 </script>

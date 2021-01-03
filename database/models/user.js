@@ -7,9 +7,30 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.STRING
             },
-            email: { // email
+            name: { // Tên người dùng
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: "User"
+            },
+            phonenumber: { // Số điện thoại
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: "0"
+            },
+            email: {// địa chỉ email
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: "none@hddshop.com"
+            },
+            address: {// địa chỉ
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: "Hồ Chí Minh"
+            },
+            image: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: "/img/avatar-default.jpg"
             },
             username: { // tên đăng nhập
                 type: DataTypes.STRING,
@@ -18,10 +39,6 @@ module.exports = (sequelize, DataTypes) => {
             password: { // hash
                 type: DataTypes.STRING,
                 allowNull: true
-            },
-            accountId: {// id tài khoản người dùng (để lấy họ tên, sđt, địa chỉ,...)
-                type: DataTypes.STRING,
-                allowNull: false
             },
             type: {// loại user : 0 => admin, 1: bình thường, 2: guest
                 type: DataTypes.INTEGER,

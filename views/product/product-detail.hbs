@@ -19,20 +19,20 @@
                     <div class="row align-items-center">
                         <div class="col-md-5">
                             <div class="product-slider-single normal-slider">
-                                <img src={{item.image1}} alt="Không thể tải ảnh">
-                                <img src={{item.image2}} alt="Không thể tải ảnh">
-                                <img src={{item.image3}} alt="Không thể tải ảnh">
-                                <img src={{item.image1}} alt="Không thể tải ảnh">
-                                <img src={{item.image2}} alt="Không thể tải ảnh">
-                                <img src={{item.image3}} alt="Không thể tải ảnh">
+                                <img src={{item.image1}} alt="">
+                                <img src={{item.image2}} alt="">
+                                <img src={{item.image3}} alt="">
+                                <img src={{item.image1}} alt="">
+                                <img src={{item.image2}} alt="">
+                                <img src={{item.image3}} alt="">
                             </div>
                             <div class="product-slider-single-nav normal-slider">
-                                <div class="slider-nav-img"><img src={{item.image1}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image2}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image3}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image1}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image2}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image3}} alt="Không thể tải ảnh"></div>
+                                <div class="slider-nav-img"><img src={{item.image1}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image2}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image3}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image1}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image2}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image3}} alt=""></div>
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -60,6 +60,12 @@
                                         <button class="btn-minus"><i class="fa fa-minus"></i></button>
                                         <input type="text" value="1">
                                         <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="quantity">
+                                    <h4>👁️ :</h4>
+                                    <div class="qty">
+                                        <input type="text" value={{{item.viewCount}}}>
                                     </div>
                                 </div>
                                 <div class="p-size">
@@ -94,22 +100,22 @@
                     <div class="col-lg-12">
                         <ul class="nav nav-pills nav-justified">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="pill" href="#description">Mô tả</a>
+                                <a class="nav-link active" data-toggle="pill" href="#tabdescription">Mô tả</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#specification">Thông số kĩ thuật</a>
+                                <a class="nav-link" data-toggle="pill" href="#tabspecification">Thông số kĩ thuật</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#reviews">Nhận xét (2)</a>
+                                <a class="nav-link" data-toggle="pill" href="#tabreviews">Nhận xét</a>
                             </li>
                         </ul>
 
                         <div class="tab-content">
-                            <div id="description" class="container tab-pane active">
+                            <div id="tabdescription" class="container tab-pane active">
                                 <h4>Mô tả sản phẩm</h4>
                                 <p>{{item.description}}</p>
                             </div>
-                            <div id="specification" class="container tab-pane fade">
+                            <div id="tabspecification" class="container tab-pane fade">
                                 <h4>Thông số kĩ thuật</h4>
                                 <ul>
                                     <li>{{item.specification1}}</li>
@@ -117,10 +123,10 @@
                                     <li>{{item.specification3}}</li>
                                 </ul>
                             </div>
-                            <div id="reviews" class="container tab-pane fade">
-                                {{#each item.review}}
+                            <div id="tabreviews" class="container tab-pane fade">
+                                {{#each reviewList}}
                                     <div class="reviews-submitted">
-                                        <div class="reviewer">{{reviewName}} - <span>{{reviewDate}}</span></div>
+                                        <div class="reviewer">{{name}} - <span>{{updatedAt}}</span></div>
                                         <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -128,9 +134,61 @@
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                         </div>
-                                        <p>{{reviewContent}}</p>
+                                        <p>{{content}}</p>
                                     </div>
                                 {{/each}}
+
+                                <nav aria-label="...">
+                                    <ul class="pagination">
+
+                                        {{#if pageCount}}
+
+                                            {{#if isPreviousPage}}
+                                                <li class="page-item">
+                                                    <a class="page-link"
+                                                        href="/product/detail/{{item.id}}?page={{previousPage}}"
+                                                        tabindex="-1">Trước</a>
+                                                </li>
+                                            {{else}}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1">Trước</a>
+                                                </li>
+                                            {{/if}}
+
+                                            {{#each listPaginate}}
+                                                {{#if isCurrentPage}}
+                                                    <li class="page-item active">
+                                                        <a class="page-link"
+                                                            href="/product?page={{pageId}}">{{pageId}}</a>
+                                                    </li>
+                                                {{else}}
+                                                    <li class="page-item">
+                                                        <a class="page-link"
+                                                            href="/product?page={{pageId}}">{{pageId}}</a>
+                                                    </li>
+                                                {{/if}}
+                                            {{/each}}
+
+                                            {{#if isNextPage}}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/product/detail/{{item.id}}?page={{nextPage}}" tabindex="-1">Trước</a>
+                                                </li>
+                                            {{else}}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link"
+                                                        href="#"
+                                                        tabindex="-1">Trước</a>
+                                                </li>
+                                            {{/if}}
+
+                                        {{else}}
+                                            <p>Không có bình luận</p>
+                                        {{/if}}
+
+
+                                    </ul>
+                                </nav>
+
                                 <div class="reviews-submit">
                                     <h4>Để lại bình luận:</h4>
                                     <div class="ratting">
@@ -166,7 +224,7 @@
                     </div>
 
                     <div class="row align-items-center product-slider product-slider-3">
-                        {{#each productList}}
+                        {{#each relativeProducts}}
                             <div class="col-lg-3">
                                 <div class="product-item">
                                     <div class="product-title">
@@ -181,7 +239,7 @@
                                     </div>
                                     <div class="product-image">
                                         <a href="/product/detail/{{id}}">
-                                            <img src={{image1}} alt="Không thể tải ảnh">
+                                            <img src={{image1}} alt="">
                                         </a>
                                         <div class="product-action">
                                             <a href="/cart/{{id}}"><i class="fa fa-cart-plus"></i></a>
@@ -219,7 +277,7 @@
 
                 <div class="sidebar-widget widget-slider">
                     <div class="sidebar-slider normal-slider">
-                        {{#each productList}}
+                        {{#each relativeProducts}}
                             <div class="product-item">
                                 <div class="product-title">
                                     <a href="#">{{name}}</a>
