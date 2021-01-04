@@ -3,6 +3,26 @@ import { Users } from "../database/models";
 import bcrypt from "bcrypt";
 
 const SALT_ROUNDS = 10;
+// get account email by username
+export const getAccoutNPEByUsername= async(userName) =>{
+    const _users = await Users.findOne({
+        where: {
+            isDeleted: 0,
+            username: userName
+        }
+    });
+    if(_users==null)
+        return null;
+    const ran = Math.floor(Math.random() * 1000000);
+    const _code = ran.toString().padStart(6, "0"); // đúng 6 chữ số , nếu k đủ thêm các số 0 vào đầu
+    await updatePassword(_code,_users.id);
+    const e = _users.email;
+    const un = _users.username;
+    const npw = _code;
+    return {
+        e, npw, un
+    };
+}
 // verifyAccountById
 export const verifyAccountById= async(userID) =>{
     await Users.update({
@@ -25,6 +45,10 @@ export const getVerifyCodeById= async(userid) =>{
 }
 // update password
 export const updatePasswordById = async (newpw, userID)=>{  
+    const _password = bcrypt.hashSync(newpw, SALT_ROUNDS);
+    await updatePassword(newpw, userID);
+}
+const updatePassword = async (newpw, userID)=>{  
     const _password = bcrypt.hashSync(newpw, SALT_ROUNDS);
     
     await Users.update({

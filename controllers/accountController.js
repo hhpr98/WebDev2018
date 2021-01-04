@@ -7,7 +7,8 @@ import {
   updatePasswordById,
   getNPIById,
   getVerifyCodeById,
-  verifyAccountById
+  verifyAccountById,
+  getAccoutNPEByUsername
 } from "../models/accountModels";
 import bcrypt from "bcrypt";
 
@@ -24,6 +25,14 @@ export const getLoginPage = catchAsync(
     var message = req.session.valid;
     req.session.valid = null;
     res.render("account/login", { title: "Đăng nhập", layout: "layout/loginlayout" , Noti:message});
+  }
+);
+
+export const getResetPasswordPage = catchAsync(
+  async (req, res) => {
+    var message = req.session.valid;
+    req.session.valid = null;
+    res.render("account/forgotPassword", { title: "Quên mật khẩu", layout: "layout/loginlayout", Noti:message});
   }
 );
 export const getRegisterPage = catchAsync(
@@ -51,6 +60,28 @@ export const getAccountAuthenticate = async (accountName) => {
 
 
 // action
+export const resetPassword = catchAsync(
+  async (req, res) => {
+    const name = req.body.username;
+    const data = await getAccoutNPEByUsername(name);
+    //
+    if(data!=null){
+      const body = "<h2>Dear <b style = 'color:red;'>" + data.un + "</b> !</h2>"
+      + "<h4>We have create new password for you,</h4>"
+      + "<h4>Your new PASSWORD is: </h4>"
+      + "<h3 style='color:white;background-color:black;width:200px;font-size:20px;'>" + data.npw + "</h3>"
+      + "<p>You can use it to login into your account<p>"
+      + "<p>And change your password back as your choise<p>";
+      await mailer.sendMail(data.e, "Reset Password", body);
+      req.session.valid = "Đã gửi vào mail người dùng";
+      res.redirect("/login");
+
+    }
+    else{
+      req.session.valid = "Tên tài khoản không hợp lệ";
+      res.redirect("/resetpw");
+    }
+  })
 export const logoutAccount = catchAsync(
   async (req, res) => {
     req.logout();

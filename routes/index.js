@@ -13,7 +13,7 @@ import homeRouter from "./index/homeRouter";
 import productRouter from "./index/productRouter";
 
 
-import { getAccountAuthenticate, getLoginPage, getRegisterPage, postRegisterPage } from "../controllers/accountController"
+import { getAccountAuthenticate, getLoginPage, getRegisterPage, postRegisterPage, getResetPasswordPage, resetPassword } from "../controllers/accountController"
 // const SALT_ROUNDS = 10;
 import {sendMailRouter} from "../controllers/mailController"
 const indexRouter = express.Router();
@@ -99,6 +99,8 @@ passport.deserializeUser((id, done) => {
 // register route 
 indexRouter.get("/register", getRegisterPage);
 indexRouter.post("/register", postRegisterPage);
-//
+// forgot password
+indexRouter.get("/resetpw",getResetPasswordPage);
+indexRouter.post("/resetpw",resetPassword);
 
 export default indexRouter;
