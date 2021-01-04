@@ -116,8 +116,27 @@
                         aria-labelledby="account-nav">
 
                         <h1 style="color:red;">{{noti}}</h1>
+
+
                         <div class="row">
                             <div class="col-md-9">
+                                {{#if user.isBanned}}
+                                <h4>Tài khoản chưa được xác thực, nhập mã OTP trong email để xác thực tài khoản</h4>
+                                <form action="/account/verify" method="POST">
+                                    <div class=" form-group row">
+                                        <label for="v" class="col-sm-3 col-form-label">NHẬP MÃ XÁC THỰC</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="v" placeholder="Mã xác thực"
+                                                name="otp">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 middle">
+                                        <button type="submit" class="btn">Xác thực</button>
+                                    </div>
+                                </form>
+                                {{else}}
+                                
+                                {{/if}}
                                 <h2>THÔNG TIN NGƯỜI DÙNG</h2>
                                 <HR>
                                 </HR>
@@ -153,21 +172,21 @@
                                 </HR>
                                 <form action="/account/updateinfo" method="POST" onsubmit="return toSubmit();">
                                     <div class="form-group row">
-                                        
+
                                         <label for="tnd2" class="col-sm-3 col-form-label">Tên Người Dùng</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="tnd2"
-                                                placeholder="Tên người dùng"  name="username">
+                                                placeholder="Tên người dùng" name="username">
                                         </div>
                                         <label for="e2" class="col-sm-3 col-form-label">Email</label>
                                         <div class="col-sm-9">
                                             <input type="email" class="form-control" id="e2" placeholder="Email"
-                                                 name="email">
+                                                name="email">
                                         </div>
                                         <label for="p2" class="col-sm-3 col-form-label">Số Điện Thoại</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="p2" placeholder="Phonenumber"
-                                                 name="phone">
+                                                name="phone">
                                         </div>
                                         <label for="dc2" class="col-sm-3 col-form-label">Địa chỉ</label>
                                         <div class="col-sm-9">
@@ -187,16 +206,18 @@
                                         <label for="mkc" class="col-sm-3 col-form-label">Nhập mật khẩu cũ</label>
                                         <div class="col-sm-9">
                                             <input type="password" class="form-control" id="mkc"
-                                                placeholder="Mật khẩu cũ"  name="oldpw" minlength="6" maxlength="10">
+                                                placeholder="Mật khẩu cũ" name="oldpw" minlength="6" maxlength="10">
                                         </div>
                                         <label for="mkm" class="col-sm-3 col-form-label">Nhập mật khẩu mới</label>
                                         <div class="col-sm-9">
                                             <input type="password" class="form-control" id="mkm"
                                                 placeholder="Mật khẩu mới" minlength="6" maxlength="10" name="newpw">
                                         </div>
-                                        <label for="nlmkm" class="col-sm-3 col-form-label">Nhập lại mật khẩu mới</label>
+                                        <label for="nlmkm" class="col-sm-3 col-form-label">Nhập lại mật khẩu
+                                            mới</label>
                                         <div class="col-sm-9">
-                                            <input type="password" class="form-control" id="nlmkm" placeholder="" minlength="6" maxlength="10">
+                                            <input type="password" class="form-control" id="nlmkm" placeholder=""
+                                                minlength="6" maxlength="10">
                                         </div>
                                         <div class="col-md-12 middle">
                                             <button type="submit" class="btn">Đổi mật khẩu</button>
@@ -210,6 +231,7 @@
                                     <img class="fill-parent" src={{user.image}} alt="Avatar">
                                 </div>
                                 <hr>
+
                                 <p>Cập nhật ảnh đại diện</p>
                                 <div class="form-group row">
                                     <form method="post" action="/account/updateAvata" enctype="multipart/form-data">

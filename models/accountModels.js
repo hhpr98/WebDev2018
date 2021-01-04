@@ -3,7 +3,26 @@ import { Users } from "../database/models";
 import bcrypt from "bcrypt";
 
 const SALT_ROUNDS = 10;
-
+// verifyAccountById
+export const verifyAccountById= async(userID) =>{
+    await Users.update({
+        isBanned : 0
+    },{
+        where:{
+            id: userID
+        },
+        limit: 1
+    });
+}
+export const getVerifyCodeById= async(userid) =>{
+    const _users = await Users.findOne({
+        where: {
+            isDeleted: 0,
+            id: userid
+        }
+    });
+    return _users.isBanned;
+}
 // update password
 export const updatePasswordById = async (newpw, userID)=>{  
     const _password = bcrypt.hashSync(newpw, SALT_ROUNDS);
@@ -13,7 +32,8 @@ export const updatePasswordById = async (newpw, userID)=>{
    },{
        where:{
            id: userID
-       }
+       },
+        limit:1
    });
 }
 //
@@ -31,7 +51,7 @@ export const getUserByUserName = async (userName) => {
 }
 // admin
 // create new
-export const addAccount = async (username, password, email) => {
+export const addAccount = async (username, password, email, code) => {
     // tạo thông tin trong bảng account
     const _password = bcrypt.hashSync(password, SALT_ROUNDS);
     await Users.create({
@@ -41,7 +61,8 @@ export const addAccount = async (username, password, email) => {
         phonenumber: null,
         username: username,
         password: _password,
-        type: 1
+        type: 1,
+        isBanned: code
     });
 }
 
@@ -96,7 +117,8 @@ export const updateUserInfoById = async (username, phone, email, adress, userID)
    },{
        where:{
            id: userID
-       }
+       },
+       limit:1
    });
 }
 
@@ -107,7 +129,8 @@ export const updateUserImage = async (userID, update_img_src) => {
    },{
        where:{
            id: userID
-       }
+       },
+       limit:1
    });
     
 }

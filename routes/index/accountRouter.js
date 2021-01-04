@@ -15,7 +15,8 @@ import {
     updateInfo,
     updatePassword,
     logoutAccount,
-    updateAvata
+    updateAvata,
+    verifyAccount
 } from "../../controllers/accountController";
 
 const accountRouter = express.Router();
@@ -24,6 +25,8 @@ accountRouter.get("/", getAccountPage)
 accountRouter.get("/logout", logoutAccount); 
 accountRouter.post("/updateinfo",updateInfo);
 accountRouter.post("/updatePw",updatePassword);
+accountRouter.post("/verify",verifyAccount);
+
 
 
 

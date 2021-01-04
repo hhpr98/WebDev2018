@@ -5,9 +5,14 @@ import {
   addAccount,
   updateUserInfoById,
   updatePasswordById,
-  getNPIById
+  getNPIById,
+  getVerifyCodeById,
+  verifyAccountById
 } from "../models/accountModels";
 import bcrypt from "bcrypt";
+
+import mailer from "./mailer";
+
 
 const SALT_ROUNDS = 10;
 import catchAsync from "../libs/catchAsync";
@@ -52,7 +57,22 @@ export const logoutAccount = catchAsync(
     res.redirect('/');
   }
 )
-
+export const verifyAccount = catchAsync(
+  async (req, res) => {
+    const id = req.user;
+    const code = await getVerifyCodeById(id);
+    //
+    if (req.body.otp == code.toString()){
+      await verifyAccountById(id);
+      req.session.valid = "Đã xác thực tài khoản";
+    }
+      
+    else{
+      req.session.valid = 'Mã OTP không khớp';
+    }
+      res.redirect("/account");
+  }
+)
 // update
 export const updateAvata = catchAsync(
   async (req, res, filename) => {
@@ -101,7 +121,16 @@ export const postRegisterPage = catchAsync(
       return;
     }
     // luu vao db
-    await addAccount(req.body.username, req.body.pass, req.body.email);
+    const ran = Math.floor(Math.random() * 1000000);
+    const _code = ran.toString().padStart(6, "0"); // đúng 6 chữ số , nếu k đủ thêm các số 0 vào đầu
+    await addAccount(req.body.username, req.body.pass, req.body.email, _code);
+    // lay ra id, hash sau do gui ve email
+    const body = "<h2>Dear <b style = 'color:red;'>" + req.body.username + "</b> !</h2>"
+    + "<p>You must be entered your OTP to verify the transaction!<p>"
+    + "<h4>Your code is: </h4>"
+    + "<h3 style='color:white;background-color:black;width:200px;font-size:20px;'>" + _code + "</h3>"
+    + "<p>Enter the Account Page to confirm verify code<p>";
+    await mailer.sendMail(req.body.email, "Verify Account", body);
     res.redirect("/login");
   }
 );

@@ -15,7 +15,7 @@ import productRouter from "./index/productRouter";
 
 import { getAccountAuthenticate, getLoginPage, getRegisterPage, postRegisterPage } from "../controllers/accountController"
 // const SALT_ROUNDS = 10;
-import {sendMail} from "../controllers/emailController"
+import {sendMailRouter} from "../controllers/mailController"
 const indexRouter = express.Router();
 
 //                              //////parent route
@@ -31,7 +31,7 @@ indexRouter.use("/account", (req, res, next) => {
         res.render("error/authenticate");
 }, accountRouter);
 indexRouter.get("/generate-data", genService);
-indexRouter.get("/send",sendMail );
+indexRouter.get("/send",sendMailRouter);
 
 //                          /////////////login route//////////
 

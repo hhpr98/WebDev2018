@@ -13,7 +13,7 @@ const mailHost = 'smtp.gmail.com'
 // 587 là một cổng tiêu chuẩn và phổ biến trong giao thức SMTP
 const mailPort = 587
 
-const Send = (to, subject, htmlContent) => {
+const sendMail = (to, subject, htmlContent) => {
   // Khởi tạo một thằng transporter object sử dụng chuẩn giao thức truyền tải SMTP với các thông tin cấu hình ở trên.
   const transporter = nodeMailer.createTransport({
     host: mailHost,
@@ -36,23 +36,6 @@ const Send = (to, subject, htmlContent) => {
   return transporter.sendMail(options)
 }
 
-// module.exports = {
-//   sendMail: sendMail
-// }
-
-export const sendMail = async (req, res) => {
-    try {
-      // Lấy data truyền lên từ form phía client
-      const to = "hdanh26041999@gmail.com";
-      const subject = "test nodemail";
-      const body = "day la noi dung";
-      // Thực hiện gửi email
-      await Send(to, subject, body)
-      // Quá trình gửi email thành công thì gửi về thông báo success cho người dùng
-      res.send('<h3>Your email has been sent successfully.</h3>')
-    } catch (error) {
-      // Nếu có lỗi thì log ra để kiểm tra và cũng gửi về client
-      console.log(error)
-      res.send(error)
-    }
-  }
+module.exports = {
+  sendMail: sendMail
+}
