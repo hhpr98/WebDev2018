@@ -1,51 +1,97 @@
-import { Accounts, Users} from "../database/models";
 import { v4 as uuid } from "uuid";
+import { Users } from "../database/models";
+import bcrypt from "bcrypt";
 
-// create new
-export const addNewAccoutToDatabase = async (username, password, email) => {
-    // tạo thông tin trong bảng account
-    var account_id = uuid();
-    var created_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    await Accounts.create({
-        id: account_id,
-        name: username,
-        phonenumber: null,
-        email: email,
-        address: null,
-        image: '/img/avatar-default.jpg',
-        isDeleted: 0,
-        createdAt: created_date,
-        updatedAt: null
-    });
-    // tạo tài khoản ttrong bảng user
-    await   Users.create({
-        id: uuid(),
-        email: email,
-        username: username,
-        password: password,
-        accountId: account_id,
-        type: 1,
-        isBanned:-1, // chua verificate
-        isDeleted: 0,
-        createdAt: created_date,
-        updatedAt: null
-    })
-}
-export const getUser1 = async () => {
-
-    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
-    const _users = await Accounts.findOne({
+const SALT_ROUNDS = 10;
+// get account email by username
+export const getAccoutNPEByUsername= async(userName) =>{
+    const _users = await Users.findOne({
         where: {
             isDeleted: 0,
-            name: "Nguyễn Hữu Hòa"
+            username: userName
+        }
+    });
+    if(_users==null)
+        return null;
+    const ran = Math.floor(Math.random() * 1000000);
+    const _code = ran.toString().padStart(6, "0"); // đúng 6 chữ số , nếu k đủ thêm các số 0 vào đầu
+    await updatePassword(_code,_users.id);
+    const e = _users.email;
+    const un = _users.username;
+    const npw = _code;
+    return {
+        e, npw, un
+    };
+}
+// verifyAccountById
+export const verifyAccountById= async(userID) =>{
+    await Users.update({
+        isBanned : 0
+    },{
+        where:{
+            id: userID
+        },
+        limit: 1
+    });
+}
+export const getVerifyCodeById= async(userid) =>{
+    const _users = await Users.findOne({
+        where: {
+            isDeleted: 0,
+            id: userid
+        }
+    });
+    return _users.isBanned;
+}
+// update password
+export const updatePasswordById = async (newpw, userID)=>{  
+    const _password = bcrypt.hashSync(newpw, SALT_ROUNDS);
+    await updatePassword(newpw, userID);
+}
+const updatePassword = async (newpw, userID)=>{  
+    const _password = bcrypt.hashSync(newpw, SALT_ROUNDS);
+    
+    await Users.update({
+       password : _password
+   },{
+       where:{
+           id: userID
+       },
+        limit:1
+   });
+}
+//
+
+export const getUserByUserName = async (userName) => {
+
+    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
+    const _users = await Users.findOne({
+        where: {
+            isDeleted: 0,
+            username: userName
         }
     });
     return _users;
 }
-export const getAccountByID = async (userId) => {
+// admin
+// create new
+export const addAccount = async (username, password, email, code) => {
+    // tạo thông tin trong bảng account
+    const _password = bcrypt.hashSync(password, SALT_ROUNDS);
+    await Users.create({
+        id: uuid(),
+        name: "Người dùng",
+        email: email,
+        phonenumber: null,
+        username: username,
+        password: _password,
+        type: 1,
+        isBanned: code
+    });
+}
 
-    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
-    const _users = await Accounts.findOne({
+export const getAccountByID = async (userId) => {
+    const _users = await Users.findOne({
         where: {
             isDeleted: 0,
             id: userId
@@ -55,45 +101,60 @@ export const getAccountByID = async (userId) => {
 }
 
 export const getAccountByUserName = async (userName) => {
-    console.log("model ");
-    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
-    const _users = await Accounts.findOne({
+    const _users = await Users.findOne({
         where: {
             isDeleted: 0,
-            name: userName
+            username: userName
         }
     });
-    console.log("model " + _users);
     if(_users == null)
-        return "";
-        // trong banrgh này k có pw, nên e lấy phone ra để test
-        
-    return _users.phonenumber;
+        return null;
+    const id = _users.id;
+    const un = _users.username;
+    const pw = _users.password;
+    return {
+        id, un, pw
+    };
 }
-export const updateUserInfo = async (firstName, phone, email, adress, userID)=>{
-    await Accounts.update({
-        name : firstName,
+export const getNPIById = async (userid) => {
+    const _users = await Users.findOne({
+        where: {
+            isDeleted: 0,
+            id: userid
+        }
+    });
+    if(_users == null)
+        return null;
+    const id = _users.id;
+    const un = _users.username;
+    const pw = _users.password;
+    return {
+        id, un, pw
+    };
+}
+export const updateUserInfoById = async (username, phone, email, adress, userID)=>{
+    await Users.update({
+        name: username,
+        email: email,
         phonenumber: phone,
-        address: adress,
-        email:email
+        address: adress
    },{
        where:{
            id: userID
-       }
+       },
+       limit:1
    });
 }
 
 // luu hinh anh nguoi dung vao db 
-export const saveUser1 = async (id, update_img) => {
-
-    // hoặc cách này : isDeleted = 0 là tài khoản chưa xóa thôi, hiện tại chưa xóa thì nó vẫn = 0 hết
-    const _users = await Accounts.findOne({
-        where: {
-            isDeleted: 0,
-            id: id
-        }
-    });
-    _users.image = update_img;
-    await _users.save();
-    return _users;
+export const updateUserImage = async (userID, update_img_src) => {
+    await Users.update({
+        image : update_img_src
+   },{
+       where:{
+           id: userID
+       },
+       limit:1
+   });
+    
 }
