@@ -13,7 +13,6 @@ import homeRouter from "./index/homeRouter";
 import productRouter from "./index/productRouter";
 import uploadRouter from "./index/uploadRouter";
 import { getLoginPage, getRegisterPage, postRegisterPage, getAccountPassword } from "../controllers/accountController"
-// import "../controllers/accountController"
 const indexRouter = express.Router();
 
 indexRouter.use("/", homeRouter);
