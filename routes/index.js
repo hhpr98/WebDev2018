@@ -11,10 +11,9 @@ import accountRouter from "./index/accountRouter";
 import cartRouter from "./index/cartRouter";
 import homeRouter from "./index/homeRouter";
 import productRouter from "./index/productRouter";
-
-
 import { getAccountAuthenticate, getLoginPage, getRegisterPage, postRegisterPage, getResetPasswordPage, resetPassword } from "../controllers/accountController"
 // const SALT_ROUNDS = 10;
+
 const indexRouter = express.Router();
 
 //                              //////parent route
@@ -37,17 +36,19 @@ indexRouter.route("/login")
     // .post(passport.authenticate("local", { failureRedirect: "/login", successRedirect: "/",failureFlash : true}));
     .post(function (req, res, next) {
         passport.authenticate('local', function (err, user, info) {
-            if (err) { 
-                return next(err); }
-            if (!user) { 
+            if (err) {
+                return next(err);
+            }
+            if (!user) {
                 req.session.valid = "Mật khẩu hoặc tài khoản không đúng";
-                return res.redirect('/login'); 
+                return res.redirect('/login');
             }
             req.logIn(user, function (err) {
 
-                
-                if (err) { 
-                    return next(err); }
+
+                if (err) {
+                    return next(err);
+                }
                 return res.redirect('/');
             });
         })(req, res, next);
@@ -97,7 +98,7 @@ passport.deserializeUser((id, done) => {
 indexRouter.get("/register", getRegisterPage);
 indexRouter.post("/register", postRegisterPage);
 // forgot password
-indexRouter.get("/resetpw",getResetPasswordPage);
-indexRouter.post("/resetpw",resetPassword);
+indexRouter.get("/resetpw", getResetPasswordPage);
+indexRouter.post("/resetpw", resetPassword);
 
 export default indexRouter;
