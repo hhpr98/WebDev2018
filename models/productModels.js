@@ -7,7 +7,6 @@ export const getListProductInCart = async (array)=>{
             id: array
         },
     });
-    console.log(_product);
     return _product;
 }
 // Lấy danh sách sản phẩm

@@ -10,6 +10,7 @@ export const getCart = catchAsync(
     }
 );
 
+
 export const getCheckout = catchAsync(
     async (req, res) => {
         res.render("cart/checkout", { title: "Đơn hàng" });
@@ -32,3 +33,20 @@ export const addtoCart = catchAsync(
         res.redirect("/");
     }
 )
+export const removeFromCart = catchAsync(
+    async (req, res) => {
+        var cart;
+        if (req.session.cart) {
+            cart = req.session.cart;
+            var index =  cart.indexOf(req.params.id);
+            if (index > -1) {
+                cart.splice(index, 1);
+              }
+            var a = await getListProductInCart(req.session.cart);
+            res.render("cart/cart", { title: "Giỏ hàng", cartItem: a});
+
+        }else{
+            res.redirect("/");
+        }
+    }
+);
