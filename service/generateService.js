@@ -7,11 +7,11 @@ import { genCategory } from "./genCategory";
 export const genService = catchAsync(
     async (req, res) => {
         console.log("============================== GENERATE PRODUCT ==============================");
-        //await genProduct();
+        await genProduct();
         console.log("============================== GENERATE USER ==============================");
         await genAccount();
         console.log("============================== GENERATE CATEGORY ==============================");
-        //await genCategory();
+        await genCategory();
         res.render("error/errorCustom", { errorContent: "Generate dữ liệu thành công!" });
     }
 );
