@@ -6,7 +6,8 @@ import {
     getProductListDatabaseBySearchText,
     getBranchs,
     getTags,
-    getCommentListDatabaseByProductId
+    getCommentListDatabaseByProductId,
+    addACommentDatabase
 } from "../models/productModels";
 import catchAsync from "../libs/catchAsync";
 
@@ -146,5 +147,20 @@ export const getProductDetailPage = catchAsync(
             listPaginate: getListPaginate(currentPage, pageCount)
         });
 
+    }
+);
+
+// Thêm 1 bình luận
+export const addACommentAction = catchAsync(
+    async (req, res) => {
+
+        const productId = req.params.id || "1";
+        const _name = req.body.name || "";
+        const _email = req.body.email || "";
+        const _content = req.body.content || "";
+
+        await addACommentDatabase(productId, _name, _email, _content);
+
+        res.redirect(`/product/detail/${productId}`);
     }
 );
