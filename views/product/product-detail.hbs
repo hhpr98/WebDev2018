@@ -86,10 +86,14 @@
                                     </div>
                                 </div>
                                 <div class="action">
-                                    <a class="btn" href="/cart/{{item.id}}"><i class="fa fa-shopping-cart"></i>Giỏ
-                                        hàng</a>
-                                    <a class="btn" href="/product/detail/{{item.id}}"><i
-                                            class="fa fa-shopping-bag"></i>Mua ngay</a>
+                                    <a class="btn" href="/cart/{{item.id}}">
+                                        <i class="fa fa-shopping-cart"> </i>
+                                        Giỏ hàng
+                                    </a>
+                                    <a class="btn" href="/cart/{{item.id}}">
+                                        <i class="fa fa-shopping-bag"></i>
+                                        Mua ngay
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -171,13 +175,13 @@
 
                                             {{#if isNextPage}}
                                                 <li class="page-item">
-                                                    <a class="page-link" href="/product/detail/{{item.id}}?page={{nextPage}}" tabindex="-1">Trước</a>
+                                                    <a class="page-link"
+                                                        href="/product/detail/{{item.id}}?page={{nextPage}}"
+                                                        tabindex="-1">Trước</a>
                                                 </li>
                                             {{else}}
                                                 <li class="page-item disabled">
-                                                    <a class="page-link"
-                                                        href="#"
-                                                        tabindex="-1">Trước</a>
+                                                    <a class="page-link" href="#" tabindex="-1">Trước</a>
                                                 </li>
                                             {{/if}}
 
@@ -198,20 +202,20 @@
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                     </div>
-                                    <div class="row form">
+                                    <form class="row form" method="POST" action="/product/comment/{{item.id}}">
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="Tên">
+                                            <input type="text" placeholder="Tên" value="Khách" name="name" id="name">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="email" placeholder="Email">
+                                            <input type="email" placeholder="Email" name="email" id="email">
                                         </div>
                                         <div class="col-sm-12">
-                                            <textarea placeholder="Nội dung"></textarea>
+                                            <textarea placeholder="Nội dung" name="content" id="content"></textarea>
                                         </div>
                                         <div class="col-sm-12">
-                                            <button>Xác nhận</button>
+                                            <button type="submit">Xác nhận</button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
