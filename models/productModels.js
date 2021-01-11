@@ -212,3 +212,18 @@ export const getCommentListDatabaseByProductId = async (limit, page, productId) 
 
     return _comment;
 }
+
+// Thêm bình luận
+// Input : productId, name,email,content
+// Result:
+export const addACommentDatabase = async (productId, name, email, content) => {
+
+    const _comment = await Comments.create({
+        productId: productId,
+        name: name,
+        address: email,
+        content: content
+    });
+
+    return _comment;
+}

@@ -13,6 +13,16 @@ module.exports = {
                 allowNull: true,
                 defaultValue: 0
             },
+            cartStatus: { // tình trạng giỏ hàng
+                type: Sequelize.STRING,
+                allowNull: true,
+                defaultValue: "Chưa xử lí"
+            },
+            cartNote: { // Ghi chú giỏ hàng
+                type: Sequelize.STRING,
+                allowNull: true,
+                defaultValue: ""
+            },
             isDeleted: {
                 type: Sequelize.INTEGER,
                 allowNull: true,
