@@ -14,6 +14,16 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true,
                 defaultValue: 0
             },
+            cartStatus: { // tình trạng giỏ hàng
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: "Chưa xử lí"
+            },
+            cartNote: { // Ghi chú giỏ hàng
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: ""
+            },
             isDeleted: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
