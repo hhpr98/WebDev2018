@@ -29,8 +29,14 @@ indexRouter.use("/account", (req, res, next) => {
         res.render("error/authenticate");
 }, accountRouter);
 indexRouter.get("/generate-data", genService);
-//                          /////////////login route//////////
 
+indexRouter.post("/match", function(req, res) {
+    console.log("Route Test1: " + req.body.username);
+    req.session.valid = "Mật khẩu hoặc tài khoản không đúng";
+    
+ });
+
+//                          /////////////login route//////////
 indexRouter.route("/login")
     .get(getLoginPage)
     // .post(passport.authenticate("local", { failureRedirect: "/login", successRedirect: "/",failureFlash : true}));
@@ -60,7 +66,7 @@ passport.use(new localStrategy( // này để passport dùng
         // lay tu db ra password tuong ung voi username, neu khong co thi la "";
         var account;
         try {
-            account = await getAccountAuthenticate(username);// chỗ này nè a
+            account = await getAccountAuthenticate(username);
         }
         catch (err) {
             console.log("Err while getting password from db!!")
