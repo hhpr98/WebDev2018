@@ -6,7 +6,7 @@ export const getCart = catchAsync(
     async (req, res) => {
         if(req.session.cart)
             var a = await getListProductInCart(req.session.cart);
-        res.render("cart/cart", { title: "Giỏ hàng" });
+        res.render("cart/cart", { title: "Giỏ hàng", cartItem: a});
     }
 );
 
