@@ -1,5 +1,15 @@
 import { Products, Categories, Op, Comments } from "../database/models";
 
+
+export const getListProductInCart = async (array)=>{
+    const _product = await Products.findAndCountAll({
+        where: {
+            id: array
+        },
+    });
+    console.log(_product);
+    return _product;
+}
 // Lấy danh sách sản phẩm
 // Input : limit, page
 // Result: count + list sản phẩm
