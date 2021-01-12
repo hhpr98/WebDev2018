@@ -21,3 +21,5 @@ export const getContactPage = catchAsync(
         res.render("other/contact", { title: "Liên hệ" });
     }
 );
+
+

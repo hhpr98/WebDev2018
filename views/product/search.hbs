@@ -16,44 +16,6 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="product-view-top">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="product-search">
-                                        <input type="email" value="" placeholder="Tìm kiếm">
-                                        <button><i class="fa fa-search"></i></button>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="product-short">
-                                        <div class="dropdown">
-                                            <div class="dropdown-toggle" data-toggle="dropdown">Sắp xếp theo</div>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="#" class="dropdown-item">Mới nhất</a>
-                                                <a href="#" class="dropdown-item">Phổ biến nhất</a>
-                                                <a href="#" class="dropdown-item">Đang giảm giá</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="product-price-range">
-                                        <div class="dropdown">
-                                            <div class="dropdown-toggle" data-toggle="dropdown">Theo giá sản phẩm</div>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="#" class="dropdown-item">Dưới 100k</a>
-                                                <a href="#" class="dropdown-item">Từ 100k đến 500k</a>
-                                                <a href="#" class="dropdown-item">Từ 500k đến 2 triệu</a>
-                                                <a href="#" class="dropdown-item">Trên 2 triệu</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     {{#each productList}}
                         <div class="col-md-4">
                             <div class="product-item">
@@ -69,7 +31,7 @@
                                 </div>
                                 <div class="product-image">
                                     <a href="/product/detail/{{id}}">
-                                        <img src={{image1}} alt="Không tải được hình ảnh">
+                                        <img src={{image1}} alt="">
                                     </a>
                                     <div class="product-action">
                                         <a href="/cart/{{id}}"><i class="fa fa-cart-plus"></i></a>
@@ -79,8 +41,10 @@
                                 </div>
                                 <div class="product-price">
                                     <h3>{{formatCurencyVND originPrice}}<span>đ</span></h3>
-                                    <a class="btn" href="/product/detail/{{id}}"><i class="fa fa-shopping-cart"></i>Mua
-                                        ngay</a>
+                                    <a class="btn" href="/product/detail/{{id}}">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Mua ngay
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -145,6 +109,7 @@
                                         <i class="{{iclass}}"></i>{{name}}
                                     </a>
                                 </li>
+
                             {{/each}}
                         </ul>
                     </nav>
@@ -166,7 +131,7 @@
                                 </div>
                                 <div class="product-image">
                                     <a href="/product/detail/{{id}}">
-                                        <img src={{image1}} alt="Không thể tải hình ảnh">
+                                        <img src={{image1}} alt="">
                                     </a>
                                     <div class="product-action">
                                         <a href="/cart/{{id}}"><i class="fa fa-cart-plus"></i></a>
@@ -176,10 +141,13 @@
                                 </div>
                                 <div class="product-price">
                                     <h3>{{formatCurencyVND originPrice}}<span>đ</span></h3>
-                                    <a class="btn" href="/product/detail/{{id}}"><i class="fa fa-shopping-cart"></i>Mua
-                                        ngay</a>
+                                    <a class="btn" href="/product/detail/{{id}}">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Mua ngay
+                                    </a>
                                 </div>
                             </div>
+
                         {{/each}}
                     </div>
                 </div>
@@ -188,7 +156,9 @@
                     <h2 class="title">Nhãn hiệu</h2>
                     <ul>
                         {{#each branchs}}
-                            <li><a href="/product/search?text={{name}}">{{name}} </a><span>({{number}})</span></li>
+                            <li>
+                                <a href="/product/search?text={{name}}">{{name}}</a><span>({{number}})</span>
+                            </li>
                         {{/each}}
                     </ul>
                 </div>
@@ -197,6 +167,7 @@
                     <h2 class="title">Thẻ tags</h2>
                     {{#each tags}}
                         <a href="/product/search?text={{name}}">{{name}}</a>
+
                     {{/each}}
                 </div>
             </div>
