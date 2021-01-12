@@ -1,76 +1,60 @@
-<!-- Breadcrumb Start -->
-<div class="breadcrumb-wrap">
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
-            <li class="breadcrumb-item active">Login & Register</li>
-        </ul>
-    </div>
-</div>
-<!-- Breadcrumb End -->
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('/login/images/bg-01.jpg');">
+        <div class="wrap-login100">
+            <form method="POST" class="login100-form validate-form">
+                <span class="login100-form-logo">
+                    <i class="zmdi zmdi-landscape"></i>
+                </span>
 
-<!-- Login Start -->
-<div class="login">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="register-form">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="First Name">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Last Name"</label>
-                            <input class="form-control" type="text" placeholder="Last Name">
-                        </div>
-                        <div class="col-md-6">
-                            <label>E-mail</label>
-                            <input class="form-control" type="text" placeholder="E-mail">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" placeholder="Mobile No">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Password</label>
-                            <input class="form-control" type="text" placeholder="Password">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Retype Password</label>
-                            <input class="form-control" type="text" placeholder="Password">
-                        </div>
-                        <div class="col-md-12">
-                            <button class="btn">Submit</button>
-                        </div>
-                    </div>
+                <span class="login100-form-title p-b-34 p-t-27">
+                    Đăng nhập
+                </span>
+
+
+   
+
+                <div class="wrap-input100 validate-input" data-validate="Không bỏ trống tên đăng nhập">
+                    <input class="input100" type="text" name="username" placeholder="Tên đăng nhập">
+                    <span class="focus-input100" data-placeholder="&#xf207;"></span>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="login-form">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>E-mail / Username</label>
-                            <input class="form-control" type="text" placeholder="E-mail / Username">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Password</label>
-                            <input class="form-control" type="text" placeholder="Password">
-                        </div>
-                        <div class="col-md-12">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="newaccount">
-                                <label class="custom-control-label" for="newaccount">Keep me signed in</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <button class="btn">Submit</button>
-                        </div>
-                    </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Vui lòng nhập mật khẩu">
+                    <input class="input100" type="password" name="password" placeholder="Mật khẩu">
+                    <span class="focus-input100" data-placeholder="&#xf191;"></span>
                 </div>
-            </div>
+                <script>
+                    $(document).ready(function () {
+                        $('.aaaa').hide();
+                    })
+                </script>
+                <hr>
+                <h5 style="color:black;"> {{Noti}}</h5>
+                <div class="contact100-form-checkbox">
+                    <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                    <label class="label-checkbox100" for="ckb1">
+                        Ghi nhớ tôi
+                    </label>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Đăng nhập
+                    </button>
+                </div>
+                <div class="text-center p-t-90">
+                    <a class="txt1" href="/register">
+                        Đăng kí
+                    </a>
+                    <a class="txt1" href="/resetpw">
+                        Quên mật khẩu
+                    </a>
+                </div>
+            </form>
+
+
         </div>
     </div>
 </div>
-<!-- Login End -->
+
+
+<div id="dropDownSelect1"></div>

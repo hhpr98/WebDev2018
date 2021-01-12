@@ -19,20 +19,20 @@
                     <div class="row align-items-center">
                         <div class="col-md-5">
                             <div class="product-slider-single normal-slider">
-                                <img src={{item.image}} alt="Không thể tải ảnh">
-                                <img src={{item.image2}} alt="Không thể tải ảnh">
-                                <img src={{item.image3}} alt="Không thể tải ảnh">
-                                <img src={{item.image4}} alt="Không thể tải ảnh">
-                                <img src={{item.image5}} alt="Không thể tải ảnh">
-                                <img src={{item.image6}} alt="Không thể tải ảnh">
+                                <img src={{item.image1}} alt="">
+                                <img src={{item.image2}} alt="">
+                                <img src={{item.image3}} alt="">
+                                <img src={{item.image1}} alt="">
+                                <img src={{item.image2}} alt="">
+                                <img src={{item.image3}} alt="">
                             </div>
                             <div class="product-slider-single-nav normal-slider">
-                                <div class="slider-nav-img"><img src={{item.image}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image2}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image3}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image4}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image5}} alt="Không thể tải ảnh"></div>
-                                <div class="slider-nav-img"><img src={{item.image6}} alt="Không thể tải ảnh"></div>
+                                <div class="slider-nav-img"><img src={{item.image1}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image2}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image3}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image1}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image2}} alt=""></div>
+                                <div class="slider-nav-img"><img src={{item.image3}} alt=""></div>
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -48,9 +48,9 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <div class="price">
-                                    <h4>Price:</h4>
+                                    <h4>Giá:</h4>
                                     <p>
-                                        {{formatCurencyVND item.price}}đ
+                                        {{formatCurencyVND item.salePrice}}đ
                                         <span>{{formatCurencyVND item.originPrice}}đ</span>
                                     </p>
                                 </div>
@@ -62,25 +62,38 @@
                                         <button class="btn-plus"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
+                                <div class="quantity">
+                                    <h4>👁️ :</h4>
+                                    <div class="qty">
+                                        <input type="text" value={{{item.viewCount}}}>
+                                    </div>
+                                </div>
                                 <div class="p-size">
-                                    <h4>Size:</h4>
+                                    <h4>Kích cỡ:</h4>
                                     <div class="btn-group btn-group-sm">
-                                        {{#each item.size}}
-                                            <button type="button" class="btn">{{sizeName}}</button>
-                                        {{/each}}
+                                        <button type="button" class="btn">S</button>
+                                        <button type="button" class="btn">M</button>
+                                        <button type="button" class="btn">L</button>
+                                        <button type="button" class="btn">XL</button>
                                     </div>
                                 </div>
                                 <div class="p-color">
                                     <h4>Màu sắc:</h4>
                                     <div class="btn-group btn-group-sm">
-                                        {{#each item.color}}
-                                            <button type="button" class="btn">{{colorName}}</button>
-                                        {{/each}}
+                                        <button type="button" class="btn">Đỏ</button>
+                                        <button type="button" class="btn">Đen</button>
+                                        <button type="button" class="btn">Trắng</button>
                                     </div>
                                 </div>
                                 <div class="action">
-                                    <a class="btn" href="#"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>
-                                    <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Mua ngay</a>
+                                    <a class="btn" href="/cart/{{item.id}}">
+                                        <i class="fa fa-shopping-cart"> </i>
+                                        Giỏ hàng
+                                    </a>
+                                    <a class="btn" href="/cart/{{item.id}}">
+                                        <i class="fa fa-shopping-bag"></i>
+                                        Mua ngay
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -91,33 +104,33 @@
                     <div class="col-lg-12">
                         <ul class="nav nav-pills nav-justified">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="pill" href="#description">Mô tả</a>
+                                <a class="nav-link active" data-toggle="pill" href="#tabdescription">Mô tả</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#specification">Thông số kĩ thuật</a>
+                                <a class="nav-link" data-toggle="pill" href="#tabspecification">Thông số kĩ thuật</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#reviews">Nhận xét (2)</a>
+                                <a class="nav-link" data-toggle="pill" href="#tabreviews">Nhận xét</a>
                             </li>
                         </ul>
 
                         <div class="tab-content">
-                            <div id="description" class="container tab-pane active">
+                            <div id="tabdescription" class="container tab-pane active">
                                 <h4>Mô tả sản phẩm</h4>
                                 <p>{{item.description}}</p>
                             </div>
-                            <div id="specification" class="container tab-pane fade">
+                            <div id="tabspecification" class="container tab-pane fade">
                                 <h4>Thông số kĩ thuật</h4>
                                 <ul>
-                                    {{#each item.special}}
-                                        <li>{{specName}}</li>
-                                    {{/each}}
+                                    <li>{{item.specification1}}</li>
+                                    <li>{{item.specification2}}</li>
+                                    <li>{{item.specification3}}</li>
                                 </ul>
                             </div>
-                            <div id="reviews" class="container tab-pane fade">
-                                {{#each item.review}}
+                            <div id="tabreviews" class="container tab-pane fade">
+                                {{#each reviewList}}
                                     <div class="reviews-submitted">
-                                        <div class="reviewer">{{reviewName}} - <span>{{reviewDate}}</span></div>
+                                        <div class="reviewer">{{name}} - <span>{{updatedAt}}</span></div>
                                         <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -125,9 +138,61 @@
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                         </div>
-                                        <p>{{reviewContent}}</p>
+                                        <p>{{content}}</p>
                                     </div>
                                 {{/each}}
+
+                                <nav aria-label="...">
+                                    <ul class="pagination">
+
+                                        {{#if pageCount}}
+
+                                            {{#if isPreviousPage}}
+                                                <li class="page-item">
+                                                    <a class="page-link"
+                                                        href="/product/detail/{{item.id}}?page={{previousPage}}"
+                                                        tabindex="-1">Trước</a>
+                                                </li>
+                                            {{else}}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1">Trước</a>
+                                                </li>
+                                            {{/if}}
+
+                                            {{#each listPaginate}}
+                                                {{#if isCurrentPage}}
+                                                    <li class="page-item active">
+                                                        <a class="page-link"
+                                                            href="/product?page={{pageId}}">{{pageId}}</a>
+                                                    </li>
+                                                {{else}}
+                                                    <li class="page-item">
+                                                        <a class="page-link"
+                                                            href="/product?page={{pageId}}">{{pageId}}</a>
+                                                    </li>
+                                                {{/if}}
+                                            {{/each}}
+
+                                            {{#if isNextPage}}
+                                                <li class="page-item">
+                                                    <a class="page-link"
+                                                        href="/product/detail/{{item.id}}?page={{nextPage}}"
+                                                        tabindex="-1">Trước</a>
+                                                </li>
+                                            {{else}}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1">Trước</a>
+                                                </li>
+                                            {{/if}}
+
+                                        {{else}}
+                                            <p>Không có bình luận</p>
+                                        {{/if}}
+
+
+                                    </ul>
+                                </nav>
+
                                 <div class="reviews-submit">
                                     <h4>Để lại bình luận:</h4>
                                     <div class="ratting">
@@ -137,20 +202,20 @@
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                     </div>
-                                    <div class="row form">
+                                    <form class="row form" method="POST" action="/product/comment/{{item.id}}">
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="Tên">
+                                            <input type="text" placeholder="Tên" value="Khách" name="name" id="name">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="email" placeholder="Email">
+                                            <input type="email" placeholder="Email" name="email" id="email">
                                         </div>
                                         <div class="col-sm-12">
-                                            <textarea placeholder="Nội dung"></textarea>
+                                            <textarea placeholder="Nội dung" name="content" id="content"></textarea>
                                         </div>
                                         <div class="col-sm-12">
-                                            <button>Xác nhận</button>
+                                            <button type="submit">Xác nhận</button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +228,7 @@
                     </div>
 
                     <div class="row align-items-center product-slider product-slider-3">
-                        {{#each productList}}
+                        {{#each relativeProducts}}
                             <div class="col-lg-3">
                                 <div class="product-item">
                                     <div class="product-title">
@@ -178,17 +243,18 @@
                                     </div>
                                     <div class="product-image">
                                         <a href="/product/detail/{{id}}">
-                                            <img src={{image}} alt="Không thể tải ảnh">
+                                            <img src={{image1}} alt="">
                                         </a>
                                         <div class="product-action">
                                             <a href="/cart/{{id}}"><i class="fa fa-cart-plus"></i></a>
-                                            <a href="#"><i class="fa fa-heart"></i></a>
+                                            <a href="/wishlist"><i class="fa fa-heart"></i></a>
                                             <a href="/product/detail/{{id}}"><i class="fa fa-info"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-price">
-                                        <h3>{{formatCurencyVND price}}<span>đ</span></h3>
-                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                        <h3>{{formatCurencyVND salePrice}}<span>đ</span></h3>
+                                        <a class="btn" href="/product/detail/{{id}}"><i
+                                                class="fa fa-shopping-cart"></i>Mua ngay</a>
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +271,8 @@
                         <ul class="navbar-nav">
                             {{#each category}}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="{{iclass}}"></i>{{name}}</a>
+                                    <a class="nav-link" href="/product/category/{{id}}"><i
+                                            class="{{iclass}}"></i>{{name}}</a>
                                 </li>
                             {{/each}}
                         </ul>
@@ -214,7 +281,7 @@
 
                 <div class="sidebar-widget widget-slider">
                     <div class="sidebar-slider normal-slider">
-                        {{#each productList}}
+                        {{#each relativeProducts}}
                             <div class="product-item">
                                 <div class="product-title">
                                     <a href="#">{{name}}</a>
@@ -228,17 +295,18 @@
                                 </div>
                                 <div class="product-image">
                                     <a href="/product/detail/{{id}}">
-                                        <img src={{image}} alt="Không thể tải hình ảnh">
+                                        <img src={{image1}} alt="Không thể tải hình ảnh">
                                     </a>
                                     <div class="product-action">
                                         <a href="/cart/{{id}}"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
+                                        <a href="/wishlist"><i class="fa fa-heart"></i></a>
                                         <a href="/product/detail/{{id}}"><i class="fa fa-info"></i></a>
                                     </div>
                                 </div>
                                 <div class="product-price">
-                                    <h3>{{formatCurencyVND price}}<span>đ</span></h3>
-                                    <a class="btn" href="#"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                    <h3>{{formatCurencyVND salePrice}}<span>đ</span></h3>
+                                    <a class="btn" href="/product/detail/{{id}}"><i class="fa fa-shopping-cart"></i>Mua
+                                        ngay</a>
                                 </div>
                             </div>
                         {{/each}}
@@ -248,29 +316,17 @@
                 <div class="sidebar-widget brands">
                     <h2 class="title">Nhãn hiệu</h2>
                     <ul>
-                        <li><a href="#">Nulla </a><span>(45)</span></li>
-                        <li><a href="#">Curabitur </a><span>(34)</span></li>
-                        <li><a href="#">Nunc </a><span>(67)</span></li>
-                        <li><a href="#">Ullamcorper</a><span>(74)</span></li>
-                        <li><a href="#">Fusce </a><span>(89)</span></li>
-                        <li><a href="#">Sagittis</a><span>(28)</span></li>
+                        {{#each branchs}}
+                            <li><a href="/product/search?text={{name}}">{{name}} </a><span>({{number}})</span></li>
+                        {{/each}}
                     </ul>
                 </div>
 
                 <div class="sidebar-widget tag">
                     <h2 class="title">Thẻ tags</h2>
-                    <a href="#">Đồ nam</a>
-                    <a href="#">Hàng hiệu</a>
-                    <a href="#">Hô ly gút</a>
-                    <a href="#">Đỏ</a>
-                    <a href="#">Đầm diện ngắn</a>
-                    <a href="#">Noel</a>
-                    <a href="#">Người yêu</a>
-                    <a href="#">Quần áo</a>
-                    <a href="#">Mũ len</a>
-                    <a href="#">Tây ba lô</a>
-                    <a href="#">Hello world</a>
-                    <a href="#">Mùa đông</a>
+                    {{#each tags}}
+                        <a href="/product/search?text={{name}}">{{name}}</a>
+                    {{/each}}
                 </div>
             </div>
             <!-- Side Bar End -->

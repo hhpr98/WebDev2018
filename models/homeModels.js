@@ -1,3 +1,5 @@
+import { Products } from "../database/models";
+
 export const getCategoryLeftBar = () => {
     return [
         {
@@ -10,195 +12,70 @@ export const getCategoryLeftBar = () => {
             id: 2,
             name: "Giảm giá",
             iclass: "fa fa-shopping-bag",
-            ihref: "/"
+            ihref: "/product"
         },
         {
             id: 3,
             name: "Hàng mới",
             iclass: "fa fa-plus-square",
-            ihref: "/"
+            ihref: "/product"
         },
         {
             id: 4,
             name: "Thời gian & đẹp",
             iclass: "fa fa-female",
-            ihref: "/"
+            ihref: "/product/search?text=Thời%20trang"
         },
         {
             id: 5,
             name: "Trẻ em",
             iclass: "fa fa-child",
-            ihref: "/"
+            ihref: "/product/search?text=Trẻ%20em"
         },
         {
             id: 6,
             name: "Đồ cho Nam & Nữ",
             iclass: "fa fa-tshirt",
-            ihref: "/"
+            ihref: "/product/search?text=Nam%20Nữ"
         },
         {
             id: 7,
             name: "Phụ kiện",
             iclass: "fa fa-mobile-alt",
-            ihref: "/"
+            ihref: "/product"
         },
         {
             id: 8,
             name: "Hàng dịch vụ",
             iclass: "fa fa-microchip",
-            ihref: "/"
+            ihref: "/product"
         }
     ]
 }
 
-export const getRecentProduct = () => {
-    return [
-        {
-            id: 1,
-            name: "Váy ngắn VT01",
-            star: 5,
-            price: 250000,
-            image: "/img/product-1.jpg"
-        },
-        {
-            id: 2,
-            name: "Váy ngắn VT02",
-            star: 5,
-            price: 250000,
-            image: "/img/product-2.jpg"
-        },
-        {
-            id: 3,
-            name: "Váy ngắn VT03",
-            star: 5,
-            price: 250000,
-            image: "/img/product-3.jpg"
-        },
-        {
-            id: 4,
-            name: "Váy ngắn VT04",
-            star: 5,
-            price: 250000,
-            image: "/img/product-4.jpg"
-        },
-        {
-            id: 5,
-            name: "Váy ngắn VT05",
-            star: 5,
-            price: 250000,
-            image: "/img/product-5.jpg"
-        },
-        {
-            id: 6,
-            name: "Váy ngắn VT06",
-            star: 5,
-            price: 250000,
-            image: "/img/product-6.jpg"
-        },
-        {
-            id: 7,
-            name: "Váy ngắn VT07",
-            star: 5,
-            price: 250000,
-            image: "/img/product-7.jpg"
-        },
-        {
-            id: 8,
-            name: "Váy ngắn VT08",
-            star: 5,
-            price: 250000,
-            image: "/img/product-8.jpg"
-        },
-        {
-            id: 9,
-            name: "Váy ngắn VT09",
-            star: 5,
-            price: 250000,
-            image: "/img/product-9.jpg"
-        },
-        {
-            id: 10,
-            name: "Váy ngắn VT10",
-            star: 5,
-            price: 250000,
-            image: "/img/product-10.jpg"
-        }
-    ]
+// Lấy các sản phẩm thêm gần đây => căn cứ theo ngày
+export const getRecentProduct = async () => {
+    const _recent = await Products.findAll({
+        limit: 6,
+        offset: 0,
+        order: [
+            ['updatedAt', 'DESC'],
+        ]
+    });
+
+    return _recent;
 }
 
-export const getBuyingMost = () => {
-    return [
-        {
-            id: 1,
-            name: "Váy ngắn VT01",
-            star: 5,
-            price: 250000,
-            image: "/img/product-1.jpg"
-        },
-        {
-            id: 2,
-            name: "Váy ngắn VT02",
-            star: 5,
-            price: 250000,
-            image: "/img/product-2.jpg"
-        },
-        {
-            id: 3,
-            name: "Váy ngắn VT03",
-            star: 5,
-            price: 250000,
-            image: "/img/product-3.jpg"
-        },
-        {
-            id: 4,
-            name: "Váy ngắn VT04",
-            star: 5,
-            price: 250000,
-            image: "/img/product-4.jpg"
-        },
-        {
-            id: 5,
-            name: "Váy ngắn VT05",
-            star: 5,
-            price: 250000,
-            image: "/img/product-5.jpg"
-        },
-        {
-            id: 6,
-            name: "Váy ngắn VT06",
-            star: 5,
-            price: 250000,
-            image: "/img/product-6.jpg"
-        },
-        {
-            id: 7,
-            name: "Váy ngắn VT07",
-            star: 5,
-            price: 250000,
-            image: "/img/product-7.jpg"
-        },
-        {
-            id: 8,
-            name: "Váy ngắn VT08",
-            star: 5,
-            price: 250000,
-            image: "/img/product-8.jpg"
-        },
-        {
-            id: 9,
-            name: "Váy ngắn VT09",
-            star: 5,
-            price: 250000,
-            image: "/img/product-9.jpg"
-        },
-        {
-            id: 10,
-            name: "Váy ngắn VT06",
-            star: 5,
-            price: 250000,
-            image: "/img/product-10.jpg"
-        }
-    ]
+export const getBuyingMost = async () => {
+    const _mostBuying = await Products.findAll({
+        limit: 6,
+        offset: 0,
+        order: [
+            ['viewCount', 'DESC'],
+        ]
+    });
+
+    return _mostBuying;
 }
 
 export const getReviewOfCustomer = () => {

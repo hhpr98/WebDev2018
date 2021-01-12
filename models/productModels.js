@@ -1,5 +1,18 @@
 import { Products, Categories, Op, Comments } from "../database/models";
 
+export const getListProductInCart = async (array)=>{
+    const a = [];
+    array.forEach(element => {
+        a.push(element.id);
+    });
+    const _product = await Products.findAll({
+        where: {
+            id: a
+        },
+    });
+    return _product;
+}
+
 // Lấy danh sách sản phẩm
 // Input : limit, page
 // Result: count + list sản phẩm
@@ -207,12 +220,10 @@ export const getCommentListDatabaseByProductId = async (limit, page, productId) 
 // Input : productId, name,email,content
 // Result: 
 export const addACommentDatabase = async (productId, name, email, content) => {
-
     await Comments.create({
         productId: productId,
         name: name,
         address: email,
         content: content
     });
-
 }

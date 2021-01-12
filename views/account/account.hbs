@@ -16,7 +16,9 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i
+                    <a class="nav-link active" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i
+                            class="fa fa-user"></i>Account Details</a>
+                    <a class="nav-link" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i
                             class="fa fa-tachometer-alt"></i>Dashboard</a>
                     <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i
                             class="fa fa-shopping-bag"></i>Orders</a>
@@ -24,15 +26,14 @@
                             class="fa fa-credit-card"></i>Payment Method</a>
                     <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i
                             class="fa fa-map-marker-alt"></i>address</a>
-                    <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i
-                            class="fa fa-user"></i>Account Details</a>
+
                     <a class="nav-link" href="index.html"><i class="fa fa-sign-out-alt"></i>Logout</a>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel"
-                        aria-labelledby="dashboard-nav">
+
+                    <div class="tab-pane fade" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
                         <h4>Dashboard</h4>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra
@@ -111,42 +112,149 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
-                        <h4>Account Details</h4>
+                    <div class="tab-pane fade  show active" id="account-tab" role="tabpanel"
+                        aria-labelledby="account-nav">
+
+                        <h1 style="color:red;">{{noti}}</h1>
+
+
                         <div class="row">
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="First Name">
+                            <div class="col-md-9">
+                                {{#if user.isBanned}}
+                                <h4>Tài khoản chưa được xác thực, nhập mã OTP trong email để xác thực tài khoản</h4>
+                                <form action="/account/verify" method="POST">
+                                    <div class=" form-group row">
+                                        <label for="v" class="col-sm-3 col-form-label">NHẬP MÃ XÁC THỰC</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="v" placeholder="Mã xác thực"
+                                                name="otp">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 middle">
+                                        <button type="submit" class="btn">Xác thực</button>
+                                    </div>
+                                </form>
+                                {{else}}
+                                
+                                {{/if}}
+                                <h2>THÔNG TIN NGƯỜI DÙNG</h2>
+                                <HR>
+                                </HR>
+                                <div class="row">
+                                    <label for="tdd" class="col-sm-3 col-form-label">Tên Tài Khoản</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="tdd" placeholder="Tên Người Dùng"
+                                            value={{user.username}} name="userName">
+                                    </div>
+                                    <label for="tnd" class="col-sm-3 col-form-label">Tên Người Dùng</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="tnd" placeholder="Tên người dùng"
+                                            value="{{user.name}}">
+                                    </div>
+                                    <label for="e" class="col-sm-3 col-form-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="e" placeholder="Email"
+                                            value={{user.email}}>
+                                    </div>
+                                    <label for="p" class="col-sm-3 col-form-label">Số Điện Thoại</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="p" placeholder="Phonenumber"
+                                            value={{user.phonenumber}}>
+                                    </div>
+                                    <label for="dc" class="col-sm-3 col-form-label">Địa chỉ</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="dc" placeholder="Adress"
+                                            value="{{user.address}}">
+                                    </div>
+                                </div>
+                                <h2>CẬP NHẬT THÔNG TIN</h2>
+                                <HR>
+                                </HR>
+                                <form action="/account/updateinfo" method="POST" onsubmit="return toSubmit();">
+                                    <div class="form-group row">
+
+                                        <label for="tnd2" class="col-sm-3 col-form-label">Tên Người Dùng</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="tnd2"
+                                                placeholder="Tên người dùng" name="username">
+                                        </div>
+                                        <label for="e2" class="col-sm-3 col-form-label">Email</label>
+                                        <div class="col-sm-9">
+                                            <input type="email" class="form-control" id="e2" placeholder="Email"
+                                                name="email">
+                                        </div>
+                                        <label for="p2" class="col-sm-3 col-form-label">Số Điện Thoại</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="p2" placeholder="Phonenumber"
+                                                name="phone">
+                                        </div>
+                                        <label for="dc2" class="col-sm-3 col-form-label">Địa chỉ</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="dc2" placeholder="Adress"
+                                                value={{user.address}} name="address">
+                                        </div>
+                                        <div class="col-md-12 middle">
+                                            <button type="submit" class="btn">Cập nhật</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <h2>ĐỔI MẬT KHẨU</h2>
+                                <HR>
+                                </HR>
+                                <form action="/account/updatePw" method="POST" onsubmit="return toSubmit();">
+                                    <div class="form-group row">
+                                        <label for="mkc" class="col-sm-3 col-form-label">Nhập mật khẩu cũ</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="mkc"
+                                                placeholder="Mật khẩu cũ" name="oldpw" minlength="6" maxlength="10">
+                                        </div>
+                                        <label for="mkm" class="col-sm-3 col-form-label">Nhập mật khẩu mới</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="mkm"
+                                                placeholder="Mật khẩu mới" minlength="6" maxlength="10" name="newpw">
+                                        </div>
+                                        <label for="nlmkm" class="col-sm-3 col-form-label">Nhập lại mật khẩu
+                                            mới</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="nlmkm" placeholder=""
+                                                minlength="6" maxlength="10">
+                                        </div>
+                                        <div class="col-md-12 middle">
+                                            <button type="submit" class="btn">Đổi mật khẩu</button>
+                                        </div>
+                                    </div>
+                                </form>
+
                             </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Last Name">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Mobile">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Email">
-                            </div>
-                            <div class="col-md-12">
-                                <input class="form-control" type="text" placeholder="Address">
-                            </div>
-                            <div class="col-md-12">
-                                <button class="btn">Update Account</button>
-                                <br><br>
-                            </div>
-                        </div>
-                        <h4>Password change</h4>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <input class="form-control" type="password" placeholder="Current Password">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="New Password">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Confirm Password">
-                            </div>
-                            <div class="col-md-12">
-                                <button class="btn">Save Changes</button>
+                            <div class="col-md-3">
+                                <div class="image-container">
+                                    <img class="fill-parent" src={{user.image}} alt="Avatar">
+                                </div>
+                                <hr>
+
+                                <p>Cập nhật ảnh đại diện</p>
+                                <div class="form-group row">
+                                    <form method="post" action="/account/updateAvata" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <input style="display: none;" type="file" name="file" id="files"
+                                                        class="hidden " onchange="readURL(this);" />
+                                                    <button type="button" class="btn btn-primary pull-right"><label
+                                                            for="files">Select
+                                                            file</label></button>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="submit"
+                                                        class="btn btn-primary pull-right">Upload</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <img style="width: 100%; height: auto;" id="blah" src="#" />
+
                             </div>
                         </div>
                     </div>
@@ -156,3 +264,35 @@
     </div>
 </div>
 <!-- My Account End -->
+
+<!-- 
+
+    show img
+    -->
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(500)
+                    .height(500);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // check update pw
+    function toSubmit() {
+        var newpPssword = document.getElementById("mkm").value;
+        var confirmPassword = document.getElementById("nlmkm").value;
+        if (newpPssword === confirmPassword) {
+            return true;
+        }
+        alert("Confirm Password is incorrect, Check it again!");
+        return false;
+    }
+</script>

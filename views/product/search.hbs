@@ -16,6 +16,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="row">
+<<<<<<< HEAD
                     {{#each productList}}
                     <div class="col-md-4">
                         <div class="product-item">
@@ -46,6 +47,39 @@
                             </div>
                         </div>
                     </div>
+=======
+
+                    {{#each productList}}
+                        <div class="col-md-4">
+                            <div class="product-item">
+                                <div class="product-title">
+                                    <a href="#">{{name}}</a>
+                                    <div class="ratting">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="product-image">
+                                    <a href="/product/detail/{{id}}">
+                                        <img src={{image1}} alt="">
+                                    </a>
+                                    <div class="product-action">
+                                        <a href="/product/detail/{{id}}"><i class="fa fa-cart-plus"></i></a>
+                                        <a href="/wishlist"><i class="fa fa-heart"></i></a>
+                                        <a href="/product/detail/{{id}}"><i class="fa fa-info"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-price">
+                                    <h3>{{formatCurencyVND originPrice}}<span>đ</span></h3>
+                                    <a class="btn" href="/product/detail/{{id}}"><i class="fa fa-shopping-cart"></i>Mua
+                                        ngay</a>
+                                </div>
+                            </div>
+                        </div>
+>>>>>>> 40c70a06d3f38ac9d35b90074e0c56374fd7b052
                     {{/each}}
 
                 </div>
@@ -55,6 +89,7 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
                             {{#if pageCount}}
+<<<<<<< HEAD
                             {{#if isPreviousPage}}
                             <li class="page-item">
                                 <a class="page-link" href="/product/search?text={{text}}&&page={{previousPage}}"
@@ -87,6 +122,41 @@
                             <h2 class="text-danger mt-5 mb-5 text-center">
                                 Ồ không!!!! không có sản phẩm nào ở đây cả. Vui lòng thử lại!
                             </h2>
+=======
+                                {{#if isPreviousPage}}
+                                    <li class="page-item">
+                                        <a class="page-link" href="/product/search?text={{text}}&&page={{previousPage}}"
+                                            tabindex="-1">Trước
+                                        </a>
+                                    </li>
+                                {{else}}
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1">Trước</a>
+                                    </li>
+                                {{/if}}
+
+                                {{#each listPaginate}}
+                                    <li {{#if isCurrentPage}}class="page-item active" {{else}}class="page-item" {{/if}}>
+                                        <a class="page-link"
+                                            href="/product/search?text={{../text}}&&page={{pageId}}">{{pageId}}</a>
+                                    </li>
+                                {{/each}}
+
+                                {{#if isNextPage}}
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="/product/search?text={{text}}&&page={{nextPage}}">Sau</a>
+                                    </li>
+                                {{else}}
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#">Sau</a>
+                                    </li>
+                                {{/if}}
+                            {{else}}
+                                <h2 class="text-danger mt-5 mb-5 text-center">
+                                    Ồ không!!!! không có sản phẩm nào ở đây cả. Vui lòng thử lại!
+                                </h2>
+>>>>>>> 40c70a06d3f38ac9d35b90074e0c56374fd7b052
                             {{/if}}
                         </ul>
                     </nav>
@@ -101,11 +171,19 @@
                     <nav class="navbar bg-light">
                         <ul class="navbar-nav">
                             {{#each category}}
+<<<<<<< HEAD
                             <li class="nav-item">
                                 <a class="nav-link" href="/product/category/{{id}}">
                                     <i class="{{iclass}}"></i>{{name}}
                                 </a>
                             </li>
+=======
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/product/category/{{id}}">
+                                        <i class="{{iclass}}"></i>{{name}}
+                                    </a>
+                                </li>
+>>>>>>> 40c70a06d3f38ac9d35b90074e0c56374fd7b052
                             {{/each}}
                         </ul>
                     </nav>
@@ -114,6 +192,7 @@
                 <div class="sidebar-widget widget-slider">
                     <div class="sidebar-slider normal-slider">
                         {{#each productList}}
+<<<<<<< HEAD
                         <div class="product-item">
                             <div class="product-title">
                                 <a href="#">{{name}}</a>
@@ -141,6 +220,35 @@
                                     ngay</a>
                             </div>
                         </div>
+=======
+                            <div class="product-item">
+                                <div class="product-title">
+                                    <a href="#">{{name}}</a>
+                                    <div class="ratting">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="product-image">
+                                    <a href="/product/detail/{{id}}">
+                                        <img src={{image1}} alt="">
+                                    </a>
+                                    <div class="product-action">
+                                        <a href="/product/detail/{{id}}"><i class="fa fa-cart-plus"></i></a>
+                                        <a href="/wishlist"><i class="fa fa-heart"></i></a>
+                                        <a href="/product/detail/{{id}}"><i class="fa fa-info"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-price">
+                                    <h3>{{formatCurencyVND originPrice}}<span>đ</span></h3>
+                                    <a class="btn" href="/product/detail/{{id}}"><i class="fa fa-shopping-cart"></i>Mua
+                                        ngay</a>
+                                </div>
+                            </div>
+>>>>>>> 40c70a06d3f38ac9d35b90074e0c56374fd7b052
                         {{/each}}
                     </div>
                 </div>
@@ -149,7 +257,11 @@
                     <h2 class="title">Nhãn hiệu</h2>
                     <ul>
                         {{#each branchs}}
+<<<<<<< HEAD
                         <li><a href="/product/search?text={{name}}">{{name}} </a><span>({{number}})</span></li>
+=======
+                            <li><a href="/product/search?text={{name}}">{{name}} </a><span>({{number}})</span></li>
+>>>>>>> 40c70a06d3f38ac9d35b90074e0c56374fd7b052
                         {{/each}}
                     </ul>
                 </div>
@@ -157,7 +269,11 @@
                 <div class="sidebar-widget tag">
                     <h2 class="title">Thẻ tags</h2>
                     {{#each tags}}
+<<<<<<< HEAD
                     <a href="/product/search?text={{name}}">{{name}}</a>
+=======
+                        <a href="/product/search?text={{name}}">{{name}}</a>
+>>>>>>> 40c70a06d3f38ac9d35b90074e0c56374fd7b052
                     {{/each}}
                 </div>
             </div>

@@ -1,15 +1,37 @@
 import createError from "http-errors";
 import express from "express";
+import bodyParser from "body-parser";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import { registerHelper } from "./libs/hbsHelper";
 import favicon from "serve-favicon";
-
+import dotenv from "dotenv";
 import indexRouter from "./routes/index";
 import adminRouter from "./routes/admin";
 
-var app = express();
+
+var app = express(); // express 
+dotenv.config(); // using dotenv file
+
+// autenticat
+import expressSession from "express-session";
+var FileStore = require('session-file-store')(expressSession);
+
+import passport from "passport";
+
+app.use(expressSession({
+  secret: "userCookieSecret",
+  resave: false,
+  saveUninitialized: false,
+  secure:false,
+  cookie:{maxAge: 3000000 // 5p ton tai
+  }})); 
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 
 // view engine setup
@@ -22,10 +44,10 @@ registerHelper();
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
 app.use('/admin', adminRouter);
 
@@ -45,8 +67,11 @@ app.use((err, req, res, next) => {
   res.render('error/error');
 });
 
+
+
 // PORT INIT
 const PORT = process.env.PORT || 3333;
 app.listen(PORT, () => {
   console.log(`App is running at PORT ${PORT}`);
+  console.log(`http://localhost:${PORT}/`);
 });

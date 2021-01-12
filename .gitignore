@@ -12,6 +12,7 @@ images/smileys/
 images/member_photos/
 images/signature_attachments/
 images/pm_attachments/
+public/img/uploads/
 
 # For security do not publish the following files
 system/expressionengine/config/database.php

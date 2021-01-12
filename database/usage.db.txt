@@ -1,0 +1,27 @@
+// Sử dụng lệnh dưới này để tạo db, migrate k tự tạo db
+
+// sequelize db:migrate
+
+// db list:
+-product
+-category
+-comment
+-branch
+-user 
+-cart(cardId,.....)
+-cartDetail(cardId,productId,...)
+-...
+
+Hi
+
+Your account number is: 472115
+
+Your new database is now ready to use.
+
+To connect to your database use these details
+
+Server: sql12.freemysqlhosting.net
+Name: sql12379291
+Username: sql12379291
+Password: Xn44HIjLvX
+Port number: 3306

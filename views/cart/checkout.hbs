@@ -2,9 +2,9 @@
 <div class="breadcrumb-wrap">
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
-            <li class="breadcrumb-item active">Checkout</li>
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/product">Sản phẩm</a></li>
+            <li class="breadcrumb-item active">Đơn hàng</li>
         </ul>
     </div>
 </div>
@@ -13,197 +13,238 @@
 <!-- Checkout Start -->
 <div class="checkout">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="checkout-inner">
-                    <div class="billing-address">
-                        <h2>Billing Address</h2>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>First Name</label>
-                                <input class="form-control" type="text" placeholder="First Name">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Last Name"</label>
-                                <input class="form-control" type="text" placeholder="Last Name">
-                            </div>
-                            <div class="col-md-6">
-                                <label>E-mail</label>
-                                <input class="form-control" type="text" placeholder="E-mail">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Mobile No</label>
-                                <input class="form-control" type="text" placeholder="Mobile No">
-                            </div>
-                            <div class="col-md-12">
-                                <label>Address</label>
-                                <input class="form-control" type="text" placeholder="Address">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Country</label>
-                                <select class="custom-select">
-                                    <option selected>United States</option>
-                                    <option>Afghanistan</option>
-                                    <option>Albania</option>
-                                    <option>Algeria</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>City</label>
-                                <input class="form-control" type="text" placeholder="City">
-                            </div>
-                            <div class="col-md-6">
-                                <label>State</label>
-                                <input class="form-control" type="text" placeholder="State">
-                            </div>
-                            <div class="col-md-6">
-                                <label>ZIP Code</label>
-                                <input class="form-control" type="text" placeholder="ZIP Code">
-                            </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="newaccount">
-                                    <label class="custom-control-label" for="newaccount">Create an account</label>
+        <form action="/cart/submit" method="POST">
+            <div class="row">
+                
+                <div class="col-lg-8">
+                    <h2>{{Noti}}</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="table" name="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng cộng</th>
+                                    <th>Xóa bỏ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                                {{#each cartItem}}
+                                <tr>
+                                    <td>
+                                        <div class="img" style="max-width: 100px;">
+                                            <a href="#"><img src="{{image1}}" alt="Image"></a>
+                                            <p>{{name}}</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="price{{id}}">{{originPrice}}</div>
+                                    </td>
+                                    <td>
+                                        <div class="qty">
+                                            <button type="button" id="dec{{id}}"><i class="fa fa-minus"></i></button>
+                                            <input type="text" value="1" id="input{{id}}" name="{{id}}">
+                                            <button type="button" id="inc{{id}}"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="result{{id}}"></div>
+                                    </td>
+                                    <td><a href="/cart/remove/{{id}}"><button><i class="fa fa-trash"></i></button></a>
+                                    </td>
+                                </tr>
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#inc{{id}}").click(function () {
+
+                                            var num = parseInt($('#input{{id}}').val(), 10);
+                                            var price = parseInt($('#price{{id}}').text(), 10);
+                                            num = num + 1;
+
+                                            $('#sum').text(parseInt($('#sum').text(), 10) + price);
+                                            $('#result{{id}}').text((num * price).toString());
+                                            $('#input{{id}}').val(num);
+                                            $('#sum2').text($('#sum').text());
+                                        })
+                                        $("#dec{{id}}").click(function () {
+                                            var num = parseInt($('#input{{id}}').val(), 10);
+                                            var price = parseInt($('#price{{id}}').text(), 10);
+
+                                            if (num != "1") {
+                                                num = num - 1;
+
+                                                $('#sum').text(parseInt($('#sum').text(), 10) - price);
+                                                $('#result{{id}}').text((num * price).toString());
+                                                $('#input{{id}}').val(num);
+                                                $('#sum2').text($('#sum').text());
+                                            }
+                                        })
+                                        var price = $('#price{{id}}').text();
+                                        var num = $('#input{{id}}').val();
+                                        $('#result{{id}}').text(num * price);
+                                        var text = $('#sum').text();
+                                        $('#sum').text(parseInt(text, 10) + parseInt($('#price{{id}}').text(), 10));
+                                        var text = $('#sum').text();
+                                        $('#sum2').text($('#sum').text());
+                                    })
+
+                                </script>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="checkout-inner">
+                        <div class="billing-address">
+                            <h2>Địa chỉ thanh toán hóa đơn</h2>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Tên</label>
+                                    <input class="form-control" type="text" placeholder="Tên" value="{{user.name}}"
+                                        readonly>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="shipto">
-                                    <label class="custom-control-label" for="shipto">Ship to different address</label>
+                                <div class="col-md-6">
+                                    <label>E-mail</label>
+                                    <input class="form-control" type="text" placeholder="E-mail" value="{{user.email}}"
+                                        readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Điện thoại</label>
+                                    <input class="form-control" type="text" placeholder="Điện thoại"
+                                        value="{{user.phonenumber}}" readonly>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Địa chỉ</label>
+                                    <input class="form-control" type="text" placeholder="Địa chỉ" name="address1"
+                                        value="{{user.address}}" readonly>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Địa chỉ cụ thể</label>
+                                    <input id="address" class="form-control" type="text" name="address2"
+                                        placeholder="Ghi chú thêm về địa chỉ" value="">
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="shipping-address">
-                        <h2>Shipping Address</h2>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>First Name</label>
-                                <input class="form-control" type="text" placeholder="First Name">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="checkout-inner">
+                        <div class="cart-summary">
+
+                            <div class="checkout-summary">
+                                <h1>Tổng cộng</h1>
+                                <pclass="sub-total"><span>
+                                        <div id="sum">0</div>
+                                    </span></p>
+                                    <h2>Tổng tiền<span>
+                                            <div id="sum2">0</div>
+                                        </span></h2>
                             </div>
-                            <div class="col-md-6">
-                                <label>Last Name"</label>
-                                <input class="form-control" type="text" placeholder="Last Name">
-                            </div>
-                            <div class="col-md-6">
-                                <label>E-mail</label>
-                                <input class="form-control" type="text" placeholder="E-mail">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Mobile No</label>
-                                <input class="form-control" type="text" placeholder="Mobile No">
-                            </div>
-                            <div class="col-md-12">
-                                <label>Address</label>
-                                <input class="form-control" type="text" placeholder="Address">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Country</label>
-                                <select class="custom-select">
-                                    <option selected>United States</option>
-                                    <option>Afghanistan</option>
-                                    <option>Albania</option>
-                                    <option>Algeria</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>City</label>
-                                <input class="form-control" type="text" placeholder="City">
-                            </div>
-                            <div class="col-md-6">
-                                <label>State</label>
-                                <input class="form-control" type="text" placeholder="State">
-                            </div>
-                            <div class="col-md-6">
-                                <label>ZIP Code</label>
-                                <input class="form-control" type="text" placeholder="ZIP Code">
+
+                            <div class="checkout-payment">
+                                <div class="payment-methods">
+                                    <h1>Phương thức thanh toán</h1>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-1"
+                                                name="payment">
+                                            <label class="custom-control-label" for="payment-1">Paypal</label>
+                                        </div>
+                                        <div class="payment-content" id="payment-1-show">
+                                            <p>
+                                                Bạn sẽ nhận được mã OTP để xác nhận đơn hàng. Tuyệt đối không cung cấp
+                                                mã
+                                                này cho
+                                                bất kì ai không phải là nhân viên ngân hàng.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-2"
+                                                name="payment">
+                                            <label class="custom-control-label" for="payment-2">MoMo</label>
+                                        </div>
+                                        <div class="payment-content" id="payment-2-show">
+                                            <p>
+                                                Bạn sẽ nhận được mã OTP để xác nhận đơn hàng. Tuyệt đối không cung cấp
+                                                mã
+                                                này cho
+                                                bất kì ai không phải là nhân viên ngân hàng.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-3"
+                                                name="payment">
+                                            <label class="custom-control-label" for="payment-3">ZaloPay</label>
+                                        </div>
+                                        <div class="payment-content" id="payment-3-show">
+                                            <p>
+                                                Bạn sẽ nhận được mã OTP để xác nhận đơn hàng. Tuyệt đối không cung cấp
+                                                mã
+                                                này cho
+                                                bất kì ai không phải là nhân viên ngân hàng.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-4"
+                                                name="payment">
+                                            <label class="custom-control-label" for="payment-4">ViettelPay</label>
+                                        </div>
+                                        <div class="payment-content" id="payment-4-show">
+                                            <p>
+                                                Bạn sẽ nhận được mã OTP để xác nhận đơn hàng. Tuyệt đối không cung cấp
+                                                mã
+                                                này cho
+                                                bất kì ai không phải là nhân viên ngân hàng.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-5"
+                                                name="payment">
+                                            <label class="custom-control-label" for="payment-5">VinID</label>
+                                        </div>
+                                        <div class="payment-content" id="payment-5-show">
+                                            <p>
+                                                Bạn sẽ nhận được mã OTP để xác nhận đơn hàng. Tuyệt đối không cung cấp
+                                                mã
+                                                này cho
+                                                bất kì ai không phải là nhân viên ngân hàng.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-5"
+                                                name="payment">
+                                            <label class="custom-control-label" for="payment-5">Trả tiền mặt</label>
+                                        </div>
+                                        <div class="payment-content" id="payment-5-show">
+                                            <p>
+                                                Bạn sẽ nhận được mã OTP để xác nhận đơn hàng. Tuyệt đối không cung cấp
+                                                mã
+                                                này cho
+                                                bất kì ai không phải là nhân viên ngân hàng.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="checkout-btn">
+                                    <button id="button" type="submit">Xác nhận</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="checkout-inner">
-                    <div class="checkout-summary">
-                        <h1>Cart Total</h1>
-                        <p>Product Name<span>$99</span></p>
-                        <p class="sub-total">Sub Total<span>$99</span></p>
-                        <p class="ship-cost">Shipping Cost<span>$1</span></p>
-                        <h2>Grand Total<span>$100</span></h2>
-                    </div>
-
-                    <div class="checkout-payment">
-                        <div class="payment-methods">
-                            <h1>Payment Methods</h1>
-                            <div class="payment-method">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="payment-1" name="payment">
-                                    <label class="custom-control-label" for="payment-1">Paypal</label>
-                                </div>
-                                <div class="payment-content" id="payment-1-show">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac
-                                        eros volutpat maximus lacinia quis diam.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="payment-method">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="payment-2" name="payment">
-                                    <label class="custom-control-label" for="payment-2">Payoneer</label>
-                                </div>
-                                <div class="payment-content" id="payment-2-show">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac
-                                        eros volutpat maximus lacinia quis diam.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="payment-method">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="payment-3" name="payment">
-                                    <label class="custom-control-label" for="payment-3">Check Payment</label>
-                                </div>
-                                <div class="payment-content" id="payment-3-show">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac
-                                        eros volutpat maximus lacinia quis diam.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="payment-method">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="payment-4" name="payment">
-                                    <label class="custom-control-label" for="payment-4">Direct Bank Transfer</label>
-                                </div>
-                                <div class="payment-content" id="payment-4-show">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac
-                                        eros volutpat maximus lacinia quis diam.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="payment-method">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="payment-5" name="payment">
-                                    <label class="custom-control-label" for="payment-5">Cash on Delivery</label>
-                                </div>
-                                <div class="payment-content" id="payment-5-show">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac
-                                        eros volutpat maximus lacinia quis diam.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="checkout-btn">
-                            <button>Place Order</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
-</div>
-<!-- Checkout End -->
+    <!-- Checkout End -->

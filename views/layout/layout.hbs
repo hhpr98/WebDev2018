@@ -8,6 +8,10 @@
   <meta content="eCommerce HTML Template Free Download" name="keywords">
   <meta content="eCommerce HTML Template Free Download" name="description">
 
+
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+
+
   <!-- Favicon -->
   <link href="/img/favicon.ico" rel="icon">
 
@@ -70,8 +74,9 @@
               </a>
               <div class="dropdown-menu">
                 <a href="/account" class="dropdown-item">Tài khoản</a>
-                <a href="/account/login" class="dropdown-item">Đăng nhập</a>
-                <a href="/account/register" class="dropdown-item">Đăng kí</a>
+                <a href="/login" class="dropdown-item">Đăng nhập</a>
+                <a href="/register" class="dropdown-item">Đăng kí</a>
+                <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
               </div>
             </div>
           </div>
@@ -93,10 +98,12 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="search">
-            <input type="text" placeholder="Tìm kiếm....">
-            <button><i class="fa fa-search"></i></button>
-          </div>
+          <form method="GET" action="/product/search?text={{text}}">
+            <div class="search">
+              <input type="text" placeholder="Tìm kiếm...." name="text">
+              <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
+          </form>
         </div>
         <div class="col-md-3">
           <div class="user">
