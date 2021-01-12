@@ -17,7 +17,7 @@ cartRouter.get("/checkout", (req, res, next) => {
         res.render("error/authenticate");
 }
 , getCheckout);
-cartRouter.get("/submit", submitCart);
+cartRouter.post("/submit", submitCart);
 
 cartRouter.get("/:id", addtoCart);
 

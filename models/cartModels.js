@@ -1,19 +1,26 @@
 import { Carts, Products, CartDetails } from "../database/models";
 import { v4 as uuid } from "uuid";
 
-export const addCart = async (totalamount, to) => {
-    const cartId = uuid();
-    await Carts.create({
-        id: cartId,
-        totalAmount: totalamount,
-        cartNote: to
-    });
-    var a;
+const addItemToCartDetail = async(cartId, id, amount)=>{
     await CartDetails.create({
         id: uuid(),
         cardId: cartId,
-        productId:a ,
-
-       amount: 1
+        productId: id,
+        amount: amount
     });
+}
+export const addCart = async (item, address) => {
+    const cartId = uuid();
+    var total = 0;
+    for(i of item){
+        total += parseInt(i.amount, 10);;
+    }
+    await Carts.create({
+        id: cartId,
+        totalAmount: total,
+        cartNote: address
+    });
+    for(var i of item){
+        await addItemToCartDetail(cartId, i.id, i.amount);
+    }   
 }
