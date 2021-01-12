@@ -2,9 +2,13 @@ import { Products, Categories, Op, Comments } from "../database/models";
 
 
 export const getListProductInCart = async (array)=>{
+    const a = [];
+    array.forEach(element => {
+        a.push(element.id);
+    });
     const _product = await Products.findAll({
         where: {
-            id: array
+            id: a
         },
     });
     return _product;

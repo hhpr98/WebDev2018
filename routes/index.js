@@ -1,7 +1,6 @@
 import express from "express";
 // for authenticate
 import bcrypt from "bcrypt";
-
 import passport from "passport";
 const localStrategy = require("passport-local").Strategy;
 
