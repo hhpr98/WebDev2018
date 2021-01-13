@@ -7,7 +7,8 @@ import {
     getBranchs,
     getTags,
     getCommentListDatabaseByProductId,
-    addACommentDatabase
+    addACommentDatabase,
+    getProductListDatabaseByAdvanceSearch
 } from "../models/productModels";
 import catchAsync from "../libs/catchAsync";
 
@@ -162,5 +163,40 @@ export const addACommentAction = catchAsync(
         await addACommentDatabase(productId, _name, _email, _content);
 
         res.redirect(`/product/detail/${productId}`);
+    }
+);
+
+// Tìm kiếm nâng cao - trang
+export const getAdvanceSearchPage = catchAsync(
+    async (req, res) => {
+
+        const category = await getCategoryDatabase();
+        res.render("product/advance-search", { layout: false, category });
+    }
+);
+
+// ACtion : Tìm kiếm nâng cao
+export const postAdvanceSearchPage = catchAsync(
+    async (req, res) => {
+
+        const text = req.body.text || "";
+        if (text === "") {
+            res.redirect("/product");
+            return;
+        }
+        const color = req.body.icolor || "";
+        const size = req.body.isize || "";
+        const type = req.body.icategory || "4";
+
+        const list = await getProductListDatabaseByAdvanceSearch(text, color, size, type);
+        const category = await getCategoryDatabase();
+        const branchs = getBranchs();
+        const tags = getTags();
+
+        res.render("product/product-list-by-advance-search", {
+            title: "Tìm kiếm nâng cao",
+            productList: list.rows, category, branchs, tags, 
+            noProduct: list.count == 0 ? true : false
+        });
     }
 );
