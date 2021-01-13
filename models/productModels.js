@@ -1,6 +1,6 @@
 import { Products, Categories, Op, Comments } from "../database/models";
 
-export const getListProductInCart = async (array)=>{
+export const getListProductInCart = async (array) => {
     const a = [];
     array.forEach(element => {
         a.push(element.id);
@@ -226,4 +226,23 @@ export const addACommentDatabase = async (productId, name, email, content) => {
         address: email,
         content: content
     });
+}
+
+// Lấy danh sách sản phẩm tìm kiếm nâng cao
+// Input : limit, page, search text, color,size, category
+// Result: count + list sản phẩm
+export const getProductListDatabaseByAdvanceSearch = async (text, color, size, category) => {
+
+    const _product = await Products.findAndCountAll({
+        where: {
+            isDeleted: 0,
+            name: {
+                [Op.like]: `%${text}%`
+            },
+            color: color,
+            size: size,
+            type: category
+        }
+    });
+    return _product;
 }

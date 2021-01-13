@@ -4,7 +4,9 @@ import {
     getProductListPageByCategoryPage,
     getProductListPage,
     getProductListPageBySearchText,
-    addACommentAction
+    addACommentAction,
+    getAdvanceSearchPage,
+    postAdvanceSearchPage
 } from "../../controllers/productController";
 const productRouter = express.Router();
 
@@ -13,5 +15,7 @@ productRouter.get("/category/:id", getProductListPageByCategoryPage);
 productRouter.get("/search", getProductListPageBySearchText);
 productRouter.get("/detail/:id", getProductDetailPage);
 productRouter.post("/comment/:id", addACommentAction);
+productRouter.get("/advance-search", getAdvanceSearchPage);
+productRouter.post("/advance-search/search", postAdvanceSearchPage);
 
 export default productRouter;
